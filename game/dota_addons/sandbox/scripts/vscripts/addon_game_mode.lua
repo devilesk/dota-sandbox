@@ -7,7 +7,6 @@ _G.NEUTRAL_TEAM = 4 -- global const for neutral team int
 _G.DOTA_MAX_ABILITIES = 16
 _G.HERO_MAX_LEVEL = 25
 
-LinkLuaModifier( "lm_take_no_damage", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_damage_tracking", LUA_MODIFIER_MOTION_NONE )
 
 -- "demo_hero_name" is a magic term, "default_value" means no string was passed, so we'd probably want to put them in hero selection
@@ -22,28 +21,7 @@ if CHeroDemo == nil then
 	--refer to: http://stackoverflow.com/questions/6586145/lua-require-with-global-local
 end
 
---[[OverlayState = {
-	cbTowerDayVisionRange=true,
-	cbTowerNightVisionRange=true,
-	cbTowerTrueSightRange=true,
-	cbTowerAttackRange=true,
-	cbNeutralSpawnBox=true,
-	cbDetectNeutrals=false,
-	cbSentryVision=true,
-	cbWardVision=true,
-	cbHeroXPRange=true
-}]]
-
-NeutralCampCoords = {
-	--[[{
-        name = "neutralcamp_good_5",
-        boxes = {
-            {Vector(-1728.0, -4224.0, 128.0), Vector(-1344.0, -3520.0, 576.0)}
-        },
-        particles=nil,
-        isRed=false
-    }]]
-}
+NeutralCampCoords = {}
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 -- Required .lua files, which just exist to help organize functions contained in our addon.  Make sure to call these beneath the mode's class creation.
@@ -75,13 +53,10 @@ end
 -- Precache files and folders
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 function Precache( context )
-	--PrecacheUnitByNameSync( sHeroSelection, context )
 	PrecacheResource( "particle", "particles/custom/range_display.vpcf", context )
 	PrecacheResource( "particle", "particles/custom/range_display_red.vpcf", context )
 	PrecacheResource( "particle", "particles/custom/range_display_line.vpcf", context )
 	PrecacheResource( "particle", "particles/custom/range_display_line_red.vpcf", context )
-	PrecacheUnitByNameSync( "npc_dota_hero_axe", context )
-  PrecacheUnitByNameSync("npc_dota_venomancer_plague_ward_2", context)
   
   PrecacheUnitByNameSync( "npc_dota_hero_abaddon", context )
   PrecacheUnitByNameSync( "npc_dota_hero_abyssal_underlord", context )
@@ -214,7 +189,6 @@ end
 function InitBoxes()
   local boxes = Entities:FindAllByClassname("trigger_multiple")
   for k,ent in pairs(boxes) do
-    --if ent:GetName() ~= "neutralcamp_good_5" and string.find(ent:GetName(), "neutralcamp") ~= nil then
     if string.find(ent:GetName(), "neutralcamp") ~= nil then
       local box = {
         name = ent:GetName(),
@@ -333,9 +307,6 @@ function CHeroDemo:InitGameMode()
 	self.m_bPlayerDataCaptured = false
 	self.m_nPlayerID = 0
 
-	--self.m_nHeroLevelBeforeMaxing = 1 -- unused now
-	--self.m_bHeroMaxedOut = false -- unused now
-    DebugPrint ("player team PlayerResource:GetTeam(0): " .. PlayerResource:GetTeam(0) .."")
 	self.m_nALLIES_TEAM = 2
 	self.m_tAlliesList = {}
 	self.m_nAlliesCount = 0
@@ -377,10 +348,7 @@ function CHeroDemo:InitGameMode()
 	--local hNeutralSpawn = Entities:FindByName( nil, "neutral_caster_spawn" )
 	--self._hNeutralCaster = CreateUnitByName( "npc_dota_neutral_caster", hNeutralSpawn:GetAbsOrigin(), false, nil, nil, NEUTRAL_TEAM )
     self._hNeutralCaster = CreateUnitByName( "npc_dota_neutral_caster", Vector(0, 0, 0), false, nil, nil, NEUTRAL_TEAM )
-    
-	--PlayerResource:SetCustomTeamAssignment( self.m_nPlayerID, self.m_nALLIES_TEAM ) -- put PlayerID 0 on Radiant team (== team 2)
 
-  --CustomNetTables:SetTableValue( "dps_nettable", "key_1", { value = "hello" } )
   self.m_tPlayerDPS = {}
   self.m_tPlayerDPS10 = {}
   for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS - 1 do
@@ -394,7 +362,6 @@ function CHeroDemo:InitGameMode()
     self.m_tPlayerDPS10[nPlayerID] = List.new()
   end
   GameRules:GetGameModeEntity():SetThink("CalculateDPS", self)
-  --GameRules:GetGameModeEntity():SetThink("DumpModifiers", self)
 end
 
 function CHeroDemo:DumpModifiers()
@@ -434,12 +401,7 @@ function CHeroDemo:CalculateDPS()
     end
     if k == -1 then k = self.m_tPlayerDPS10[nPlayerID].first end
     if k == self.m_tPlayerDPS10[nPlayerID].last then k = self.m_tPlayerDPS10[nPlayerID].last - 1 end
-    --[[if nPlayerID == 0 then
-        for i = self.m_tPlayerDPS10[nPlayerID].first, self.m_tPlayerDPS10[nPlayerID].last do
-            DebugPrint (self.m_tPlayerDPS10[nPlayerID][i])
-        end
-        DebugPrint (self.m_tPlayerDPS10[nPlayerID].last, self.m_tPlayerDPS10[nPlayerID].first, k, self.m_tPlayerDPS10[nPlayerID].last - k)
-    end]]
+
     dps10 = dps10 / (self.m_tPlayerDPS10[nPlayerID].last - k)
     CustomNetTables:SetTableValue( "dps10_nettable", tostring(nPlayerID), { value = dps10 } )
     
@@ -460,8 +422,6 @@ function CHeroDemo:GameThink()
       self.m_nENEMIES_TEAM = 2
     end
 	end
-
-	--DebugPrint( "#self.m_tEnemiesList == " .. #self.m_tEnemiesList .. " | GameTime == " .. tostring( string.format( "%.0f", GameRules:GetGameTime() ) ) )
 
   if self.m_bFreeSpellsEnabled == true then
     if not GameRules:IsCheatMode() then

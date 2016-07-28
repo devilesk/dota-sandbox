@@ -91,18 +91,7 @@ function CHeroDemo:Think_InitializePlayerHero( hPlayerHero )
 		return 0.1
 	end
     
-	if self.m_bPlayerDataCaptured == false then
-		--if hPlayerHero:GetUnitName() == self.m_sHeroSelection then
-		--[[if self.m_sHeroSelection == "default_value" then
-
-		end]]
-    local nPlayerID = hPlayerHero:GetPlayerOwnerID()
-    --PlayerResource:ModifyGold( nPlayerID, 99999, true, 0 )
-          
-          --hPlayerHero:AddAbility("ability_show_damage")
-          --hPlayerHero:AddAbility("fx_test_ability")
-          --DebugPrint( "hPlayerHero:AddAbility( \"ability_show_damage\" )" )
-          
+	if self.m_bPlayerDataCaptured == false then   
     self.m_bPlayerDataCaptured = true
 	end
 
@@ -112,7 +101,6 @@ function CHeroDemo:Think_InitializePlayerHero( hPlayerHero )
 		hAllPlayerUnits[ #hAllPlayerUnits + 1 ] = hPlayerHero
 
 		for _, hUnit in pairs( hAllPlayerUnits ) do
-			--hUnit:AddNewModifier( hPlayerHero, nil, "lm_take_no_damage", nil )
             hUnit:SetHealth(hUnit:GetMaxHealth())
 		end
 	end
@@ -396,37 +384,13 @@ function CHeroDemo:OnInvulnerabilityButtonPressed( eventSourceIndex, data )
 	hAllPlayerUnits[ #hAllPlayerUnits + 1 ] = hPlayerHero]]
 
 	if self.m_bInvulnerabilityEnabled == false then
-		--[[for _, hUnit in pairs( hAllPlayerUnits ) do
-			hUnit:AddNewModifier( hPlayerHero, nil, "lm_take_no_damage", nil )
-		end]]
 		self.m_bInvulnerabilityEnabled = true
 		self:BroadcastMsg( "#InvulnerabilityOn_Msg" )
 	elseif self.m_bInvulnerabilityEnabled == true then
-		--[[for _, hUnit in pairs( hAllPlayerUnits ) do
-			hUnit:RemoveModifierByName( "lm_take_no_damage" )
-		end]]
 		self.m_bInvulnerabilityEnabled = false
 		self:BroadcastMsg( "#InvulnerabilityOff_Msg" )
 	end
 end
-
---------------------------------------------------------------------------------
--- ButtonEvent: OnSpawnAllyButtonPressed -- deprecated
---------------------------------------------------------------------------------
---[[function CHeroDemo:OnSpawnAllyButtonPressed( eventSourceIndex, data )
-	local hPlayerHero = PlayerResource:GetSelectedHeroEntity( data.PlayerID )
-	self.m_nAlliesCount = self.m_nAlliesCount + 1
-	DebugPrint( "Ally team count is now: " .. self.m_nAlliesCount )
-	self.m_tAlliesList[ self.m_nAlliesCount ] = CreateUnitByName( "npc_dota_hero_axe", hPlayerHero:GetAbsOrigin(), true, nil, nil, self.m_nALLIES_TEAM )
-	local hUnit = self.m_tAlliesList[ self.m_nAlliesCount ]
-	hUnit:SetControllableByPlayer( self.m_nPlayerID, false )
-	hUnit:SetRespawnPosition( hPlayerHero:GetAbsOrigin() )
-	FindClearSpaceForUnit( hUnit, hPlayerHero:GetAbsOrigin(), false )
-	hUnit:Hold()
-	hUnit:SetIdleAcquire( false )
-	hUnit:SetAcquisitionRange( 0 )
-	self:BroadcastMsg( "#SpawnAlly_Msg" )
-end]]
 
 --------------------------------------------------------------------------------
 -- ButtonEvent: OnLevelUpAllyButtonPressed
