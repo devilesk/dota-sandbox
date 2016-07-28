@@ -1,0 +1,329 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/dotastyles.css" />
+		<include src="file://{resources}/styles/custom_game/shared_scoreboard_styles.css" />
+        <include src="file://{resources}/styles/custom_game/hud_hero_demo.css" />
+        <include src="file://{resources}/styles/custom_game/multiteam_top_scoreboard.css" />
+	</styles>
+	<scripts>
+    <include src="file://{resources}/scripts/custom_game/scoreboard_player_options.js" />
+  </scripts>
+	<Panel hittest="true" class="options-container" ondescendantblur="Destroy()">
+        <Panel class="Category Row">
+        <DropDown id="HeroDropDown" class="DemoButton" oninputsubmit="OnHeroChanged()">
+          <Label text="" id="blank_option" style="visibility:collapse;"/>
+          <Label text="Abaddon" id="npc_dota_hero_abaddon"/>
+          <!--<Label text="Abyssal Underlord" id="npc_dota_hero_abyssal_underlord"/>-->
+          <Label text="Alchemist" id="npc_dota_hero_alchemist"/>
+          <Label text="Ancient Apparition" id="npc_dota_hero_ancient_apparition"/>
+          <Label text="Anti-Mage" id="npc_dota_hero_antimage"/>
+          <Label text="Arc Warden" id="npc_dota_hero_arc_warden"/>
+          <Label text="Axe" id="npc_dota_hero_axe"/>
+          <Label text="Bane" id="npc_dota_hero_bane"/>
+          <Label text="Batrider" id="npc_dota_hero_batrider"/>
+          <Label text="Beastmaster" id="npc_dota_hero_beastmaster"/>
+          <Label text="Bloodseeker" id="npc_dota_hero_bloodseeker"/>
+          <Label text="Bounty Hunter" id="npc_dota_hero_bounty_hunter"/>
+          <Label text="Brewmaster" id="npc_dota_hero_brewmaster"/>
+          <Label text="Bristleback" id="npc_dota_hero_bristleback"/>
+          <Label text="Broodmother" id="npc_dota_hero_broodmother"/>
+          <Label text="Centaur Warrunner" id="npc_dota_hero_centaur"/>
+          <Label text="Chaos Knight" id="npc_dota_hero_chaos_knight"/>
+          <Label text="Chen" id="npc_dota_hero_chen"/>
+          <Label text="Clinkz" id="npc_dota_hero_clinkz"/>
+          <Label text="Clockwerk" id="npc_dota_hero_rattletrap"/>
+          <Label text="Crystal Maiden" id="npc_dota_hero_crystal_maiden"/>
+          <Label text="Dark Seer" id="npc_dota_hero_dark_seer"/>
+          <Label text="Dazzle" id="npc_dota_hero_dazzle"/>
+          <Label text="Death Prophet" id="npc_dota_hero_death_prophet"/>
+          <Label text="Disruptor" id="npc_dota_hero_disruptor"/>
+          <Label text="Doom" id="npc_dota_hero_doom_bringer"/>
+          <Label text="Dragon Knight" id="npc_dota_hero_dragon_knight"/>
+          <Label text="Drow Ranger" id="npc_dota_hero_drow_ranger"/>
+          <Label text="Earth Spirit" id="npc_dota_hero_earth_spirit"/>
+          <Label text="Earthshaker" id="npc_dota_hero_earthshaker"/>
+          <Label text="Elder Titan" id="npc_dota_hero_elder_titan"/>
+          <Label text="Ember Spirit" id="npc_dota_hero_ember_spirit"/>
+          <Label text="Enchantress" id="npc_dota_hero_enchantress"/>
+          <Label text="Enigma" id="npc_dota_hero_enigma"/>
+          <Label text="Faceless Void" id="npc_dota_hero_faceless_void"/>
+          <Label text="Gyrocopter" id="npc_dota_hero_gyrocopter"/>
+          <Label text="Huskar" id="npc_dota_hero_huskar"/>
+          <Label text="Invoker" id="npc_dota_hero_invoker"/>
+          <Label text="Io" id="npc_dota_hero_wisp"/>
+          <Label text="Jakiro" id="npc_dota_hero_jakiro"/>
+          <Label text="Juggernaut" id="npc_dota_hero_juggernaut"/>
+          <Label text="Keeper of the Light" id="npc_dota_hero_keeper_of_the_light"/>
+          <Label text="Kunkka" id="npc_dota_hero_kunkka"/>
+          <Label text="Legion Commander" id="npc_dota_hero_legion_commander"/>
+          <Label text="Leshrac" id="npc_dota_hero_leshrac"/>
+          <Label text="Lich" id="npc_dota_hero_lich"/>
+          <Label text="Lifestealer" id="npc_dota_hero_life_stealer"/>
+          <Label text="Lina" id="npc_dota_hero_lina"/>
+          <Label text="Lion" id="npc_dota_hero_lion"/>
+          <Label text="Lone Druid" id="npc_dota_hero_lone_druid"/>
+          <Label text="Luna" id="npc_dota_hero_luna"/>
+          <Label text="Lycan" id="npc_dota_hero_lycan"/>
+          <Label text="Magnus" id="npc_dota_hero_magnataur"/>
+          <Label text="Medusa" id="npc_dota_hero_medusa"/>
+          <Label text="Meepo" id="npc_dota_hero_meepo"/>
+          <Label text="Mirana" id="npc_dota_hero_mirana"/>
+          <Label text="Morphling" id="npc_dota_hero_morphling"/>
+          <Label text="Naga Siren" id="npc_dota_hero_naga_siren"/>
+          <Label text="Nature's Prophet" id="npc_dota_hero_furion"/>
+          <Label text="Necrophos" id="npc_dota_hero_necrolyte"/>
+          <Label text="Night Stalker" id="npc_dota_hero_night_stalker"/>
+          <Label text="Nyx Assassin" id="npc_dota_hero_nyx_assassin"/>
+          <Label text="Ogre Magi" id="npc_dota_hero_ogre_magi"/>
+          <Label text="Omniknight" id="npc_dota_hero_omniknight"/>
+          <Label text="Oracle" id="npc_dota_hero_oracle"/>
+          <Label text="Outworld Devourer" id="npc_dota_hero_obsidian_destroyer"/>
+          <Label text="Phantom Assassin" id="npc_dota_hero_phantom_assassin"/>
+          <Label text="Phantom Lancer" id="npc_dota_hero_phantom_lancer"/>
+          <Label text="Phoenix" id="npc_dota_hero_phoenix"/>
+          <Label text="Puck" id="npc_dota_hero_puck"/>
+          <Label text="Pudge" id="npc_dota_hero_pudge"/>
+          <Label text="Pugna" id="npc_dota_hero_pugna"/>
+          <Label text="Queen of Pain" id="npc_dota_hero_queenofpain"/>
+          <Label text="Razor" id="npc_dota_hero_razor"/>
+          <Label text="Riki" id="npc_dota_hero_riki"/>
+          <Label text="Rubick" id="npc_dota_hero_rubick"/>
+          <Label text="Sand King" id="npc_dota_hero_sand_king"/>
+          <Label text="Shadow Demon" id="npc_dota_hero_shadow_demon"/>
+          <Label text="Shadow Fiend" id="npc_dota_hero_nevermore"/>
+          <Label text="Shadow Shaman" id="npc_dota_hero_shadow_shaman"/>
+          <Label text="Silencer" id="npc_dota_hero_silencer"/>
+          <Label text="Skywrath Mage" id="npc_dota_hero_skywrath_mage"/>
+          <Label text="Slardar" id="npc_dota_hero_slardar"/>
+          <Label text="Slark" id="npc_dota_hero_slark"/>
+          <Label text="Sniper" id="npc_dota_hero_sniper"/>
+          <Label text="Spectre" id="npc_dota_hero_spectre"/>
+          <Label text="Spirit Breaker" id="npc_dota_hero_spirit_breaker"/>
+          <Label text="Storm Spirit" id="npc_dota_hero_storm_spirit"/>
+          <Label text="Sven" id="npc_dota_hero_sven"/>
+          <Label text="Techies" id="npc_dota_hero_techies"/>
+          <Label text="Templar Assassin" id="npc_dota_hero_templar_assassin"/>
+          <Label text="Terrorblade" id="npc_dota_hero_terrorblade"/>
+          <Label text="Tidehunter" id="npc_dota_hero_tidehunter"/>
+          <Label text="Timbersaw" id="npc_dota_hero_shredder"/>
+          <Label text="Tinker" id="npc_dota_hero_tinker"/>
+          <Label text="Tiny" id="npc_dota_hero_tiny"/>
+          <Label text="Treant Protector" id="npc_dota_hero_treant"/>
+          <Label text="Troll Warlord" id="npc_dota_hero_troll_warlord"/>
+          <Label text="Tusk" id="npc_dota_hero_tusk"/>
+          <Label text="Undying" id="npc_dota_hero_undying"/>
+          <Label text="Ursa" id="npc_dota_hero_ursa"/>
+          <Label text="Vengeful Spirit" id="npc_dota_hero_vengefulspirit"/>
+          <Label text="Venomancer" id="npc_dota_hero_venomancer"/>
+          <Label text="Viper" id="npc_dota_hero_viper"/>
+          <Label text="Visage" id="npc_dota_hero_visage"/>
+          <Label text="Warlock" id="npc_dota_hero_warlock"/>
+          <Label text="Weaver" id="npc_dota_hero_weaver"/>
+          <Label text="Windranger" id="npc_dota_hero_windrunner"/>
+          <Label text="Winter Wyvern" id="npc_dota_hero_winter_wyvern"/>
+          <Label text="Witch Doctor" id="npc_dota_hero_witch_doctor"/>
+          <Label text="Wraith King" id="npc_dota_hero_skeleton_king"/>
+          <Label text="Zeus" id="npc_dota_hero_zuus"/>
+        </DropDown>
+        <Button class="CloseButton DemoButton Row" onactivate="Destroy();">
+        </Button>
+    </Panel>
+    <Panel class="shop-tabs Category Row">
+      <Button class="DemoButton" onactivate="$('#shop-basic').AddClass('active');$('#shop-upgrades').RemoveClass('active');$('#shop-secret').RemoveClass('active');">
+        <Label text="Basic" />
+      </Button>
+      <Button class="DemoButton" onactivate="$('#shop-basic').RemoveClass('active');$('#shop-upgrades').AddClass('active');$('#shop-secret').RemoveClass('active');">
+          <Label text="Upgrades" />
+      </Button>
+      <Button class="DemoButton" onactivate="$('#shop-basic').RemoveClass('active');$('#shop-upgrades').RemoveClass('active');$('#shop-secret').AddClass('active');">
+          <Label text="Secret" />
+      </Button>
+    </Panel>
+<Panel id="shop">
+    <Panel id="shop-basic" class="shop-tab active">
+<Panel class="item-column">
+  <DOTAItemImage class="shop-item" id="item_clarity" itemname="item_clarity" onactivate="ItemClick('item_clarity')"/>
+  <DOTAItemImage class="shop-item" id="item_faerie_fire" itemname="item_faerie_fire" onactivate="ItemClick('item_faerie_fire')"/>
+  <DOTAItemImage class="shop-item" id="item_enchanted_mango" itemname="item_enchanted_mango" onactivate="ItemClick('item_enchanted_mango')"/>
+  <DOTAItemImage class="shop-item" id="item_tango" itemname="item_tango" onactivate="ItemClick('item_tango')"/>
+  <DOTAItemImage class="shop-item" id="item_flask" itemname="item_flask" onactivate="ItemClick('item_flask')"/>
+  <DOTAItemImage class="shop-item" id="item_smoke_of_deceit" itemname="item_smoke_of_deceit" onactivate="ItemClick('item_smoke_of_deceit')"/>
+  <DOTAItemImage class="shop-item" id="item_tpscroll" itemname="item_tpscroll" onactivate="ItemClick('item_tpscroll')"/>
+  <DOTAItemImage class="shop-item" id="item_dust" itemname="item_dust" onactivate="ItemClick('item_dust')"/>
+  <DOTAItemImage class="shop-item" id="item_courier" itemname="item_courier" onactivate="ItemClick('item_courier')"/>
+  <DOTAItemImage class="shop-item" id="item_flying_courier" itemname="item_flying_courier" onactivate="ItemClick('item_flying_courier')"/>
+  <DOTAItemImage class="shop-item" id="item_ward_observer" itemname="item_ward_observer" onactivate="ItemClick('item_ward_observer')"/>
+  <DOTAItemImage class="shop-item" id="item_ward_sentry" itemname="item_ward_sentry" onactivate="ItemClick('item_ward_sentry')"/>
+  <DOTAItemImage class="shop-item" id="item_tome_of_knowledge" itemname="item_tome_of_knowledge" onactivate="ItemClick('item_tome_of_knowledge')"/>
+  <DOTAItemImage class="shop-item" id="item_bottle" itemname="item_bottle" onactivate="ItemClick('item_bottle')"/>
+</Panel>
+<Panel class="item-column">
+  <DOTAItemImage class="shop-item" id="item_branches" itemname="item_branches" onactivate="ItemClick('item_branches')"/>
+  <DOTAItemImage class="shop-item" id="item_gauntlets" itemname="item_gauntlets" onactivate="ItemClick('item_gauntlets')"/>
+  <DOTAItemImage class="shop-item" id="item_slippers" itemname="item_slippers" onactivate="ItemClick('item_slippers')"/>
+  <DOTAItemImage class="shop-item" id="item_mantle" itemname="item_mantle" onactivate="ItemClick('item_mantle')"/>
+  <DOTAItemImage class="shop-item" id="item_circlet" itemname="item_circlet" onactivate="ItemClick('item_circlet')"/>
+  <DOTAItemImage class="shop-item" id="item_belt_of_strength" itemname="item_belt_of_strength" onactivate="ItemClick('item_belt_of_strength')"/>
+  <DOTAItemImage class="shop-item" id="item_boots_of_elves" itemname="item_boots_of_elves" onactivate="ItemClick('item_boots_of_elves')"/>
+  <DOTAItemImage class="shop-item" id="item_robe" itemname="item_robe" onactivate="ItemClick('item_robe')"/>
+  <DOTAItemImage class="shop-item" id="item_ogre_axe" itemname="item_ogre_axe" onactivate="ItemClick('item_ogre_axe')"/>
+  <DOTAItemImage class="shop-item" id="item_blade_of_alacrity" itemname="item_blade_of_alacrity" onactivate="ItemClick('item_blade_of_alacrity')"/>
+  <DOTAItemImage class="shop-item" id="item_staff_of_wizardry" itemname="item_staff_of_wizardry" onactivate="ItemClick('item_staff_of_wizardry')"/>
+</Panel>
+<Panel class="item-column">
+  <DOTAItemImage class="shop-item" id="item_ring_of_protection" itemname="item_ring_of_protection" onactivate="ItemClick('item_ring_of_protection')"/>
+  <DOTAItemImage class="shop-item" id="item_stout_shield" itemname="item_stout_shield" onactivate="ItemClick('item_stout_shield')"/>
+  <DOTAItemImage class="shop-item" id="item_quelling_blade" itemname="item_quelling_blade" onactivate="ItemClick('item_quelling_blade')"/>
+  <DOTAItemImage class="shop-item" id="item_infused_raindrop" itemname="item_infused_raindrop" onactivate="ItemClick('item_infused_raindrop')"/>
+  <DOTAItemImage class="shop-item" id="item_blight_stone" itemname="item_blight_stone" onactivate="ItemClick('item_blight_stone')"/>
+  <DOTAItemImage class="shop-item" id="item_orb_of_venom" itemname="item_orb_of_venom" onactivate="ItemClick('item_orb_of_venom')"/>
+  <DOTAItemImage class="shop-item" id="item_blades_of_attack" itemname="item_blades_of_attack" onactivate="ItemClick('item_blades_of_attack')"/>
+  <DOTAItemImage class="shop-item" id="item_chainmail" itemname="item_chainmail" onactivate="ItemClick('item_chainmail')"/>
+  <DOTAItemImage class="shop-item" id="item_quarterstaff" itemname="item_quarterstaff" onactivate="ItemClick('item_quarterstaff')"/>
+  <DOTAItemImage class="shop-item" id="item_helm_of_iron_will" itemname="item_helm_of_iron_will" onactivate="ItemClick('item_helm_of_iron_will')"/>
+  <DOTAItemImage class="shop-item" id="item_broadsword" itemname="item_broadsword" onactivate="ItemClick('item_broadsword')"/>
+  <DOTAItemImage class="shop-item" id="item_claymore" itemname="item_claymore" onactivate="ItemClick('item_claymore')"/>
+  <DOTAItemImage class="shop-item" id="item_javelin" itemname="item_javelin" onactivate="ItemClick('item_javelin')"/>
+  <DOTAItemImage class="shop-item" id="item_mithril_hammer" itemname="item_mithril_hammer" onactivate="ItemClick('item_mithril_hammer')"/>
+</Panel>
+<Panel class="item-column">
+  <DOTAItemImage class="shop-item" id="item_wind_lace" itemname="item_wind_lace" onactivate="ItemClick('item_wind_lace')"/>
+  <DOTAItemImage class="shop-item" id="item_magic_stick" itemname="item_magic_stick" onactivate="ItemClick('item_magic_stick')"/>
+  <DOTAItemImage class="shop-item" id="item_sobi_mask" itemname="item_sobi_mask" onactivate="ItemClick('item_sobi_mask')"/>
+  <DOTAItemImage class="shop-item" id="item_ring_of_regen" itemname="item_ring_of_regen" onactivate="ItemClick('item_ring_of_regen')"/>
+  <DOTAItemImage class="shop-item" id="item_boots" itemname="item_boots" onactivate="ItemClick('item_boots')"/>
+  <DOTAItemImage class="shop-item" id="item_gloves" itemname="item_gloves" onactivate="ItemClick('item_gloves')"/>
+  <DOTAItemImage class="shop-item" id="item_cloak" itemname="item_cloak" onactivate="ItemClick('item_cloak')"/>
+  <DOTAItemImage class="shop-item" id="item_ring_of_health" itemname="item_ring_of_health" onactivate="ItemClick('item_ring_of_health')"/>
+  <DOTAItemImage class="shop-item" id="item_void_stone" itemname="item_void_stone" onactivate="ItemClick('item_void_stone')"/>
+  <DOTAItemImage class="shop-item" id="item_gem" itemname="item_gem" onactivate="ItemClick('item_gem')"/>
+  <DOTAItemImage class="shop-item" id="item_lifesteal" itemname="item_lifesteal" onactivate="ItemClick('item_lifesteal')"/>
+  <DOTAItemImage class="shop-item" id="item_shadow_amulet" itemname="item_shadow_amulet" onactivate="ItemClick('item_shadow_amulet')"/>
+  <DOTAItemImage class="shop-item" id="item_ghost" itemname="item_ghost" onactivate="ItemClick('item_ghost')"/>
+  <DOTAItemImage class="shop-item" id="item_blink" itemname="item_blink" onactivate="ItemClick('item_blink')"/>
+</Panel>
+    </Panel>
+    <Panel id="shop-upgrades" class="shop-tab">
+<Panel class="item-column">
+  <DOTAItemImage class="shop-item" id="item_magic_wand" itemname="item_magic_wand" onactivate="ItemClick('item_magic_wand')"/>
+  <DOTAItemImage class="shop-item" id="item_null_talisman" itemname="item_null_talisman" onactivate="ItemClick('item_null_talisman')"/>
+  <DOTAItemImage class="shop-item" id="item_wraith_band" itemname="item_wraith_band" onactivate="ItemClick('item_wraith_band')"/>
+  <DOTAItemImage class="shop-item" id="item_poor_mans_shield" itemname="item_poor_mans_shield" onactivate="ItemClick('item_poor_mans_shield')"/>
+  <DOTAItemImage class="shop-item" id="item_bracer" itemname="item_bracer" onactivate="ItemClick('item_bracer')"/>
+  <DOTAItemImage class="shop-item" id="item_soul_ring" itemname="item_soul_ring" onactivate="ItemClick('item_soul_ring')"/>
+  <DOTAItemImage class="shop-item" id="item_phase_boots" itemname="item_phase_boots" onactivate="ItemClick('item_phase_boots')"/>
+  <DOTAItemImage class="shop-item" id="item_power_treads" itemname="item_power_treads" onactivate="ItemClick('item_power_treads')"/>
+  <DOTAItemImage class="shop-item" id="item_oblivion_staff" itemname="item_oblivion_staff" onactivate="ItemClick('item_oblivion_staff')"/>
+  <DOTAItemImage class="shop-item" id="item_pers" itemname="item_pers" onactivate="ItemClick('item_pers')"/>
+  <DOTAItemImage class="shop-item" id="item_hand_of_midas" itemname="item_hand_of_midas" onactivate="ItemClick('item_hand_of_midas')"/>
+  <DOTAItemImage class="shop-item" id="item_travel_boots" itemname="item_travel_boots" onactivate="ItemClick('item_travel_boots')"/>
+  <DOTAItemImage class="shop-item" id="item_moon_shard" itemname="item_moon_shard" onactivate="ItemClick('item_moon_shard')"/>
+</Panel>
+<Panel class="item-column">
+  <DOTAItemImage class="shop-item" id="item_ring_of_basilius" itemname="item_ring_of_basilius" onactivate="ItemClick('item_ring_of_basilius')"/>
+  <DOTAItemImage class="shop-item" id="item_iron_talon" itemname="item_iron_talon" onactivate="ItemClick('item_iron_talon')"/>
+  <DOTAItemImage class="shop-item" id="item_headdress" itemname="item_headdress" onactivate="ItemClick('item_headdress')"/>
+  <DOTAItemImage class="shop-item" id="item_buckler" itemname="item_buckler" onactivate="ItemClick('item_buckler')"/>
+  <DOTAItemImage class="shop-item" id="item_urn_of_shadows" itemname="item_urn_of_shadows" onactivate="ItemClick('item_urn_of_shadows')"/>
+  <DOTAItemImage class="shop-item" id="item_tranquil_boots" itemname="item_tranquil_boots" onactivate="ItemClick('item_tranquil_boots')"/>
+  <DOTAItemImage class="shop-item" id="item_ring_of_aquila" itemname="item_ring_of_aquila" onactivate="ItemClick('item_ring_of_aquila')"/>
+  <DOTAItemImage class="shop-item" id="item_medallion_of_courage" itemname="item_medallion_of_courage" onactivate="ItemClick('item_medallion_of_courage')"/>
+  <DOTAItemImage class="shop-item" id="item_arcane_boots" itemname="item_arcane_boots" onactivate="ItemClick('item_arcane_boots')"/>
+  <DOTAItemImage class="shop-item" id="item_ancient_janggo" itemname="item_ancient_janggo" onactivate="ItemClick('item_ancient_janggo')"/>
+  <DOTAItemImage class="shop-item" id="item_mekansm" itemname="item_mekansm" onactivate="ItemClick('item_mekansm')"/>
+  <DOTAItemImage class="shop-item" id="item_vladmir" itemname="item_vladmir" onactivate="ItemClick('item_vladmir')"/>
+  <DOTAItemImage class="shop-item" id="item_pipe" itemname="item_pipe" onactivate="ItemClick('item_pipe')"/>
+  <DOTAItemImage class="shop-item" id="item_guardian_greaves" itemname="item_guardian_greaves" onactivate="ItemClick('item_guardian_greaves')"/>
+</Panel>
+<Panel class="item-column">
+  <DOTAItemImage class="shop-item" id="item_glimmer_cape" itemname="item_glimmer_cape" onactivate="ItemClick('item_glimmer_cape')"/>
+  <DOTAItemImage class="shop-item" id="item_force_staff" itemname="item_force_staff" onactivate="ItemClick('item_force_staff')"/>
+  <DOTAItemImage class="shop-item" id="item_veil_of_discord" itemname="item_veil_of_discord" onactivate="ItemClick('item_veil_of_discord')"/>
+  <DOTAItemImage class="shop-item" id="item_aether_lens" itemname="item_aether_lens" onactivate="ItemClick('item_aether_lens')"/>
+  <DOTAItemImage class="shop-item" id="item_necronomicon" itemname="item_necronomicon" onactivate="ItemClick('item_necronomicon')"/>
+  <DOTAItemImage class="shop-item" id="item_dagon" itemname="item_dagon" onactivate="ItemClick('item_dagon')"/>
+  <DOTAItemImage class="shop-item" id="item_cyclone" itemname="item_cyclone" onactivate="ItemClick('item_cyclone')"/>
+  <DOTAItemImage class="shop-item" id="item_solar_crest" itemname="item_solar_crest" onactivate="ItemClick('item_solar_crest')"/>
+  <DOTAItemImage class="shop-item" id="item_rod_of_atos" itemname="item_rod_of_atos" onactivate="ItemClick('item_rod_of_atos')"/>
+  <DOTAItemImage class="shop-item" id="item_orchid" itemname="item_orchid" onactivate="ItemClick('item_orchid')"/>
+  <DOTAItemImage class="shop-item" id="item_ultimate_scepter" itemname="item_ultimate_scepter" onactivate="ItemClick('item_ultimate_scepter')"/>
+  <DOTAItemImage class="shop-item" id="item_refresher" itemname="item_refresher" onactivate="ItemClick('item_refresher')"/>
+  <DOTAItemImage class="shop-item" id="item_sheepstick" itemname="item_sheepstick" onactivate="ItemClick('item_sheepstick')"/>
+  <DOTAItemImage class="shop-item" id="item_octarine_core" itemname="item_octarine_core" onactivate="ItemClick('item_octarine_core')"/>
+</Panel>
+<Panel class="item-column">
+  <DOTAItemImage class="shop-item" id="item_lesser_crit" itemname="item_lesser_crit" onactivate="ItemClick('item_lesser_crit')"/>
+  <DOTAItemImage class="shop-item" id="item_armlet" itemname="item_armlet" onactivate="ItemClick('item_armlet')"/>
+  <DOTAItemImage class="shop-item" id="item_invis_sword" itemname="item_invis_sword" onactivate="ItemClick('item_invis_sword')"/>
+  <DOTAItemImage class="shop-item" id="item_basher" itemname="item_basher" onactivate="ItemClick('item_basher')"/>
+  <DOTAItemImage class="shop-item" id="item_bfury" itemname="item_bfury" onactivate="ItemClick('item_bfury')"/>
+  <DOTAItemImage class="shop-item" id="item_ethereal_blade" itemname="item_ethereal_blade" onactivate="ItemClick('item_ethereal_blade')"/>
+  <DOTAItemImage class="shop-item" id="item_silver_edge" itemname="item_silver_edge" onactivate="ItemClick('item_silver_edge')"/>
+  <DOTAItemImage class="shop-item" id="item_radiance" itemname="item_radiance" onactivate="ItemClick('item_radiance')"/>
+  <DOTAItemImage class="shop-item" id="item_monkey_king_bar" itemname="item_monkey_king_bar" onactivate="ItemClick('item_monkey_king_bar')"/>
+  <DOTAItemImage class="shop-item" id="item_greater_crit" itemname="item_greater_crit" onactivate="ItemClick('item_greater_crit')"/>
+  <DOTAItemImage class="shop-item" id="item_butterfly" itemname="item_butterfly" onactivate="ItemClick('item_butterfly')"/>
+  <DOTAItemImage class="shop-item" id="item_rapier" itemname="item_rapier" onactivate="ItemClick('item_rapier')"/>
+  <DOTAItemImage class="shop-item" id="item_abyssal_blade" itemname="item_abyssal_blade" onactivate="ItemClick('item_abyssal_blade')"/>
+  <DOTAItemImage class="shop-item" id="item_bloodthorn" itemname="item_bloodthorn" onactivate="ItemClick('item_bloodthorn')"/>
+</Panel>
+<Panel class="item-column">
+  <DOTAItemImage class="shop-item" id="item_hood_of_defiance" itemname="item_hood_of_defiance" onactivate="ItemClick('item_hood_of_defiance')"/>
+  <DOTAItemImage class="shop-item" id="item_vanguard" itemname="item_vanguard" onactivate="ItemClick('item_vanguard')"/>
+  <DOTAItemImage class="shop-item" id="item_blade_mail" itemname="item_blade_mail" onactivate="ItemClick('item_blade_mail')"/>
+  <DOTAItemImage class="shop-item" id="item_soul_booster" itemname="item_soul_booster" onactivate="ItemClick('item_soul_booster')"/>
+  <DOTAItemImage class="shop-item" id="item_crimson_guard" itemname="item_crimson_guard" onactivate="ItemClick('item_crimson_guard')"/>
+  <DOTAItemImage class="shop-item" id="item_black_king_bar" itemname="item_black_king_bar" onactivate="ItemClick('item_black_king_bar')"/>
+  <DOTAItemImage class="shop-item" id="item_lotus_orb" itemname="item_lotus_orb" onactivate="ItemClick('item_lotus_orb')"/>
+  <DOTAItemImage class="shop-item" id="item_shivas_guard" itemname="item_shivas_guard" onactivate="ItemClick('item_shivas_guard')"/>
+  <DOTAItemImage class="shop-item" id="item_bloodstone" itemname="item_bloodstone" onactivate="ItemClick('item_bloodstone')"/>
+  <DOTAItemImage class="shop-item" id="item_manta" itemname="item_manta" onactivate="ItemClick('item_manta')"/>
+  <DOTAItemImage class="shop-item" id="item_sphere" itemname="item_sphere" onactivate="ItemClick('item_sphere')"/>
+  <DOTAItemImage class="shop-item" id="item_hurricane_pike" itemname="item_hurricane_pike" onactivate="ItemClick('item_hurricane_pike')"/>
+  <DOTAItemImage class="shop-item" id="item_assault" itemname="item_assault" onactivate="ItemClick('item_assault')"/>
+  <DOTAItemImage class="shop-item" id="item_heart" itemname="item_heart" onactivate="ItemClick('item_heart')"/>
+</Panel>
+<Panel class="item-column">
+  <DOTAItemImage class="shop-item" id="item_mask_of_madness" itemname="item_mask_of_madness" onactivate="ItemClick('item_mask_of_madness')"/>
+  <DOTAItemImage class="shop-item" id="item_helm_of_the_dominator" itemname="item_helm_of_the_dominator" onactivate="ItemClick('item_helm_of_the_dominator')"/>
+  <DOTAItemImage class="shop-item" id="item_dragon_lance" itemname="item_dragon_lance" onactivate="ItemClick('item_dragon_lance')"/>
+  <DOTAItemImage class="shop-item" id="item_sange" itemname="item_sange" onactivate="ItemClick('item_sange')"/>
+  <DOTAItemImage class="shop-item" id="item_yasha" itemname="item_yasha" onactivate="ItemClick('item_yasha')"/>
+  <DOTAItemImage class="shop-item" id="item_echo_sabre" itemname="item_echo_sabre" onactivate="ItemClick('item_echo_sabre')"/>
+  <DOTAItemImage class="shop-item" id="item_maelstrom" itemname="item_maelstrom" onactivate="ItemClick('item_maelstrom')"/>
+  <DOTAItemImage class="shop-item" id="item_diffusal_blade" itemname="item_diffusal_blade" onactivate="ItemClick('item_diffusal_blade')"/>
+  <DOTAItemImage class="shop-item" id="item_desolator" itemname="item_desolator" onactivate="ItemClick('item_desolator')"/>
+  <DOTAItemImage class="shop-item" id="item_heavens_halberd" itemname="item_heavens_halberd" onactivate="ItemClick('item_heavens_halberd')"/>
+  <DOTAItemImage class="shop-item" id="item_sange_and_yasha" itemname="item_sange_and_yasha" onactivate="ItemClick('item_sange_and_yasha')"/>
+  <DOTAItemImage class="shop-item" id="item_skadi" itemname="item_skadi" onactivate="ItemClick('item_skadi')"/>
+  <DOTAItemImage class="shop-item" id="item_mjollnir" itemname="item_mjollnir" onactivate="ItemClick('item_mjollnir')"/>
+  <DOTAItemImage class="shop-item" id="item_satanic" itemname="item_satanic" onactivate="ItemClick('item_satanic')"/>
+</Panel>
+<Panel class="item-column">
+  <DOTAItemImage class="shop-item" id="item_diffusal_blade_2" itemname="item_diffusal_blade_2" onactivate="ItemClick('item_diffusal_blade_2')"/>
+  <DOTAItemImage class="shop-item" id="item_travel_boots_2" itemname="item_travel_boots_2" onactivate="ItemClick('item_travel_boots_2')"/>
+  <DOTAItemImage class="shop-item" id="item_dagon_2" itemname="item_dagon_2" onactivate="ItemClick('item_dagon_2')"/>
+  <DOTAItemImage class="shop-item" id="item_dagon_3" itemname="item_dagon_3" onactivate="ItemClick('item_dagon_3')"/>
+  <DOTAItemImage class="shop-item" id="item_dagon_4" itemname="item_dagon_4" onactivate="ItemClick('item_dagon_4')"/>
+  <DOTAItemImage class="shop-item" id="item_dagon_5" itemname="item_dagon_5" onactivate="ItemClick('item_dagon_5')"/>
+</Panel>
+    </Panel>
+    <Panel id="shop-secret" class="shop-tab">
+<Panel class="item-column">
+  <DOTAItemImage class="shop-item" id="item_energy_booster" itemname="item_energy_booster" onactivate="ItemClick('item_energy_booster')"/>
+  <DOTAItemImage class="shop-item" id="item_vitality_booster" itemname="item_vitality_booster" onactivate="ItemClick('item_vitality_booster')"/>
+  <DOTAItemImage class="shop-item" id="item_point_booster" itemname="item_point_booster" onactivate="ItemClick('item_point_booster')"/>
+  <DOTAItemImage class="shop-item" id="item_platemail" itemname="item_platemail" onactivate="ItemClick('item_platemail')"/>
+  <DOTAItemImage class="shop-item" id="item_talisman_of_evasion" itemname="item_talisman_of_evasion" onactivate="ItemClick('item_talisman_of_evasion')"/>
+  <DOTAItemImage class="shop-item" id="item_hyperstone" itemname="item_hyperstone" onactivate="ItemClick('item_hyperstone')"/>
+  <DOTAItemImage class="shop-item" id="item_ultimate_orb" itemname="item_ultimate_orb" onactivate="ItemClick('item_ultimate_orb')"/>
+  <DOTAItemImage class="shop-item" id="item_demon_edge" itemname="item_demon_edge" onactivate="ItemClick('item_demon_edge')"/>
+  <DOTAItemImage class="shop-item" id="item_mystic_staff" itemname="item_mystic_staff" onactivate="ItemClick('item_mystic_staff')"/>
+  <DOTAItemImage class="shop-item" id="item_eagle" itemname="item_eagle" onactivate="ItemClick('item_eagle')"/>
+  <DOTAItemImage class="shop-item" id="item_reaver" itemname="item_reaver" onactivate="ItemClick('item_reaver')"/>
+  <DOTAItemImage class="shop-item" id="item_relic" itemname="item_relic" onactivate="ItemClick('item_relic')"/>
+</Panel>
+    </Panel>
+</Panel>
+	</Panel>
+</root>

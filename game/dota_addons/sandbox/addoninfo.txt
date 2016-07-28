@@ -1,0 +1,7 @@
+"AddonInfo"
+{
+	"dota"
+	{
+		"MaxPlayers"		"10"
+	}
+}
