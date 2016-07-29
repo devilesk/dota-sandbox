@@ -21,12 +21,11 @@ if CHeroDemo == nil then
     --refer to: http://stackoverflow.com/questions/6586145/lua-require-with-global-local
 end
 
-NeutralCampCoords = {}
-
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 -- Required .lua files, which just exist to help organize functions contained in our addon.  Make sure to call these beneath the mode's class creation.
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 require( "libraries/timers" )
+require( "libraries/util" )
 require( "events" )
 require( "utility_functions" )
 require( "queue" )
@@ -53,10 +52,10 @@ end
 -- Precache files and folders
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 function Precache( context )
-    PrecacheResource( "particle", "particles/custom/range_display.vpcf", context )
-    PrecacheResource( "particle", "particles/custom/range_display_red.vpcf", context )
-    PrecacheResource( "particle", "particles/custom/range_display_line.vpcf", context )
-    PrecacheResource( "particle", "particles/custom/range_display_line_red.vpcf", context )
+    PrecacheResource( "particle", RANGE_PARTICLE, context )
+    PrecacheResource( "particle", RANGE_PARTICLE_RED, context )
+    PrecacheResource( "particle", RANGE_LINE_PARTICLE, context )
+    PrecacheResource( "particle", RANGE_LINE_PARTICLE_RED, context )
     PrecacheUnitByNameSync( "npc_dota_hero_abaddon", context )
     PrecacheUnitByNameSync( "npc_dota_hero_abyssal_underlord", context )
     PrecacheUnitByNameSync( "npc_dota_hero_alchemist", context )
@@ -185,31 +184,11 @@ end
 --------------------------------------------------------------------------------
 -- Init
 --------------------------------------------------------------------------------
-function InitBoxes()
-    local boxes = Entities:FindAllByClassname("trigger_multiple")
-    for k,ent in pairs(boxes) do
-        if string.find(ent:GetName(), "neutralcamp") ~= nil then
-            local box = {
-                name = ent:GetName(),
-                boxes = {
-                    {
-                    ent:GetOrigin() + ent:GetBounds().Mins,
-                    ent:GetOrigin() + ent:GetBounds().Maxs
-                    }
-                },
-                particles=nil,
-                isRed=false
-            }
-            table.insert(NeutralCampCoords, box)
-        end
-    end
-end
-
 function CHeroDemo:InitGameMode()
     DebugPrint( "Initializing Hero Demo mode" )
     local GameMode = GameRules:GetGameModeEntity()
     
-    InitBoxes()
+    self.spawnBoxController = SPAWNBOXCONTROLLER()
     
     --GameMode:SetCustomGameForceHero( sHeroSelection ) -- sHeroSelection string gets piped in by dashboard's demo button
     GameMode:SetTowerBackdoorProtectionEnabled(true)
@@ -465,13 +444,85 @@ function CHeroDemo:GameThink()
     return 0.1
 end
 
+function IsInRangeFuncGenerator(entB, distance)
+    return function (entA)
+        return (entA:GetCenter() - entB:GetCenter()):Length2D() < distance
+    end
+end
+
+function IsDistBetweenEntOBBFuncGenerator(entB, distance)
+    return function (entA)
+        return CalcDistanceBetweenEntityOBB(entA, entB) < distance
+    end
+end
+
+function CreateTowerRangeOverlay(heroes, towers)
+	if towers ~= nil then
+		for k, tower in pairs(towers) do
+			if tower ~= nil and IsValidEntity(tower) then
+				CreateRangeOverlay(tower, "TowerDayVisionRangeButtonPressed", "TowerDayVision", 1800, any(IsInRangeFuncGenerator(tower, 1800), heroes))
+				CreateRangeOverlay(tower, "TowerTrueSightRangeButtonPressed", "TowerTrueSight", 900, any(IsInRangeFuncGenerator(tower, 900), heroes))
+				CreateRangeOverlay(tower, "TowerNightVisionRangeButtonPressed", "TowerNightVision", 800, any(IsInRangeFuncGenerator(tower, 800), heroes))
+				CreateRangeOverlay(tower, "TowerAttackRangeButtonPressed", "TowerAttack", 700 + tower:GetHullRadius(), any(IsDistBetweenEntOBBFuncGenerator(tower, 700), heroes))
+			end
+		end
+	end
+end
+
+function CreateHeroRangeOverlay(hero)
+	CreateRangeOverlay(hero, "HeroXPRangeButtonPressed", "HeroXPRange", 1300, false)
+	CreateRangeOverlay(hero, "BlinkRangeButtonPressed", "BlinkRange", 1200, false)
+end
+
+function CreateWardRangeOverlay(wards, sentries)
+	if wards ~= nil then
+		for k,ent in pairs(wards) do
+			if ent ~= nil and IsValidEntity(ent) then
+				CreateRangeOverlay(ent, "WardVisionButtonPressed", "WardVision", 1600, false)
+			end
+		end
+	end
+	if sentries ~= nil then
+		for k,ent in pairs(sentries) do
+			if ent ~= nil and IsValidEntity(ent) then
+				CreateRangeOverlay(ent, "SentryVisionButtonPressed", "WardVision", 150, false)
+				CreateRangeOverlay(ent, "SentryVisionButtonPressed", "TrueSightVision", 850, false)
+			end
+		end
+	end
+end
+
+function CreateRangeOverlay(ent, overlayName, particleOverlay, radius, isRed)
+	if GameRules.herodemo.overlays[overlayName] == true then
+        local particle_name = RANGE_PARTICLE
+        if isRed then
+            particle_name = RANGE_PARTICLE_RED
+        end
+		if ent._Particles[particleOverlay] ~= nil then
+			if ent._Particles[particleOverlay][2] ~= isRed then
+				ParticleManager:DestroyParticle(ent._Particles[particleOverlay][1], true)
+				ent._Particles[particleOverlay] = {CreateParticleCircle(ent, radius, particle_name), isRed}
+			end
+		else
+			ent._Particles[particleOverlay] = {CreateParticleCircle(ent, radius, particle_name), isRed}
+		end
+	else
+		if ent._Particles[particleOverlay] ~= nil then
+			ParticleManager:DestroyParticle(ent._Particles[particleOverlay][1], true)
+			ent._Particles[particleOverlay] = nil
+		end
+	end
+end
+
 function CHeroDemo:SpawnBoxThink()
-    local boxes = Entities:FindAllByClassname("trigger_multiple")
     if GameRules:State_Get() == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS or GameRules:State_Get() == DOTA_GAMERULES_STATE_PRE_GAME then
         local wards = Entities:FindAllByClassname("npc_dota_ward_base")
         local sentries = Entities:FindAllByClassname("npc_dota_ward_base_truesight")
         local towers = Entities:FindAllByClassname("npc_dota_tower")
-        local neutrals = Entities:FindAllByClassname("npc_dota_creep_neutral")
+        local neutrals
+        if self.overlays.DetectNeutralsButtonPressed then
+            neutrals = Entities:FindAllByClassname("npc_dota_creep_neutral")
+        end
         if towers ~= nil then
             for k,ent in pairs(towers) do
                 if ent._Particles == nil then
@@ -513,21 +564,23 @@ function CHeroDemo:SpawnBoxThink()
                     if hero._Particles == nil then
                         hero._Particles = {HeroXPRange=nil, BlinkRange=nil}
                     end
-                    CheckAndDrawCircle(hero, towers, wards, sentries)
-                    for k,boxData in pairs(NeutralCampCoords) do
-                        CreateParticleBoxes(hero, wards, sentries, neutrals, boxData)
-                    end
+                    CreateHeroRangeOverlay(hero)
                 end            
             end
         end
+        local heroes = HeroList:GetAllHeroes()
+        if self.overlays.ShowNeutralSpawnBoxButtonPressed then
+            self.spawnBoxController:DrawBoxes(heroes, wards, sentries, neutrals)
+        else
+            self.spawnBoxController:EraseBoxes()
+        end
+        CreateTowerRangeOverlay(heroes, towers)
+        CreateWardRangeOverlay(wards, sentries)
+        
         wards = nil
         sentries = nil
         towers = nil
         neutrals = nil
-        boxes = nil
-    elseif GameRules:State_Get() >= DOTA_GAMERULES_STATE_POST_GAME then
-        boxes = nil
-        return nil
     end
     return .01
 end
