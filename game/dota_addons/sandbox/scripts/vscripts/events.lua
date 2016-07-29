@@ -509,7 +509,7 @@ function CHeroDemo:OnResetPlayerStatsButtonPressed( eventSourceIndex, data )
         CustomNetTables:SetTableValue( "dps_nettable", tostring(selectedPlayerID), { value = 0 } )
         CustomNetTables:SetTableValue( "dps10_nettable", tostring(selectedPlayerID), { value = 0 } )
         self.m_tPlayerDPS[selectedPlayerID] = 0
-        self.m_tPlayerDPS10[selectedPlayerID] = List.new()
+        self.m_tPlayerDPS10[selectedPlayerID] = Queue()
         self:BroadcastMsg( "#ResetPlayerStats_Msg" )
     end
 end

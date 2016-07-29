@@ -26,9 +26,8 @@ end
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 require( "libraries/timers" )
 require( "libraries/util" )
+require( "libraries/queue" )
 require( "events" )
-require( "utility_functions" )
-require( "queue" )
 require( "spawnbox" )
 
 local DEBUG = false
@@ -337,17 +336,29 @@ function CHeroDemo:InitGameMode()
         CustomNetTables:SetTableValue( "dps_nettable", tostring(nPlayerID), { value = 0 } )
         CustomNetTables:SetTableValue( "dps10_nettable", tostring(nPlayerID), { value = 0 } )
         self.m_tPlayerDPS[nPlayerID] = 0
-        self.m_tPlayerDPS10[nPlayerID] = List.new()
+        self.m_tPlayerDPS10[nPlayerID] = Queue()
     end
     GameRules:GetGameModeEntity():SetThink("CalculateDPS", self)
+end
+
+function CHeroDemo:BroadcastMsg( sMsg )
+	-- Display a message about the button action that took place
+	local buttonEventMessage = sMsg
+	--print( buttonEventMessage )
+	local centerMessage = {
+		message = buttonEventMessage,
+		duration = 1.0,
+		clearQueue = true -- this doesn't seem to work
+	}
+	FireGameEvent( "show_center_message", centerMessage )
 end
 
 function CHeroDemo:CalculateDPS()
     for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS - 1 do
         CustomNetTables:SetTableValue( "dps_nettable", tostring(nPlayerID), { value = self.m_tPlayerDPS[nPlayerID] } )
-        List.pushright(self.m_tPlayerDPS10[nPlayerID], self.m_tPlayerDPS[nPlayerID])
+        self.m_tPlayerDPS10[nPlayerID]:PushRight(self.m_tPlayerDPS[nPlayerID])
         if self.m_tPlayerDPS10[nPlayerID].last - self.m_tPlayerDPS10[nPlayerID].first > 10 then
-            List.popleft(self.m_tPlayerDPS10[nPlayerID])
+            self.m_tPlayerDPS10[nPlayerID]:PopLeft()
         end
 
         local dps10 = 0
