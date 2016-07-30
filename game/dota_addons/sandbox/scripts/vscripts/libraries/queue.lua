@@ -1,4 +1,3 @@
-require("libraries/functional")
 require("libraries/util")
 
 Queue = class(
@@ -43,4 +42,4 @@ function Queue:PopRight()
   return value
 end
 
-print( "Queue.lua is loaded." )
+print( "queue.lua is loaded." )
