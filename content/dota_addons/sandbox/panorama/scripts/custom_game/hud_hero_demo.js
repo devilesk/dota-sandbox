@@ -15,32 +15,18 @@ function IsPlayerSelected(key) {
 function RefreshStats() {
     var hero = Players.GetPlayerHeroEntityIndex(parseInt(SelectedPlayerToKey()));
     $('#ASValue').text = Entities.GetAttacksPerSecond(hero).toFixed(2);
-    ////$.Msg( "In function RefreshStats():", {value: $('#TDTValue').text } );
     $.Schedule(0.1, RefreshStats);
 }
 
 $.Schedule(0.1, RefreshStats);
 
 function OnPlayerDropDownChanged() {
-    //$.Msg("OnPlayerDropDownChanged");
     var key = SelectedPlayerToKey();
     $('#DPSValue').text = CustomNetTables.GetTableValue("dps_nettable", key).value.toFixed(0);
     $('#DPS10Value').text = CustomNetTables.GetTableValue("dps10_nettable", key).value.toFixed(0);
     $('#LastAttackValue').text = CustomNetTables.GetTableValue("la_nettable", key).value.toFixed(0);
     $('#TotalDamageValue').text = CustomNetTables.GetTableValue("td_nettable", key).value.toFixed(0);
 }
-
-function OnCheatModeNettableChanged(table_name, key, data) {
-    var v = data.value == true;
-    //$.Msg( "Table ", table_name, " changed: '", key, "' = ", data, data.value == true);
-    $('#RemoveSpawnsPanel').visible = v;
-    $('#CheatsPanel1').visible = v;
-    $('#CheatsPanel2').visible = v;
-    $('#CheatsPanel3').visible = v;
-    $('#CheatsPanel4').visible = v;
-    $('#CheatsPanel5').visible = v;
-}
-CustomNetTables.SubscribeNetTableListener("cheatmode_nettable", OnCheatModeNettableChanged);
 
 //var data = //$.Msg( CustomNetTables.GetTableValue( "dps_nettable", "0" ) );
 ////$.Msg( "CustomNetTables.GetTableValue ", {data: data } );

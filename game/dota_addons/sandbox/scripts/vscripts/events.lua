@@ -26,7 +26,6 @@ function CHeroDemo:OnGameRulesStateChange()
     if GameRules:IsCheatMode() then
       SendToServerConsole( "sv_cheats 1" )
     end
-    CustomNetTables:SetTableValue( "cheatmode_nettable", "cheatMode", { value = GameRules:IsCheatMode() } )
 		DebugPrint( "OnGameRulesStateChange: Pre Game Selection" )
 	elseif nNewState == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
 		DebugPrint( "OnGameRulesStateChange: Game In Progress" )

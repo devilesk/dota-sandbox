@@ -7,7 +7,6 @@
         "td_nettable",
         "la_nettable",
         "dps_nettable",
-        "dps10_nettable",
-        "cheatmode_nettable"
+        "dps10_nettable"
     ]
 }
