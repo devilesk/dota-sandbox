@@ -350,30 +350,26 @@
                                     </Button>
                                 </Panel>
                                 <Panel class="hr"></Panel>
-                                <!--<Label class="CanCollapse" text="#Cheats_ButtonCategory" />
                                 <Panel class="Row">
-                                    <Label id="RequiresCustomLobbyLabel" class="small" text="#RequiresCustomLobbyLabel" />
-                                </Panel>-->
-                                <Panel id="CheatsPanel1" class="Row">
                                     <Label id="NeutralSpawnIntervalDropDownLabel" class="small" text="#NeutralSpawnIntervalDropDownLabel" />
                                 </Panel>
-                                <Panel id="CheatsPanel2" class="Row">
+                                <Panel class="Row">
                                     <DropDown id="NeutralSpawnIntervalDropDown" class="DemoButton" oninputsubmit="OnNeutralSpawnIntervalDropDownChanged()">
                                         <Label text="60" id="i_60"/>
                                         <Label text="30" id="i_30"/>
                                         <Label text="10" id="i_10"/>
                                     </DropDown>
                                 </Panel>
-                                <Panel id="CheatsPanel3" class="Row">
+                                <Panel class="Row">
                                     <Button class="DemoButton" onactivate="FireCustomGameEvent_Str( SpawnNeutralsButtonPressed )">
                                         <Label text="#SpawnNeutrals_Button" />
                                     </Button>
                                 </Panel>
-                                <Panel id="CheatsPanel4" class="Row">
+                                <Panel class="Row">
                                     <Label id="HostTimeScaleDropDownLabel" class="small col-2" text="#HostTimeScaleDropDownLabel" />
                                     <Label id="HostTimeScaleValueLabel" class="small col-2" text="#HostTimeScaleValueLabel" />
                                 </Panel>
-                                <Panel id="CheatsPanel5" class="Row">
+                                <Panel class="Row">
                                     <Button class="DemoButton col-4" onactivate="OnHostTimeScaleSpeedChange(-1)">
                                         <Label class="text-center" text="#HostTimeScaleSpeedDown_Button" />
                                     </Button>
