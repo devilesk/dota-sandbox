@@ -2,7 +2,6 @@
     <styles>
 		<include src="file://{resources}/styles/dotastyles.css" />
 		<include src="file://{resources}/styles/custom_game/multiteam_top_scoreboard.css" />
-		<include src="file://{resources}/styles/custom_game/shared_scoreboard_styles.css" />
     </styles>
 	<script>
 	(function()

@@ -1,7 +1,6 @@
 <root>
 	<styles>
 		<include src="file://{resources}/styles/dotastyles.css" />
-		<include src="file://{resources}/styles/custom_game/shared_scoreboard_styles.css" />
         <include src="file://{resources}/styles/custom_game/hud_hero_demo.css" />
         <include src="file://{resources}/styles/custom_game/multiteam_top_scoreboard.css" />
 	</styles>
