@@ -22,61 +22,39 @@ $.Schedule(0.1, RefreshStats);
 
 function OnPlayerDropDownChanged() {
     var key = SelectedPlayerToKey();
-    $('#DPSValue').text = CustomNetTables.GetTableValue("dps_nettable", key).value.toFixed(0);
-    $('#DPS10Value').text = CustomNetTables.GetTableValue("dps10_nettable", key).value.toFixed(0);
-    $('#LastAttackValue').text = CustomNetTables.GetTableValue("la_nettable", key).value.toFixed(0);
-    $('#TotalDamageValue').text = CustomNetTables.GetTableValue("td_nettable", key).value.toFixed(0);
-}
-
-//var data = //$.Msg( CustomNetTables.GetTableValue( "dps_nettable", "0" ) );
-////$.Msg( "CustomNetTables.GetTableValue ", {data: data } );
-function OnNettableChanged(table_name, key, data) {
-    //$.Msg( "Table ", table_name, " changed: '", key, "' = ", data );
-    if (IsPlayerSelected(key)) {
-        $('#DPSValue').text = data.value.toFixed(0);
+    for (var netTable in netTableLabelMap) {
+        if (netTableLabelMap.hasOwnProperty(netTable)) {
+            netTableLabelMap[netTable].text = CustomNetTables.GetTableValue(netTable, key).value.toFixed(0);
+        }
     }
 }
-CustomNetTables.SubscribeNetTableListener("dps_nettable", OnNettableChanged);
 
-function OnDPS10NettableChanged(table_name, key, data) {
-    //$.Msg( "Table ", table_name, " changed: '", key, "' = ", data );
-    if (IsPlayerSelected(key)) {
-        $('#DPS10Value').text = data.value.toFixed(0);
+function NetTableChangedLabelUpdater(netTable, labelElement) {
+    return function (table_name, key, data) {
+        if (IsPlayerSelected(key)) {
+            labelElement.text = data.value.toFixed(0);
+        }
     }
 }
-CustomNetTables.SubscribeNetTableListener("dps10_nettable", OnDPS10NettableChanged);
 
-function OnLastDamageTakenNettableChanged(table_name, key, data) {
-    //$.Msg( "Table ", table_name, " changed: '", key, "' = ", data, " ", $('#PlayerDropDown').GetSelected().id.replace('player', '') );
-    if (IsPlayerSelected(key)) {
-        $('#LastDamageTakenValue').text = data.value.toFixed(0);
+function NetTableListenerInit(netTable, labelElement) {
+    CustomNetTables.SubscribeNetTableListener(netTable, NetTableChangedLabelUpdater(netTable, labelElement));
+}
+
+var netTableLabelMap = {
+    "dps_nettable": $('#DPSValue'),
+    "dps10_nettable": $('#DPS10Value'),
+    "dt_nettable": $('#LastDamageTakenValue'),
+    "tdt_nettable": $('#TotalDamageTakenValue'),
+    "la_nettable": $('#LastAttackValue'),
+    "td_nettable": $('#TotalDamageValue')
+}
+
+for (var netTable in netTableLabelMap) {
+    if (netTableLabelMap.hasOwnProperty(netTable)) {
+        NetTableListenerInit(netTable, netTableLabelMap[netTable]);
     }
 }
-CustomNetTables.SubscribeNetTableListener("dt_nettable", OnLastDamageTakenNettableChanged);
-
-function OnTotalDamageTakenNettableChanged(table_name, key, data) {
-    //$.Msg( "Table ", table_name, " changed: '", key, "' = ", data, " ", $('#PlayerDropDown').GetSelected().id.replace('player', '') );
-    if (IsPlayerSelected(key)) {
-        $('#TotalDamageTakenValue').text = data.value.toFixed(0);
-    }
-}
-CustomNetTables.SubscribeNetTableListener("tdt_nettable", OnTotalDamageTakenNettableChanged);
-
-function OnLastAttackNettableChanged(table_name, key, data) {
-    //$.Msg( "Table ", table_name, " changed: '", key, "' = ", data, " ", $('#PlayerDropDown').GetSelected().id.replace('player', '') );
-    if (IsPlayerSelected(key)) {
-        $('#LastAttackValue').text = data.value.toFixed(0);
-    }
-}
-CustomNetTables.SubscribeNetTableListener("la_nettable", OnLastAttackNettableChanged);
-
-function OnTotalDamageNettableChanged(table_name, key, data) {
-    //$.Msg( "Table ", table_name, " changed: '", key, "' = ", data, " ", $('#PlayerDropDown').GetSelected().id.replace('player', '') );
-    if (IsPlayerSelected(key)) {
-        $('#TotalDamageValue').text = data.value.toFixed(0);
-    }
-}
-CustomNetTables.SubscribeNetTableListener("td_nettable", OnTotalDamageNettableChanged);
 
 function ToggleTab(index) {
     for (var i = 1; i <= NUM_TABS; i++) {
@@ -93,7 +71,6 @@ ToggleTab(1);
 
 function OnNeutralSpawnIntervalDropDownChanged() {
     var value = parseInt($('#NeutralSpawnIntervalDropDown').GetSelected().id.split('_')[1]);
-    //$.Msg( "In function OnNeutralSpawnIntervalDropDownChanged():", {value: value } );
     GameEvents.SendCustomGameEventToServer("NeutralSpawnIntervalChange", {
         value: value
     });
@@ -107,14 +84,12 @@ function OnHostTimeScaleSpeedChange(dir) {
     }
     var value = hostTimeScaleValues[hostTimeScaleIndex];
     $('#HostTimeScaleValueLabel').text = value + 'X';
-    //$.Msg( "In function OnHostTimeScaleSpeedChange():", {value: value } );
     GameEvents.SendCustomGameEventToServer("HostTimeScaleChange", {
         value: value
     });
 }
 
 function FireCustomGameEvent(eventName) {
-    //$.Msg( "In function FireCustomGameEvent():", {eventName: eventName, selectedHero: $('#HeroDropDown').GetSelected().id, goldAmount: $('#GoldAmount').text } );
     var playerId = Players.GetLocalPlayer();
     var selectedUnits = Players.GetSelectedEntities(playerId);
     var data = {
@@ -126,7 +101,6 @@ function FireCustomGameEvent(eventName) {
     }
     GameEvents.SendCustomGameEventToServer(eventName, data);
     if (eventName == "TeleportButtonPressed" || eventName == "SpawnAllyButtonPressed" || eventName == "SpawnEnemyButtonPressed") {
-        //$.Msg( "indicator");
         var unit = Players.GetLocalPlayerPortraitUnit();
         if (indicator) indicator.Delete();
         indicator = new GlobalTargetIndicator({}, unit);
@@ -134,7 +108,6 @@ function FireCustomGameEvent(eventName) {
 }
 
 function FireOverlayToggleEvent(eventName) {
-    //$.Msg( "In function FireOverlayToggleEvent():", {eventName: eventName, value: $('#' + eventName).checked } );
     GameEvents.SendCustomGameEventToServer(eventName, {
         overlayName: eventName,
         value: $('#' + eventName).checked
@@ -157,19 +130,14 @@ GameUI.SetMouseCallback(function(eventName, arg) {
                         y: coordinates[1],
                         z: coordinates[2]
                     }
-                    //$.Msg( "In function SetMouseCallback():", {eventName: eventName, arg: arg, pos: pos, selectedUnits: selectedUnits } );
-
                 GameEvents.SendCustomGameEventToServer("MouseClick", {
                     "pos": pos,
                     "selectedUnits": selectedUnits
                 });
                 if (indicator) indicator.Delete();
-            } else {
-                //$.Msg("coordinates null");
             }
         }
     }
-
     return CONTINUE_PROCESSING_EVENT;
 });
 
