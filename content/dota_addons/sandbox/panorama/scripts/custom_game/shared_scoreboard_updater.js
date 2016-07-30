@@ -43,29 +43,12 @@ function _ScoreboardUpdater_UpdatePlayerPanel( scoreboardConfig, playersContaine
 			ultStateOrTime = Game.GetPlayerUltimateStateOrTime( playerId );
 		}
 		goldValue = playerInfo.player_gold;
-		
-		/*playerPanel.SetHasClass( "player_dead", ( playerInfo.player_respawn_seconds >= 0 && playerInfo.player_selected_hero_id != -1 ) );
-		playerPanel.SetHasClass( "local_player_teammate", isTeammate && ( playerId != Game.GetLocalPlayerID() ) );*/
 
-		//_ScoreboardUpdater_SetTextSafe( playerPanel, "RespawnTimer", ( playerInfo.player_respawn_seconds + 1 ) ); // value is rounded down so just add one for rounded-up
 		_ScoreboardUpdater_SetTextSafe( playerPanel, "PlayerName", playerInfo.player_name );
 		_ScoreboardUpdater_SetTextSafe( playerPanel, "Level", playerInfo.player_level );
 		_ScoreboardUpdater_SetTextSafe( playerPanel, "Kills", playerInfo.player_kills );
 		_ScoreboardUpdater_SetTextSafe( playerPanel, "Deaths", playerInfo.player_deaths );
 		_ScoreboardUpdater_SetTextSafe( playerPanel, "Assists", playerInfo.player_assists );
-
-		var playerPortrait = playerPanel.FindChildInLayoutFile( "HeroIcon" );
-		if ( playerPortrait )
-		{
-			/*if ( playerInfo.player_selected_hero !== "" )
-			{
-				playerPortrait.SetImage( "file://{images}/heroes/" + playerInfo.player_selected_hero + ".png" );
-			}
-			else
-			{
-				playerPortrait.SetImage( "file://{images}/custom_game/unassigned.png" );
-			}*/
-		}
 		
 		if ( playerInfo.player_selected_hero_id == -1 )
 		{
@@ -90,46 +73,10 @@ function _ScoreboardUpdater_UpdatePlayerPanel( scoreboardConfig, playersContaine
 			heroNameAndDescription.SetDialogVariableInt( "hero_level",  playerInfo.player_level );
 		}		
 
-		/*playerPanel.SetHasClass( "player_connection_abandoned", playerInfo.player_connection_state == DOTAConnectionState_t.DOTA_CONNECTION_STATE_ABANDONED );
-		playerPanel.SetHasClass( "player_connection_failed", playerInfo.player_connection_state == DOTAConnectionState_t.DOTA_CONNECTION_STATE_FAILED );
-		playerPanel.SetHasClass( "player_connection_disconnected", playerInfo.player_connection_state == DOTAConnectionState_t.DOTA_CONNECTION_STATE_DISCONNECTED );*/
-
 		var playerAvatar = playerPanel.FindChildInLayoutFile( "AvatarImage" );
 		if ( playerAvatar )
 		{
 			playerAvatar.steamid = playerInfo.player_steamid;
-		}		
-
-		var playerColorBar = playerPanel.FindChildInLayoutFile( "PlayerColorBar" );
-		if ( playerColorBar !== null )
-		{
-			/*if ( GameUI.CustomUIConfig().team_colors )
-			{
-				var teamColor = GameUI.CustomUIConfig().team_colors[ playerInfo.player_team_id ];
-				if ( teamColor )
-				{
-					playerColorBar.style.backgroundColor = teamColor;
-				}
-			}
-			else
-			{
-				var playerColor = "#000000";
-        var playerColors = ['#3455FF', '#3DD296', '#8C2AF4', '#F3C909', '#FF6C00', '#C54DA8', '#C7E40D', '#1BC0D8', '#65D413', '#815336'];
-        var playerColorsMap = {
-          4294931763: 0,
-          4290772838: 1,
-          4290707647: 2,
-          4278972659: 3, 
-          4278217727: 4,
-          4290938622: 5,
-          4282889377: 6,
-          4294433125: 7,
-          4280386304: 8,
-          4278217124: 9
-        };
-				playerColorBar.style.backgroundColor = playerColors[playerColorsMap[Players.GetPlayerColor(playerId)]] || playerColor;
-        //$.Msg("player color ", playerId, " ", Players.GetPlayerColor(playerId));
-			}*/
 		}
 	}
 	
@@ -139,7 +86,6 @@ function _ScoreboardUpdater_UpdatePlayerPanel( scoreboardConfig, playersContaine
 		var playerItems = Game.GetPlayerItems( playerId );
 		if ( playerItems )
 		{
-	//		$.Msg( "playerItems = ", playerItems );
 			for ( var i = playerItems.inventory_slot_min; i < playerItems.inventory_slot_max; ++i )
 			{
 				var itemPanelName = "_dynamic_item_" + i;
@@ -255,7 +201,6 @@ function _ScoreboardUpdater_UpdateTeamPanel( scoreboardConfig, containerPanel, t
 		if ( teamColor_GradentFromTransparentLeft )
 		{
 			var gradientText = 'gradient( linear, 0% 0%, 800% 0%, from( #00000000 ), to( ' + teamColor + ' ) );';
-//			$.Msg( gradientText );
 			teamColor_GradentFromTransparentLeft.style.backgroundColor = gradientText;
 		}
 	}
