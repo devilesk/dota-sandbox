@@ -8,6 +8,7 @@ _G.DOTA_MAX_ABILITIES = 16
 _G.HERO_MAX_LEVEL = 25
 
 LinkLuaModifier( "modifier_damage_tracking", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_range_circle", LUA_MODIFIER_MOTION_NONE )
 
 -- "demo_hero_name" is a magic term, "default_value" means no string was passed, so we'd probably want to put them in hero selection
 --sHeroSelection = GameRules:GetGameSessionConfigValue( "demo_hero_name", "default_value" )
@@ -216,6 +217,7 @@ function CHeroDemo:InitGameMode()
     CustomGameEventManager:RegisterListener( "ChangeCosmeticsButtonPressed", function(...) return self:OnChangeCosmeticsButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "ChangeHeroButtonPressed", function(...) return self:OnChangeHeroButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "ClearInventoryButtonPressed", function(...) return self:OnClearInventoryButtonPressed( ... ) end )
+    CustomGameEventManager:RegisterListener( "CreepAggroRangeButtonPressed", function(...) return self:OnOverlayToggleButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "DetectNeutralsButtonPressed", function(...) return self:OnOverlayToggleButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "DummyTargetButtonPressed", function(...) return self:OnDummyTargetButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "DummyTargetsButtonPressed", function(...) return self:OnDummyTargetsButtonPressed( ... ) end )
@@ -314,6 +316,7 @@ function CHeroDemo:InitGameMode()
         WardVisionButtonPressed = false,
         HeroXPRangeButtonPressed = false,
         BlinkRangeButtonPressed = false,
+        CreepAggroRangeButtonPressed = false,
     }
 
     self._hNeutralCaster = CreateUnitByName( "npc_dota_neutral_caster", Vector(0, 0, 0), false, nil, nil, NEUTRAL_TEAM )
@@ -568,6 +571,17 @@ function CHeroDemo:SpawnBoxThink()
                         hero._Particles = {HeroXPRange=nil, BlinkRange=nil}
                     end
                     CreateHeroRangeOverlay(hero)
+                    local enemies = FindUnitsInRadius( DOTA_TEAM_GOODGUYS, hero:GetOrigin(), nil, 1000, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_CREEP, 0, 0, false )
+                    for _, creep in pairs(enemies) do
+                        --print (creep:GetName())
+                        if creep._Particles == nil then
+                            creep._Particles = {CreepAggro=nil}
+                        end
+                        CreateRangeOverlay(creep, "CreepAggroRangeButtonPressed", "CreepAggro", 500, false)
+                        if not creep:HasModifier("modifier_range_circle") then
+                            creep:AddNewModifier(creep, nil, "modifier_range_circle", {duration = -1, range=500})
+                        end
+                    end
                 end            
             end
         end
