@@ -8,8 +8,11 @@
         <include src="file://{resources}/scripts/custom_game/cheat_popup.js" />
     </scripts>
     <Panel class="root-panel" onactivate="OnRootClick()">
-        <Panel class="message-container">
+        <Panel class="container message-container">
             <Label class="message" text="#Cheats_PopupMessage" />
+        </Panel>
+        <Movie class="lobby_guide" src="file://{resources}/videos/heroes/lobby_guide.webm" controls="" repeat="true" autoplay="onload" />
+        <Panel class="container">
             <Panel class="button-container">
                 <Button class="button-quit DemoButton" onactivate="FireCustomGameEvent_Str( LeaveButtonPressed )">
                     <Label text="#CheatsQuit_Button"/>

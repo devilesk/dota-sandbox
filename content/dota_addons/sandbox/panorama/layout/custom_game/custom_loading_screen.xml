@@ -4,7 +4,6 @@
   </styles>
   <Panel class="AddonLoadingRoot" >
     <Panel class="LoadingScreenContainer" >
-  
       <Panel id ="LoadingScreenPosition">
         <Image id="LoadingScreen" /> 
       </Panel>

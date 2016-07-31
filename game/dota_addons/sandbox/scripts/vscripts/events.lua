@@ -16,7 +16,6 @@ function CHeroDemo:OnGameRulesStateChange()
 	elseif nNewState == DOTA_GAMERULES_STATE_PRE_GAME then
     if GameRules:IsCheatMode() then
         SendToServerConsole( "sv_cheats 1" )
-        CustomUI:DynamicHud_Create(-1, "cheat-popup-prompt", "file://{resources}/layout/custom_game/cheat_popup.xml", nil)
     else
         CustomUI:DynamicHud_Create(-1, "cheat-popup-prompt", "file://{resources}/layout/custom_game/cheat_popup.xml", nil)
     end

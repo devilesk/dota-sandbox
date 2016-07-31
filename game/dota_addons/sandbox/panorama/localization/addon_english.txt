@@ -17,7 +17,7 @@
 	"Overlay_ButtonCategory"					"Overlays"
 	"Stats_ButtonCategory"						"Stats"
 
-    "Cheats_PopupMessage"                                          "Cheats are not enabled and many features will not work.\nUse a cheats enabled lobby to access them."
+    "Cheats_PopupMessage"                                          "Many features will not work because cheats are off. Use a cheats enabled lobby to access them."
     "CheatsQuit_Button"                                          "Quit Game"
     "CheatsContinue_Button"                                          "Continue Playing"
     
