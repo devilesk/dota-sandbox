@@ -329,14 +329,9 @@
     letter-spacing: 0px;
 }
 
-.Category .DemoButton:hover
+.DemoButton:hover
 {
     background-color: gradient( linear, 0% 0%, 0% 100%, from( #444444 ), to( #555555 ) );
-}
-
-.Category .DemoButton:hover Label
-{
-  /*color: #cccccc;*/
 }
 
 .Category .DemoButton:active

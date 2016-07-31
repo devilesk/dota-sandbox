@@ -10,21 +10,15 @@ function CHeroDemo:OnGameRulesStateChange()
 	if nNewState == DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP then
 		DebugPrint( "OnGameRulesStateChange: Custom Game Setup" )
     GameRules:EnableCustomGameSetupAutoLaunch( false )
-
-    --[[SendToServerConsole( 'dota_create_fake_clients' )
-
-    for i = 0, 4 do
-      PlayerResource:SetCustomTeamAssignment(i, DOTA_TEAM_GOODGUYS)
-    end
-    for i = 5, 9 do
-      PlayerResource:SetCustomTeamAssignment(i, DOTA_TEAM_BADGUYS)
-    end]]
     
 	elseif nNewState == DOTA_GAMERULES_STATE_HERO_SELECTION then
 		DebugPrint( "OnGameRulesStateChange: Hero Selection" )
 	elseif nNewState == DOTA_GAMERULES_STATE_PRE_GAME then
     if GameRules:IsCheatMode() then
-      SendToServerConsole( "sv_cheats 1" )
+        SendToServerConsole( "sv_cheats 1" )
+        CustomUI:DynamicHud_Create(-1, "cheat-popup-prompt", "file://{resources}/layout/custom_game/cheat_popup.xml", nil)
+    else
+        CustomUI:DynamicHud_Create(-1, "cheat-popup-prompt", "file://{resources}/layout/custom_game/cheat_popup.xml", nil)
     end
 		DebugPrint( "OnGameRulesStateChange: Pre Game Selection" )
 	elseif nNewState == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then

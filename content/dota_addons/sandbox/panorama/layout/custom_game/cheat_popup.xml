@@ -1,0 +1,23 @@
+<root>
+    <styles>
+        <include src="file://{resources}/styles/dotastyles.css" />
+        <include src="file://{resources}/styles/custom_game/hud_hero_demo.css" />
+        <include src="file://{resources}/styles/custom_game/cheat_popup.css" />
+    </styles>
+    <scripts>
+        <include src="file://{resources}/scripts/custom_game/cheat_popup.js" />
+    </scripts>
+    <Panel class="root-panel" onactivate="OnRootClick()">
+        <Panel class="message-container">
+            <Label class="message" text="#Cheats_PopupMessage" />
+            <Panel class="button-container">
+                <Button class="button-quit DemoButton" onactivate="FireCustomGameEvent_Str( LeaveButtonPressed )">
+                    <Label text="#CheatsQuit_Button"/>
+                </Button>
+                <Button class="button-continue DemoButton" onactivate="OnContinue()">
+                    <Label text="#CheatsContinue_Button"/>
+                </Button>
+            </Panel>
+        </Panel>
+    </Panel>
+</root>
