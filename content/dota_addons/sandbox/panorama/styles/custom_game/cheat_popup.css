@@ -10,6 +10,8 @@
     height: 648px;
     horizontal-align: middle;
     border: 2px solid #222;
+    background-image: url("file://{images}/lobby_guide.jpg");
+    background-size: 100% 100%;
 }
 
 .container {
