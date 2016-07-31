@@ -948,11 +948,13 @@ end
 -- ButtonEvent: OnOverlayToggleButtonPressed
 --------------------------------------------------------------------------------
 function CHeroDemo:OnOverlayToggleButtonPressed( eventSourceIndex, data )
+    print ("OnOverlayToggleButtonPressed")
+    print (data.PlayerID)
 	if data.value == 1 then
-		self.overlays[data.overlayName] = true
+		self.overlays[data.PlayerID][data.overlayName] = true
     self:BroadcastMsg( "#" .. data.overlayName .. "On_Msg" )
 	else
-		self.overlays[data.overlayName] = false
+		self.overlays[data.PlayerID][data.overlayName] = false
     self:BroadcastMsg( "#" .. data.overlayName .. "Off_Msg" )
 	end
 end
