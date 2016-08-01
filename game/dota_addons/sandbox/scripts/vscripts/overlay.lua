@@ -2,6 +2,7 @@ RANGE_PARTICLE = "particles/custom/range_display.vpcf"
 RANGE_PARTICLE_RED = "particles/custom/range_display_red.vpcf"
 RANGE_LINE_PARTICLE = "particles/custom/range_display_line.vpcf"
 RANGE_LINE_PARTICLE_RED = "particles/custom/range_display_line_red.vpcf"
+RANGE_TARGET = "particles/custom/range_target.vpcf"
 
 function CreateParticleBox(min_a, max_a, particle_name, hPlayer)
 	local particles = {}
@@ -38,5 +39,16 @@ function CreateParticleCircle(ent, radius, particle_name, hPlayer)
         particle = ParticleManager:CreateParticleForPlayer(particle_name, PATTACH_ABSORIGIN_FOLLOW, ent, hPlayer)
     end
 	ParticleManager:SetParticleControl(particle, 1, Vector(radius, 100, 100))
+	return particle
+end
+
+function CreateParticleTarget(ent, hPlayer)
+    print ("CreateParticleCircle")
+	local particle
+    if hPlayer == nil then
+        particle = ParticleManager:CreateParticle(RANGE_TARGET, PATTACH_ABSORIGIN_FOLLOW, ent)
+    else
+        particle = ParticleManager:CreateParticleForPlayer(RANGE_TARGET, PATTACH_ABSORIGIN_FOLLOW, ent, hPlayer)
+    end
 	return particle
 end

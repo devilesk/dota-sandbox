@@ -8,6 +8,11 @@ _G.DOTA_MAX_ABILITIES = 16
 _G.HERO_MAX_LEVEL = 25
 
 LinkLuaModifier( "modifier_damage_tracking", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_range_base", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_range_blink", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_range_xp", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_range_creep_aggro", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_target", LUA_MODIFIER_MOTION_NONE )
 
 -- "demo_hero_name" is a magic term, "default_value" means no string was passed, so we'd probably want to put them in hero selection
 --sHeroSelection = GameRules:GetGameSessionConfigValue( "demo_hero_name", "default_value" )
@@ -56,6 +61,7 @@ function Precache( context )
     PrecacheResource( "particle", RANGE_PARTICLE_RED, context )
     PrecacheResource( "particle", RANGE_LINE_PARTICLE, context )
     PrecacheResource( "particle", RANGE_LINE_PARTICLE_RED, context )
+    PrecacheResource( "particle", RANGE_TARGET, context )
     PrecacheUnitByNameSync( "npc_dota_hero_abaddon", context )
     PrecacheUnitByNameSync( "npc_dota_hero_abyssal_underlord", context )
     PrecacheUnitByNameSync( "npc_dota_hero_alchemist", context )
@@ -217,6 +223,7 @@ function CHeroDemo:InitGameMode()
     CustomGameEventManager:RegisterListener( "ChangeCosmeticsButtonPressed", function(...) return self:OnChangeCosmeticsButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "ChangeHeroButtonPressed", function(...) return self:OnChangeHeroButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "ClearInventoryButtonPressed", function(...) return self:OnClearInventoryButtonPressed( ... ) end )
+    CustomGameEventManager:RegisterListener( "CreepAggroRangeButtonPressed", function(...) return self:OnOverlayToggleButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "DetectNeutralsButtonPressed", function(...) return self:OnOverlayToggleButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "DummyTargetButtonPressed", function(...) return self:OnDummyTargetButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "DummyTargetsButtonPressed", function(...) return self:OnDummyTargetsButtonPressed( ... ) end )
@@ -572,11 +579,14 @@ function CHeroDemo:SpawnBoxThink()
         end
         if heroes ~= nil then
             for k,ent in pairs(heroes) do
-                if ent._Particles == nil then
-                    ent._Particles = {}
-                    for i = 0, 9, 1 do
-                        ent._Particles[i] = {HeroXPRange=nil, BlinkRange=nil}
-                    end
+                if not ent:HasModifier("modifier_range_blink") then
+                    ent:AddNewModifier(ent, nil, "modifier_range_blink", {duration = -1})
+                end
+                if not ent:HasModifier("modifier_range_xp") then
+                    ent:AddNewModifier(ent, nil, "modifier_range_xp", {duration = -1})
+                end
+                if not ent:HasModifier("modifier_range_creep_aggro") then
+                    ent:AddNewModifier(ent, nil, "modifier_range_creep_aggro", {duration = -1})
                 end
             end
         end
@@ -591,7 +601,8 @@ function CHeroDemo:SpawnBoxThink()
                     if hero._Particles == nil then
                         hero._Particles = {HeroXPRange=nil, BlinkRange=nil}
                     end
-                    CreateHeroRangeOverlayForPlayer(player, hero)
+                    
+                    --CreateHeroRangeOverlayForPlayer(player, hero)
                     
                     local bShowBox = self.overlays[i].ShowNeutralSpawnBoxButtonPressed
                     local bDetectNeutrals = self.overlays[i].DetectNeutralsButtonPressed
@@ -599,6 +610,13 @@ function CHeroDemo:SpawnBoxThink()
                     
                     CreateTowerRangeOverlayForPlayer(player, heroes, towers)
                     CreateWardRangeOverlayForPlayer(player, wards, sentries)
+
+                    local enemies = FindUnitsInRadius( DOTA_TEAM_GOODGUYS, hero:GetOrigin(), nil, 1000, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_CREEP, 0, 0, false )
+                    for _, creep in pairs(enemies) do
+                        if not creep:HasModifier("modifier_target") then
+                            creep:AddNewModifier(creep, nil, "modifier_target", {duration = -1, overlayName="BlinkRangeButtonPressed"})
+                        end
+                    end
                 end            
             end
         end

@@ -447,6 +447,14 @@
                                         <Label text="#BlinkRange_Button" />
                                     </ToggleButton>
                                 </Panel>
+                                <Panel class="Row">
+                                    <Label id="CreepLabel" class="small" text="#CreepLabel" />
+                                </Panel>
+                                <Panel class="Row">
+                                    <ToggleButton id="CreepAggroRangeButtonPressed" class="DemoButton" onactivate="FireOverlayToggleEvent( 'CreepAggroRangeButtonPressed' )">
+                                        <Label text="#CreepAggroRange_Button" />
+                                    </ToggleButton>
+                                </Panel>
                             </Panel>
                         </Panel>
                         <Panel id="TabContent5" class="TabContent">
