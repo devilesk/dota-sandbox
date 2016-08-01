@@ -1,0 +1,126 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/dotastyles.css" />
+        <include src="file://{resources}/styles/custom_game/custom_dropdown.css" />
+	</styles>
+	<scripts>
+    <include src="file://{resources}/scripts/custom_game/custom_dropdown.js" />
+  </scripts>
+	<Panel hittest="true" class="options-container" ondescendantblur="Destroy()">
+        <TextEntry id="SearchTextbox" maxchars="100" placeholder="Type here..." oninputsubmit="OnSubmitted()" />
+        <Label text="Abaddon" id="SelectedHero" onactivate="OnOpen()"/>
+        <Panel id="CustomDropDown" class="CustomDropDown DemoButton">
+            <Label text="Abaddon" id="npc_dota_hero_abaddon" onactivate="OnLabelClick('npc_dota_hero_abaddon')"/>
+            <Label text="Alchemist" id="npc_dota_hero_alchemist" onactivate="OnLabelClick('npc_dota_hero_alchemist')"/>
+            <Label text="Ancient Apparition" id="npc_dota_hero_ancient_apparition" onactivate="OnLabelClick('npc_dota_hero_ancient_apparition')"/>
+            <Label text="Anti-Mage" id="npc_dota_hero_antimage" onactivate="OnLabelClick('npc_dota_hero_antimage')"/>
+            <Label text="Arc Warden" id="npc_dota_hero_arc_warden" onactivate="OnLabelClick('npc_dota_hero_arc_warden')"/>
+            <Label text="Axe" id="npc_dota_hero_axe" onactivate="OnLabelClick('npc_dota_hero_axe')"/>
+            <Label text="Bane" id="npc_dota_hero_bane" onactivate="OnLabelClick('npc_dota_hero_bane')"/>
+            <Label text="Batrider" id="npc_dota_hero_batrider" onactivate="OnLabelClick('npc_dota_hero_batrider')"/>
+            <Label text="Beastmaster" id="npc_dota_hero_beastmaster" onactivate="OnLabelClick('npc_dota_hero_beastmaster')"/>
+            <Label text="Bloodseeker" id="npc_dota_hero_bloodseeker" onactivate="OnLabelClick('npc_dota_hero_bloodseeker')"/>
+            <Label text="Bounty Hunter" id="npc_dota_hero_bounty_hunter" onactivate="OnLabelClick('npc_dota_hero_bounty_hunter')"/>
+            <Label text="Brewmaster" id="npc_dota_hero_brewmaster" onactivate="OnLabelClick('npc_dota_hero_brewmaster')"/>
+            <Label text="Bristleback" id="npc_dota_hero_bristleback" onactivate="OnLabelClick('npc_dota_hero_bristleback')"/>
+            <Label text="Broodmother" id="npc_dota_hero_broodmother" onactivate="OnLabelClick('npc_dota_hero_broodmother')"/>
+            <Label text="Centaur Warrunner" id="npc_dota_hero_centaur" onactivate="OnLabelClick('npc_dota_hero_centaur')"/>
+            <Label text="Chaos Knight" id="npc_dota_hero_chaos_knight" onactivate="OnLabelClick('npc_dota_hero_chaos_knight')"/>
+            <Label text="Chen" id="npc_dota_hero_chen" onactivate="OnLabelClick('npc_dota_hero_chen')"/>
+            <Label text="Clinkz" id="npc_dota_hero_clinkz" onactivate="OnLabelClick('npc_dota_hero_clinkz')"/>
+            <Label text="Clockwerk" id="npc_dota_hero_rattletrap" onactivate="OnLabelClick('npc_dota_hero_rattletrap')"/>
+            <Label text="Crystal Maiden" id="npc_dota_hero_crystal_maiden" onactivate="OnLabelClick('npc_dota_hero_crystal_maiden')"/>
+            <Label text="Dark Seer" id="npc_dota_hero_dark_seer" onactivate="OnLabelClick('npc_dota_hero_dark_seer')"/>
+            <Label text="Dazzle" id="npc_dota_hero_dazzle" onactivate="OnLabelClick('npc_dota_hero_dazzle')"/>
+            <Label text="Death Prophet" id="npc_dota_hero_death_prophet" onactivate="OnLabelClick('npc_dota_hero_death_prophet')"/>
+            <Label text="Disruptor" id="npc_dota_hero_disruptor" onactivate="OnLabelClick('npc_dota_hero_disruptor')"/>
+            <Label text="Doom" id="npc_dota_hero_doom_bringer" onactivate="OnLabelClick('npc_dota_hero_doom_bringer')"/>
+            <Label text="Dragon Knight" id="npc_dota_hero_dragon_knight" onactivate="OnLabelClick('npc_dota_hero_dragon_knight')"/>
+            <Label text="Drow Ranger" id="npc_dota_hero_drow_ranger" onactivate="OnLabelClick('npc_dota_hero_drow_ranger')"/>
+            <Label text="Earth Spirit" id="npc_dota_hero_earth_spirit" onactivate="OnLabelClick('npc_dota_hero_earth_spirit')"/>
+            <Label text="Earthshaker" id="npc_dota_hero_earthshaker" onactivate="OnLabelClick('npc_dota_hero_earthshaker')"/>
+            <Label text="Elder Titan" id="npc_dota_hero_elder_titan" onactivate="OnLabelClick('npc_dota_hero_elder_titan')"/>
+            <Label text="Ember Spirit" id="npc_dota_hero_ember_spirit" onactivate="OnLabelClick('npc_dota_hero_ember_spirit')"/>
+            <Label text="Enchantress" id="npc_dota_hero_enchantress" onactivate="OnLabelClick('npc_dota_hero_enchantress')"/>
+            <Label text="Enigma" id="npc_dota_hero_enigma" onactivate="OnLabelClick('npc_dota_hero_enigma')"/>
+            <Label text="Faceless Void" id="npc_dota_hero_faceless_void" onactivate="OnLabelClick('npc_dota_hero_faceless_void')"/>
+            <Label text="Gyrocopter" id="npc_dota_hero_gyrocopter" onactivate="OnLabelClick('npc_dota_hero_gyrocopter')"/>
+            <Label text="Huskar" id="npc_dota_hero_huskar" onactivate="OnLabelClick('npc_dota_hero_huskar')"/>
+            <Label text="Invoker" id="npc_dota_hero_invoker" onactivate="OnLabelClick('npc_dota_hero_invoker')"/>
+            <Label text="Io" id="npc_dota_hero_wisp" onactivate="OnLabelClick('npc_dota_hero_wisp')"/>
+            <Label text="Jakiro" id="npc_dota_hero_jakiro" onactivate="OnLabelClick('npc_dota_hero_jakiro')"/>
+            <Label text="Juggernaut" id="npc_dota_hero_juggernaut" onactivate="OnLabelClick('npc_dota_hero_juggernaut')"/>
+            <Label text="Keeper of the Light" id="npc_dota_hero_keeper_of_the_light" onactivate="OnLabelClick('npc_dota_hero_keeper_of_the_light')"/>
+            <Label text="Kunkka" id="npc_dota_hero_kunkka" onactivate="OnLabelClick('npc_dota_hero_kunkka')"/>
+            <Label text="Legion Commander" id="npc_dota_hero_legion_commander" onactivate="OnLabelClick('npc_dota_hero_legion_commander')"/>
+            <Label text="Leshrac" id="npc_dota_hero_leshrac" onactivate="OnLabelClick('npc_dota_hero_leshrac')"/>
+            <Label text="Lich" id="npc_dota_hero_lich" onactivate="OnLabelClick('npc_dota_hero_lich')"/>
+            <Label text="Lifestealer" id="npc_dota_hero_life_stealer" onactivate="OnLabelClick('npc_dota_hero_life_stealer')"/>
+            <Label text="Lina" id="npc_dota_hero_lina" onactivate="OnLabelClick('npc_dota_hero_lina')"/>
+            <Label text="Lion" id="npc_dota_hero_lion" onactivate="OnLabelClick('npc_dota_hero_lion')"/>
+            <Label text="Lone Druid" id="npc_dota_hero_lone_druid" onactivate="OnLabelClick('npc_dota_hero_lone_druid')"/>
+            <Label text="Luna" id="npc_dota_hero_luna" onactivate="OnLabelClick('npc_dota_hero_luna')"/>
+            <Label text="Lycan" id="npc_dota_hero_lycan" onactivate="OnLabelClick('npc_dota_hero_lycan')"/>
+            <Label text="Magnus" id="npc_dota_hero_magnataur" onactivate="OnLabelClick('npc_dota_hero_magnataur')"/>
+            <Label text="Medusa" id="npc_dota_hero_medusa" onactivate="OnLabelClick('npc_dota_hero_medusa')"/>
+            <Label text="Meepo" id="npc_dota_hero_meepo" onactivate="OnLabelClick('npc_dota_hero_meepo')"/>
+            <Label text="Mirana" id="npc_dota_hero_mirana" onactivate="OnLabelClick('npc_dota_hero_mirana')"/>
+            <Label text="Morphling" id="npc_dota_hero_morphling" onactivate="OnLabelClick('npc_dota_hero_morphling')"/>
+            <Label text="Naga Siren" id="npc_dota_hero_naga_siren" onactivate="OnLabelClick('npc_dota_hero_naga_siren')"/>
+            <Label text="Nature's Prophet" id="npc_dota_hero_furion" onactivate="OnLabelClick('npc_dota_hero_furion')"/>
+            <Label text="Necrophos" id="npc_dota_hero_necrolyte" onactivate="OnLabelClick('npc_dota_hero_necrolyte')"/>
+            <Label text="Night Stalker" id="npc_dota_hero_night_stalker" onactivate="OnLabelClick('npc_dota_hero_night_stalker')"/>
+            <Label text="Nyx Assassin" id="npc_dota_hero_nyx_assassin" onactivate="OnLabelClick('npc_dota_hero_nyx_assassin')"/>
+            <Label text="Ogre Magi" id="npc_dota_hero_ogre_magi" onactivate="OnLabelClick('npc_dota_hero_ogre_magi')"/>
+            <Label text="Omniknight" id="npc_dota_hero_omniknight" onactivate="OnLabelClick('npc_dota_hero_omniknight')"/>
+            <Label text="Oracle" id="npc_dota_hero_oracle" onactivate="OnLabelClick('npc_dota_hero_oracle')"/>
+            <Label text="Outworld Devourer" id="npc_dota_hero_obsidian_destroyer" onactivate="OnLabelClick('npc_dota_hero_obsidian_destroyer')"/>
+            <Label text="Phantom Assassin" id="npc_dota_hero_phantom_assassin" onactivate="OnLabelClick('npc_dota_hero_phantom_assassin')"/>
+            <Label text="Phantom Lancer" id="npc_dota_hero_phantom_lancer" onactivate="OnLabelClick('npc_dota_hero_phantom_lancer')"/>
+            <Label text="Phoenix" id="npc_dota_hero_phoenix" onactivate="OnLabelClick('npc_dota_hero_phoenix')"/>
+            <Label text="Puck" id="npc_dota_hero_puck" onactivate="OnLabelClick('npc_dota_hero_puck')"/>
+            <Label text="Pudge" id="npc_dota_hero_pudge" onactivate="OnLabelClick('npc_dota_hero_pudge')"/>
+            <Label text="Pugna" id="npc_dota_hero_pugna" onactivate="OnLabelClick('npc_dota_hero_pugna')"/>
+            <Label text="Queen of Pain" id="npc_dota_hero_queenofpain" onactivate="OnLabelClick('npc_dota_hero_queenofpain')"/>
+            <Label text="Razor" id="npc_dota_hero_razor" onactivate="OnLabelClick('npc_dota_hero_razor')"/>
+            <Label text="Riki" id="npc_dota_hero_riki" onactivate="OnLabelClick('npc_dota_hero_riki')"/>
+            <Label text="Rubick" id="npc_dota_hero_rubick" onactivate="OnLabelClick('npc_dota_hero_rubick')"/>
+            <Label text="Sand King" id="npc_dota_hero_sand_king" onactivate="OnLabelClick('npc_dota_hero_sand_king')"/>
+            <Label text="Shadow Demon" id="npc_dota_hero_shadow_demon" onactivate="OnLabelClick('npc_dota_hero_shadow_demon')"/>
+            <Label text="Shadow Fiend" id="npc_dota_hero_nevermore" onactivate="OnLabelClick('npc_dota_hero_nevermore')"/>
+            <Label text="Shadow Shaman" id="npc_dota_hero_shadow_shaman" onactivate="OnLabelClick('npc_dota_hero_shadow_shaman')"/>
+            <Label text="Silencer" id="npc_dota_hero_silencer" onactivate="OnLabelClick('npc_dota_hero_silencer')"/>
+            <Label text="Skywrath Mage" id="npc_dota_hero_skywrath_mage" onactivate="OnLabelClick('npc_dota_hero_skywrath_mage')"/>
+            <Label text="Slardar" id="npc_dota_hero_slardar" onactivate="OnLabelClick('npc_dota_hero_slardar')"/>
+            <Label text="Slark" id="npc_dota_hero_slark" onactivate="OnLabelClick('npc_dota_hero_slark')"/>
+            <Label text="Sniper" id="npc_dota_hero_sniper" onactivate="OnLabelClick('npc_dota_hero_sniper')"/>
+            <Label text="Spectre" id="npc_dota_hero_spectre" onactivate="OnLabelClick('npc_dota_hero_spectre')"/>
+            <Label text="Spirit Breaker" id="npc_dota_hero_spirit_breaker" onactivate="OnLabelClick('npc_dota_hero_spirit_breaker')"/>
+            <Label text="Storm Spirit" id="npc_dota_hero_storm_spirit" onactivate="OnLabelClick('npc_dota_hero_storm_spirit')"/>
+            <Label text="Sven" id="npc_dota_hero_sven" onactivate="OnLabelClick('npc_dota_hero_sven')"/>
+            <Label text="Techies" id="npc_dota_hero_techies" onactivate="OnLabelClick('npc_dota_hero_techies')"/>
+            <Label text="Templar Assassin" id="npc_dota_hero_templar_assassin" onactivate="OnLabelClick('npc_dota_hero_templar_assassin')"/>
+            <Label text="Terrorblade" id="npc_dota_hero_terrorblade" onactivate="OnLabelClick('npc_dota_hero_terrorblade')"/>
+            <Label text="Tidehunter" id="npc_dota_hero_tidehunter" onactivate="OnLabelClick('npc_dota_hero_tidehunter')"/>
+            <Label text="Timbersaw" id="npc_dota_hero_shredder" onactivate="OnLabelClick('npc_dota_hero_shredder')"/>
+            <Label text="Tinker" id="npc_dota_hero_tinker" onactivate="OnLabelClick('npc_dota_hero_tinker')"/>
+            <Label text="Tiny" id="npc_dota_hero_tiny" onactivate="OnLabelClick('npc_dota_hero_tiny')"/>
+            <Label text="Treant Protector" id="npc_dota_hero_treant" onactivate="OnLabelClick('npc_dota_hero_treant')"/>
+            <Label text="Troll Warlord" id="npc_dota_hero_troll_warlord" onactivate="OnLabelClick('npc_dota_hero_troll_warlord')"/>
+            <Label text="Tusk" id="npc_dota_hero_tusk" onactivate="OnLabelClick('npc_dota_hero_tusk')"/>
+            <Label text="Undying" id="npc_dota_hero_undying" onactivate="OnLabelClick('npc_dota_hero_undying')"/>
+            <Label text="Ursa" id="npc_dota_hero_ursa" onactivate="OnLabelClick('npc_dota_hero_ursa')"/>
+            <Label text="Vengeful Spirit" id="npc_dota_hero_vengefulspirit" onactivate="OnLabelClick('npc_dota_hero_vengefulspirit')"/>
+            <Label text="Venomancer" id="npc_dota_hero_venomancer" onactivate="OnLabelClick('npc_dota_hero_venomancer')"/>
+            <Label text="Viper" id="npc_dota_hero_viper" onactivate="OnLabelClick('npc_dota_hero_viper')"/>
+            <Label text="Visage" id="npc_dota_hero_visage" onactivate="OnLabelClick('npc_dota_hero_visage')"/>
+            <Label text="Warlock" id="npc_dota_hero_warlock" onactivate="OnLabelClick('npc_dota_hero_warlock')"/>
+            <Label text="Weaver" id="npc_dota_hero_weaver" onactivate="OnLabelClick('npc_dota_hero_weaver')"/>
+            <Label text="Windranger" id="npc_dota_hero_windrunner" onactivate="OnLabelClick('npc_dota_hero_windrunner')"/>
+            <Label text="Winter Wyvern" id="npc_dota_hero_winter_wyvern" onactivate="OnLabelClick('npc_dota_hero_winter_wyvern')"/>
+            <Label text="Witch Doctor" id="npc_dota_hero_witch_doctor" onactivate="OnLabelClick('npc_dota_hero_witch_doctor')"/>
+            <Label text="Wraith King" id="npc_dota_hero_skeleton_king" onactivate="OnLabelClick('npc_dota_hero_skeleton_king')"/>
+            <Label text="Zeus" id="npc_dota_hero_zuus" onactivate="OnLabelClick('npc_dota_hero_zuus')"/>
+        </Panel>
+    </Panel>
+</root>

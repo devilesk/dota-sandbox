@@ -2,6 +2,7 @@
 	<Panel>
         <CustomUIElement type="HudTopBar" layoutfile="file://{resources}/layout/custom_game/multiteam_top_scoreboard.xml" />
             <CustomUIElement type="Hud"					layoutfile="file://{resources}/layout/custom_game/hud_hero_demo.xml" />
+            <CustomUIElement type="Hud"					layoutfile="file://{resources}/layout/custom_game/custom_dropdown.xml" />
         <CustomUIElement type="LoadingScreen" layoutfile="file://{resources}/layout/custom_game/custom_loading_screen.xml" />
 	</Panel>
 </root>

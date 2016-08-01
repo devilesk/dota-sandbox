@@ -1,0 +1,18 @@
+.options-container {
+    width: 100%;
+    height: 100%;
+    border: 1px solid red;
+    margin-top: 200px;
+    margin-left: 300px;
+}
+#SelectedHero {
+    position: 0px 36px 0px;
+    border: 1px solid blue;
+}
+.CustomDropDown {
+    flow-children: down;
+    border: 1px solid red;
+    position: 0px 72px 0px;
+    max-height: 400px;
+    overflow: squish scroll;
+}
