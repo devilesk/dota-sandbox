@@ -8,6 +8,11 @@ _G.DOTA_MAX_ABILITIES = 16
 _G.HERO_MAX_LEVEL = 25
 
 LinkLuaModifier( "modifier_damage_tracking", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_range_base", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_range_blink", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_range_xp", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_range_creep_aggro", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_target", LUA_MODIFIER_MOTION_NONE )
 
 -- "demo_hero_name" is a magic term, "default_value" means no string was passed, so we'd probably want to put them in hero selection
 --sHeroSelection = GameRules:GetGameSessionConfigValue( "demo_hero_name", "default_value" )
@@ -28,7 +33,8 @@ require( "libraries/timers" )
 require( "libraries/util" )
 require( "libraries/queue" )
 require( "events" )
-require( "spawnbox" )
+require( "overlay" )
+require( "spawnbox_controller" )
 
 local DEBUG = false
 _G.DebugPrint = function(...)
@@ -55,6 +61,7 @@ function Precache( context )
     PrecacheResource( "particle", RANGE_PARTICLE_RED, context )
     PrecacheResource( "particle", RANGE_LINE_PARTICLE, context )
     PrecacheResource( "particle", RANGE_LINE_PARTICLE_RED, context )
+    PrecacheResource( "particle", RANGE_TARGET, context )
     PrecacheUnitByNameSync( "npc_dota_hero_abaddon", context )
     PrecacheUnitByNameSync( "npc_dota_hero_abyssal_underlord", context )
     PrecacheUnitByNameSync( "npc_dota_hero_alchemist", context )
@@ -216,6 +223,7 @@ function CHeroDemo:InitGameMode()
     CustomGameEventManager:RegisterListener( "ChangeCosmeticsButtonPressed", function(...) return self:OnChangeCosmeticsButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "ChangeHeroButtonPressed", function(...) return self:OnChangeHeroButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "ClearInventoryButtonPressed", function(...) return self:OnClearInventoryButtonPressed( ... ) end )
+    CustomGameEventManager:RegisterListener( "CreepAggroRangeButtonPressed", function(...) return self:OnOverlayToggleButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "DetectNeutralsButtonPressed", function(...) return self:OnOverlayToggleButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "DummyTargetButtonPressed", function(...) return self:OnDummyTargetButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "DummyTargetsButtonPressed", function(...) return self:OnDummyTargetsButtonPressed( ... ) end )
@@ -303,23 +311,11 @@ function CHeroDemo:InitGameMode()
     self.m_bShowTargetHealthPreAttack = false
     self.m_bShowTargetHealthPostAttack = false
 
-    self.overlays = {
-        TowerDayVisionRangeButtonPressed = false,
-        TowerNightVisionRangeButtonPressed = false,
-        TowerTrueSightRangeButtonPressed = false,
-        TowerAttackRangeButtonPressed = false,
-        ShowNeutralSpawnBoxButtonPressed = false,
-        DetectNeutralsButtonPressed = false,
-        SentryVisionButtonPressed = false,
-        WardVisionButtonPressed = false,
-        HeroXPRangeButtonPressed = false,
-        BlinkRangeButtonPressed = false,
-    }
-
     self._hNeutralCaster = CreateUnitByName( "npc_dota_neutral_caster", Vector(0, 0, 0), false, nil, nil, NEUTRAL_TEAM )
 
     self.m_tPlayerDPS = {}
     self.m_tPlayerDPS10 = {}
+    self.overlays = {}
     for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS - 1 do
         CustomNetTables:SetTableValue( "dt_nettable", tostring(nPlayerID), { value = 0 } )
         CustomNetTables:SetTableValue( "tdt_nettable", tostring(nPlayerID), { value = 0 } )
@@ -329,6 +325,19 @@ function CHeroDemo:InitGameMode()
         CustomNetTables:SetTableValue( "dps10_nettable", tostring(nPlayerID), { value = 0 } )
         self.m_tPlayerDPS[nPlayerID] = 0
         self.m_tPlayerDPS10[nPlayerID] = Queue()
+        
+        self.overlays[nPlayerID] = {
+            TowerDayVisionRangeButtonPressed = false,
+            TowerNightVisionRangeButtonPressed = false,
+            TowerTrueSightRangeButtonPressed = false,
+            TowerAttackRangeButtonPressed = false,
+            ShowNeutralSpawnBoxButtonPressed = false,
+            DetectNeutralsButtonPressed = false,
+            SentryVisionButtonPressed = false,
+            WardVisionButtonPressed = false,
+            HeroXPRangeButtonPressed = false,
+            BlinkRangeButtonPressed = false,
+        }
     end
     GameRules:GetGameModeEntity():SetThink("CalculateDPS", self)
 end
@@ -459,77 +468,80 @@ function IsDistBetweenEntOBBFuncGenerator(entB, distance)
     end
 end
 
-function CreateTowerRangeOverlay(heroes, towers)
+function CreateTowerRangeOverlayForPlayer(player, heroes, towers)
 	if towers ~= nil then
 		for k, tower in pairs(towers) do
 			if tower ~= nil and IsValidEntity(tower) then
-				CreateRangeOverlay(tower, "TowerDayVisionRangeButtonPressed", "TowerDayVision", 1800, any(IsInRangeFuncGenerator(tower, 1800), heroes))
-				CreateRangeOverlay(tower, "TowerTrueSightRangeButtonPressed", "TowerTrueSight", 900, any(IsInRangeFuncGenerator(tower, 900), heroes))
-				CreateRangeOverlay(tower, "TowerNightVisionRangeButtonPressed", "TowerNightVision", 800, any(IsInRangeFuncGenerator(tower, 800), heroes))
-				CreateRangeOverlay(tower, "TowerAttackRangeButtonPressed", "TowerAttack", 700 + tower:GetHullRadius(), any(IsDistBetweenEntOBBFuncGenerator(tower, 700), heroes))
+				CreateRangeOverlayForPlayer(player, tower, "TowerDayVisionRangeButtonPressed", "TowerDayVision", 1800, any(IsInRangeFuncGenerator(tower, 1800), heroes))
+				CreateRangeOverlayForPlayer(player, tower, "TowerTrueSightRangeButtonPressed", "TowerTrueSight", 900, any(IsInRangeFuncGenerator(tower, 900), heroes))
+				CreateRangeOverlayForPlayer(player, tower, "TowerNightVisionRangeButtonPressed", "TowerNightVision", 800, any(IsInRangeFuncGenerator(tower, 800), heroes))
+				CreateRangeOverlayForPlayer(player, tower, "TowerAttackRangeButtonPressed", "TowerAttack", 700 + tower:GetHullRadius(), any(IsDistBetweenEntOBBFuncGenerator(tower, 700), heroes))
 			end
 		end
 	end
 end
 
-function CreateHeroRangeOverlay(hero)
-	CreateRangeOverlay(hero, "HeroXPRangeButtonPressed", "HeroXPRange", 1300, false)
-	CreateRangeOverlay(hero, "BlinkRangeButtonPressed", "BlinkRange", 1200, false)
+function CreateHeroRangeOverlayForPlayer(player, hero)
+	CreateRangeOverlayForPlayer(player, hero, "HeroXPRangeButtonPressed", "HeroXPRange", 1300, false)
+	CreateRangeOverlayForPlayer(player, hero, "BlinkRangeButtonPressed", "BlinkRange", 1200, false)
 end
 
-function CreateWardRangeOverlay(wards, sentries)
+function CreateWardRangeOverlayForPlayer(player, wards, sentries)
 	if wards ~= nil then
 		for k,ent in pairs(wards) do
 			if ent ~= nil and IsValidEntity(ent) then
-				CreateRangeOverlay(ent, "WardVisionButtonPressed", "WardVision", 1600, false)
+				CreateRangeOverlayForPlayer(player, ent, "WardVisionButtonPressed", "WardVision", 1600, false)
 			end
 		end
 	end
 	if sentries ~= nil then
 		for k,ent in pairs(sentries) do
 			if ent ~= nil and IsValidEntity(ent) then
-				CreateRangeOverlay(ent, "SentryVisionButtonPressed", "WardVision", 150, false)
-				CreateRangeOverlay(ent, "SentryVisionButtonPressed", "TrueSightVision", 850, false)
+				CreateRangeOverlayForPlayer(player, ent, "SentryVisionButtonPressed", "WardVision", 150, false)
+				CreateRangeOverlayForPlayer(player, ent, "SentryVisionButtonPressed", "TrueSightVision", 850, false)
 			end
 		end
 	end
 end
 
-function CreateRangeOverlay(ent, overlayName, particleOverlay, radius, isRed)
-	if GameRules.herodemo.overlays[overlayName] == true then
+function CreateRangeOverlayForPlayer(player, ent, overlayName, particleOverlay, radius, isRed)
+    local playerID = player:GetPlayerID()
+	if GameRules.herodemo.overlays[playerID][overlayName] == true then
         local particle_name = RANGE_PARTICLE
         if isRed then
             particle_name = RANGE_PARTICLE_RED
         end
-		if ent._Particles[particleOverlay] ~= nil then
-			if ent._Particles[particleOverlay][2] ~= isRed then
-				ParticleManager:DestroyParticle(ent._Particles[particleOverlay][1], true)
-				ent._Particles[particleOverlay] = {CreateParticleCircle(ent, radius, particle_name), isRed}
+		if ent._Particles[playerID][particleOverlay] ~= nil then
+			if ent._Particles[playerID][particleOverlay][2] ~= isRed then
+				ParticleManager:DestroyParticle(ent._Particles[playerID][particleOverlay][1], true)
+				ent._Particles[playerID][particleOverlay] = {CreateParticleCircle(ent, radius, particle_name, player), isRed}
 			end
 		else
-			ent._Particles[particleOverlay] = {CreateParticleCircle(ent, radius, particle_name), isRed}
+			ent._Particles[playerID][particleOverlay] = {CreateParticleCircle(ent, radius, particle_name, player), isRed}
 		end
 	else
-		if ent._Particles[particleOverlay] ~= nil then
-			ParticleManager:DestroyParticle(ent._Particles[particleOverlay][1], true)
-			ent._Particles[particleOverlay] = nil
+		if ent._Particles[playerID][particleOverlay] ~= nil then
+			ParticleManager:DestroyParticle(ent._Particles[playerID][particleOverlay][1], true)
+			ent._Particles[playerID][particleOverlay] = nil
 		end
 	end
 end
 
 function CHeroDemo:SpawnBoxThink()
     if GameRules:State_Get() == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS or GameRules:State_Get() == DOTA_GAMERULES_STATE_PRE_GAME then
+        local heroes = HeroList:GetAllHeroes()
         local wards = Entities:FindAllByClassname("npc_dota_ward_base")
         local sentries = Entities:FindAllByClassname("npc_dota_ward_base_truesight")
+        local neutrals = Entities:FindAllByClassname("npc_dota_creep_neutral")
         local towers = Entities:FindAllByClassname("npc_dota_tower")
-        local neutrals
-        if self.overlays.DetectNeutralsButtonPressed then
-            neutrals = Entities:FindAllByClassname("npc_dota_creep_neutral")
-        end
+        
         if towers ~= nil then
             for k,ent in pairs(towers) do
                 if ent._Particles == nil then
-                    ent._Particles = {TowerDayVision=nil, TowerNightVision=nil, TowerTrueSight=nil, TowerAttack=nil}
+                    ent._Particles = {}
+                    for i = 0, 9, 1 do
+                        ent._Particles[i] = {TowerDayVision=nil, TowerNightVision=nil, TowerTrueSight=nil, TowerAttack=nil}
+                    end
                 end
             end
         end
@@ -542,7 +554,10 @@ function CHeroDemo:SpawnBoxThink()
                     ent:RemoveSelf()
                 end
                 if ent._Particles == nil then
-                    ent._Particles = {WardVision=nil}
+                    ent._Particles = {}
+                    for i = 0, 9, 1 do
+                        ent._Particles[i] = {WardVision=nil}
+                    end
                 end
             end
         end
@@ -555,10 +570,29 @@ function CHeroDemo:SpawnBoxThink()
                     ent:RemoveSelf()
                 end
                 if ent._Particles == nil then
-                    ent._Particles = {WardVision=nil, TrueSightVision=nil}
+                    ent._Particles = {}
+                    for i = 0, 9, 1 do
+                        ent._Particles[i] = {WardVision=nil, TrueSightVision=nil}
+                    end
                 end
             end
         end
+        if heroes ~= nil then
+            for k,ent in pairs(heroes) do
+                if not ent:HasModifier("modifier_range_blink") then
+                    ent:AddNewModifier(ent, nil, "modifier_range_blink", {duration = -1})
+                end
+                if not ent:HasModifier("modifier_range_xp") then
+                    ent:AddNewModifier(ent, nil, "modifier_range_xp", {duration = -1})
+                end
+                if not ent:HasModifier("modifier_range_creep_aggro") then
+                    ent:AddNewModifier(ent, nil, "modifier_range_creep_aggro", {duration = -1})
+                end
+            end
+        end
+        
+        self.spawnBoxController:UpdateIsBlockedState(heroes, wards, sentries, neutrals)
+        
         for i = 0, 9, 1 do
             local player = PlayerResource:GetPlayer(i)
             if player ~= nil then
@@ -567,18 +601,25 @@ function CHeroDemo:SpawnBoxThink()
                     if hero._Particles == nil then
                         hero._Particles = {HeroXPRange=nil, BlinkRange=nil}
                     end
-                    CreateHeroRangeOverlay(hero)
+                    
+                    --CreateHeroRangeOverlayForPlayer(player, hero)
+                    
+                    local bShowBox = self.overlays[i].ShowNeutralSpawnBoxButtonPressed
+                    local bDetectNeutrals = self.overlays[i].DetectNeutralsButtonPressed
+                    self.spawnBoxController:UpdateOverlayForPlayer(player, bShowBox, bDetectNeutrals)
+                    
+                    CreateTowerRangeOverlayForPlayer(player, heroes, towers)
+                    CreateWardRangeOverlayForPlayer(player, wards, sentries)
+
+                    local enemies = FindUnitsInRadius( DOTA_TEAM_GOODGUYS, hero:GetOrigin(), nil, 1000, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_CREEP, 0, 0, false )
+                    for _, creep in pairs(enemies) do
+                        if not creep:HasModifier("modifier_target") then
+                            creep:AddNewModifier(creep, nil, "modifier_target", {duration = -1, overlayName="BlinkRangeButtonPressed"})
+                        end
+                    end
                 end            
             end
         end
-        local heroes = HeroList:GetAllHeroes()
-        if self.overlays.ShowNeutralSpawnBoxButtonPressed then
-            self.spawnBoxController:DrawBoxes(heroes, wards, sentries, neutrals)
-        else
-            self.spawnBoxController:EraseBoxes()
-        end
-        CreateTowerRangeOverlay(heroes, towers)
-        CreateWardRangeOverlay(wards, sentries)
         
         wards = nil
         sentries = nil

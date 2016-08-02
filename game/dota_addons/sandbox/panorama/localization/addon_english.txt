@@ -80,6 +80,8 @@
 	"HeroLabel"									"Hero"
 	"HeroXPRange_Button"						"XP Range"
 	"BlinkRange_Button"							"Blink Dagger Range"
+	"CreepLabel"							    "Creep Label"
+	"CreepAggroRange_Button"					"Creep Aggro Range"
 	
 	"RequiresCustomLobbyLabel"					"These options only work in a custom lobby with cheats enabled"
 	"NeutralSpawnIntervalDropDownLabel"			"Neutral Camp Spawn Interval"
