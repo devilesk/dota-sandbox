@@ -1,7 +1,6 @@
 "addon"
 {
 	"LoadingScreenDescriptionText"			  "Play in a cheats enabled lobby to access all features."
-	"ScoreboardInstructionLabel"				"Click hero portraits for more options"
 	"DemoOptions_MinimizeButton"				"Demo Options"
 	"DemoOptions_UnMinimizeButton"				"  >&#xD;&#xD;&#xD;&#xD;  >"
 	"Tab1"										"Hero"	

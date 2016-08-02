@@ -2,7 +2,7 @@
 	<styles>
 		<include src="file://{resources}/styles/dotastyles.css" />
         <include src="file://{resources}/styles/custom_game/hud_hero_demo.css" />
-        <include src="file://{resources}/styles/custom_game/multiteam_top_scoreboard.css" />
+        <include src="file://{resources}/styles/custom_game/scoreboard_player_options.css" />
 	</styles>
 	<scripts>
     <include src="file://{resources}/scripts/custom_game/scoreboard_player_options.js" />
