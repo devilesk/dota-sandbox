@@ -1,0 +1,66 @@
+.options-container {
+    background-color: #181818dd;
+    padding: 5px;
+    margin-top: 44px;
+    width: 500px;
+    flow-children: down;
+    height: 800px;
+    transform: translateY(-800px);
+}
+.options-container.active {
+    transform: translateY(0px);
+}
+
+DOTAItemImage {
+  width: 60px;
+  padding: 3px;
+}
+
+#shop {
+    width: 100%;
+    overflow: scroll scroll;
+}
+
+.shop-tabs {
+  flow-children: right;
+}
+
+.shop-tabs Button {
+  width: 100px;
+}
+
+.shop-item {
+    box-shadow: #00000055 -4px -4px 8px 8px;
+}
+.shop-item:hover {
+    border: 1px solid #FFFFFF00;
+}
+
+.DemoButton Label {
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.DemoButton.CloseButton {
+    margin-right: 10px;
+    width: 40px;
+    horizontal-align: right;
+}
+
+.shop-tab {
+  flow-children: right;
+  visibility: collapse;
+  horizontal-align: middle;
+}
+
+.shop-tab.active {
+  visibility: visible;
+}
+
+.item-row {
+  flow-children: right;
+}
+
+.item-column {
+  flow-children: down;
+}

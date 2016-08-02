@@ -10,13 +10,7 @@
     </scripts>
 
   <Panel hittest="false" class="CustomHudRoot">
-    <Label id="ScoreboardInstructionLabel" text="#ScoreboardInstructionLabel" />
-	<Panel hittest="false" id="TopBarScoreboard">
-		<Panel hittest="false" id="ScoreboardContainer">
-			<Panel hittest="false" id="LeftInjectXMLFile" />
-			<Panel hittest="false" id="MultiteamScoreboard" />
-			<Panel hittest="false" id="RightInjectXMLFile" />
-		</Panel>
+	<Panel hittest="false" id="MultiteamScoreboard">
 	  </Panel>
   </Panel>
 </root>
