@@ -5,7 +5,8 @@
     width: 500px;
     flow-children: down;
     height: 800px;
-    transform: translateY(-800px);
+    transform: translateY(-900px);
+    horizontal-align: middle;
 }
 .options-container.active {
     transform: translateY(0px);

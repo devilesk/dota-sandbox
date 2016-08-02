@@ -1,6 +1,18 @@
 "use strict";
 
 var g_ScoreboardHandle = null;
+var optionsPanels = [];
+
+function OnPortraitClicked(playerPanel)
+{
+    var playerID = playerPanel.GetAttributeInt("player_id", -1);
+    var optionsPanel = optionsPanels[playerID];
+    playerPanel.ToggleClass("active");
+    optionsPanel.ToggleClass("active");
+    optionsPanel.SetFocus();
+    optionsPanel.SetAttributeInt("player_id", playerID);
+    optionsPanel.ClearActive = playerPanel.ClearActive;
+}
 
 function UpdateScoreboard()
 {
@@ -11,6 +23,14 @@ function UpdateScoreboard()
 
 (function()
 {
+    $.GetContextPanel().OnPortraitClicked = OnPortraitClicked;
+    for (var i = 0; i < 10; i++) {
+        var optionsPanel = $.CreatePanel("Panel", $.GetContextPanel(), "");
+        optionsPanel.SetAttributeInt("player_id", i);
+        optionsPanel.BLoadLayout("file://{resources}/layout/custom_game/scoreboard_player_options.xml", false, false);
+        optionsPanels.push(optionsPanel);
+    }
+
 	var shouldSort = false;
 
 	if ( GameUI.CustomUIConfig().multiteam_top_scoreboard )

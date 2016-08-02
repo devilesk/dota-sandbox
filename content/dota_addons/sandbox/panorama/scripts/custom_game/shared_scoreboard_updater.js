@@ -26,6 +26,7 @@ function _ScoreboardUpdater_UpdatePlayerPanel( scoreboardConfig, playersContaine
 		playerPanel = $.CreatePanel( "Panel", playersContainer, playerPanelName );
 		playerPanel.SetAttributeInt( "player_id", playerId );
 		playerPanel.BLoadLayout( scoreboardConfig.playerXmlName, false, false );
+        playerPanel.OnPortraitClicked = $.GetContextPanel().OnPortraitClicked;
 	}
 
 	playerPanel.SetHasClass( "is_local_player", ( playerId == Game.GetLocalPlayerID() ) );
