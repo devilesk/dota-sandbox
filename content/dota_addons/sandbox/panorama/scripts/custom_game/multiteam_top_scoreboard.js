@@ -5,7 +5,6 @@ var optionsPanels = [];
 
 function OnPortraitClicked(playerPanel)
 {
-    $.Msg("OnPortraitClicked");
     var playerID = playerPanel.GetAttributeInt("player_id", -1);
     var optionsPanel = optionsPanels[playerID];
     playerPanel.ToggleClass("active");
