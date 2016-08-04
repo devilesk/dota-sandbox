@@ -10,7 +10,7 @@
   </scripts>
 	<Panel hittest="true" class="options-container" ondescendantblur="Destroy()">
         <Panel class="Category Row">
-        <Label class="inputLabel" text="Change Hero" />
+        <Label class="inputLabel" text="#HeroOptionsChangeHero" />
         <Button id="HeroCustomDropDown" class="CustomDropDownButton" onactivate="OpenCustomDropDown()">
             <Label id="HeroCustomDropDownLabel" class="CustomDropDownLabel" text="" />
         </Button>
@@ -20,17 +20,17 @@
     <Panel class="hr"></Panel>
     <Panel class="shop-tabs Category Row">
       <Button class="DemoButton" onactivate="$('#shop-basic').AddClass('active');$('#shop-upgrades').RemoveClass('active');$('#shop-secret').RemoveClass('active');">
-        <Label text="Basic" />
+        <Label text="#HeroOptionsBasic" />
       </Button>
       <Button class="DemoButton" onactivate="$('#shop-basic').RemoveClass('active');$('#shop-upgrades').AddClass('active');$('#shop-secret').RemoveClass('active');">
-          <Label text="Upgrades" />
+          <Label text="#HeroOptionsUpgrades" />
       </Button>
       <Button class="DemoButton" onactivate="$('#shop-basic').RemoveClass('active');$('#shop-upgrades').RemoveClass('active');$('#shop-secret').AddClass('active');">
-          <Label text="Secret" />
+          <Label text="#HeroOptionsSecret" />
       </Button>
     </Panel>
     <Panel class="Category Row">
-        <Label class="inputLabel" text="Item Filter" />
+        <Label class="inputLabel" text="#HeroOptionsItemFilter" />
         <TextEntry id="ItemSearchTextbox" maxchars="100" oninputsubmit="OnSearchSubmitted()" onfocus="OnItemSearchFocus()" onblur="OnItemSearchBlur()" />
     </Panel>
 <Panel id="shop">

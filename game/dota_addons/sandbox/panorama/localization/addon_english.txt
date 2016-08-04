@@ -15,7 +15,13 @@
 	"Playback_ButtonCategory"					""
 	"Overlay_ButtonCategory"					"Overlays"
 	"Stats_ButtonCategory"						"Stats"
-
+    
+    "HeroOptionsBasic"                         "Basic"
+    "HeroOptionsUpgrades"                      "Upgrades"
+    "HeroOptionsSecret"                        "Secret"
+    "HeroOptionsChangeHero"                    "Change Hero"
+    "HeroOptionsItemFilter"                    "Item Filter"
+    
     "Cheats_PopupMessage"                                          "Many features will not work because cheats are off. Use a cheats enabled lobby to access them."
     "CheatsQuit_Button"                                          "Quit Game"
     "CheatsContinue_Button"                                          "Continue Playing"
