@@ -811,10 +811,7 @@ function OnItemSearchFocus() {
 }
 
 function ProcessSearch() {
-    $.Msg("ProcessSearch");
-    $.Msg($("#ItemSearchTextbox").text);
     var matches = findMatches($("#ItemSearchTextbox").text);
-    $.Msg(matches);
     for (var i = 0; i < matches.good.length; i++) {
         $("#" + matches.good[i]).visible = true;
     }
@@ -825,10 +822,8 @@ function ProcessSearch() {
 }
 
 function PollSearch() {
-    $.Msg("PollSearch");
     if (poll) {
         if (searchTerm != $("#ItemSearchTextbox").text) {
-            $.Msg("PollSearch inner");
             searchTerm = $("#ItemSearchTextbox").text;
             ProcessSearch();
         }
@@ -843,7 +838,6 @@ function PortraitClicked() {
 }
 
 function Destroy() {
-    $.Msg("Destroy", GameUI.CustomUIConfig().CustomDropDown.panel.poll);
     if (GameUI.CustomUIConfig().CustomDropDown.OpenFor != $.GetContextPanel()) {
         $.GetContextPanel().RemoveClass("active");
         $.GetContextPanel().ClearActive();
@@ -872,9 +866,7 @@ function SelectHero(data) {
 
 function OpenCustomDropDown() {
     GameUI.CustomUIConfig().CustomDropDown.OpenFor = $.GetContextPanel();
-    $.Msg("OpenCustomDropDown");
     var CustomDropDown = GameUI.CustomUIConfig().CustomDropDown;
-    $.Msg(CustomDropDown.panel.BHasDescendantKeyFocus());
     var pos = CustomDropDown.GetAbsoluteOffset($.GetContextPanel(), $("#HeroCustomDropDown"));
     CustomDropDown.SetPos(pos);
     CustomDropDown.OnHeroSelected = OnHeroSelected;
@@ -883,13 +875,11 @@ function OpenCustomDropDown() {
 }
 
 function CloseCustomDropDown() {
-    $.Msg("CloseCustomDropDown");
     GameUI.CustomUIConfig().CustomDropDown.Close();
 }
 
 function OnHeroSelected(heroId, heroName) {
     $("#HeroCustomDropDownLabel").text = heroName;
-    $.Msg("OnHeroSelected");
     GameEvents.SendCustomGameEventToServer("ChangeHeroButtonPressed", {
         pID: $.GetContextPanel().GetAttributeInt("player_id", -1),
         PlayerID: $.GetContextPanel().GetAttributeInt("player_id", -1),
@@ -899,7 +889,6 @@ function OnHeroSelected(heroId, heroName) {
 }
 
 function OnClose() {
-    $.Msg("OnClose");
     if ($.GetContextPanel().BHasClass("active")) {
         $("#HeroCustomDropDown").SetFocus();
     }

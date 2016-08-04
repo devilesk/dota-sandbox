@@ -479,7 +479,6 @@ function findMatches(s) {
 }
 
 function ResetDropDown() {
-    $.Msg("ResetDropDown");
     $("#SearchTextbox").text = "";
     searchTerm = $("#SearchTextbox").text;
     for (var i = 0; i < heroes.length; i++) {
@@ -489,7 +488,6 @@ function ResetDropDown() {
 }
 
 function OnSearchSubmitted() {
-    $.Msg("OnSearchSubmitted");
     var matches = ProcessSearch();
     if (matches.good.length == 1) {
         OnHeroSelected(matches.good[0]);
@@ -497,10 +495,7 @@ function OnSearchSubmitted() {
 }
 
 function ProcessSearch() {
-    $.Msg("ProcessSearch");
-    $.Msg($("#SearchTextbox").text);
     var matches = findMatches($("#SearchTextbox").text);
-    $.Msg(matches);
     for (var i = 0; i < matches.good.length; i++) {
         $("#" + matches.good[i]).visible = true;
     }
@@ -511,15 +506,12 @@ function ProcessSearch() {
 }
 
 function OnClick(e) {
-    $.Msg("OnClick", e);
     OnHeroSelected(e);
 }
 
 function PollSearch() {
-    $.Msg("PollSearch");
     if (poll) {
         if (searchTerm != $("#SearchTextbox").text) {
-            $.Msg("PollSearch inner");
             searchTerm = $("#SearchTextbox").text;
             ProcessSearch();
         }
@@ -528,7 +520,6 @@ function PollSearch() {
 }
 
 function OpenDropdown() {
-    $.Msg("OpenDropdown");
     $('#CustomDropDown').visible = true;
     $('#CustomDropDown').ScrollToTop();
     $('#SearchTextbox').visible = true;
@@ -550,7 +541,6 @@ function CloseDropDown() {
 }
 
 function LoseFocus() {
-    $.Msg("LoseFocus");
     CloseDropDown();
 }
 
@@ -584,7 +574,6 @@ var _CustomDropDown;
     $('#SearchTextbox').visible = false;
     
     function CustomDropDown() {
-        $.Msg("CustomDropDown");
         this.panel = $.GetContextPanel();
     }
     CustomDropDown.prototype.SetX = function (v) {
@@ -594,7 +583,6 @@ var _CustomDropDown;
         this.panel.style.y = v.toString() + "px";
     }
     CustomDropDown.prototype.SetPos = function (pos) {
-        $.Msg("SetPos", pos);
         this.SetX(pos.x);
         this.SetY(pos.y);
     }
@@ -610,5 +598,4 @@ var _CustomDropDown;
     _CustomDropdown = new CustomDropDown();
     GameUI.CustomUIConfig().CustomDropDown = _CustomDropdown;
     GameUI.CustomUIConfig().CustomDropDown.SetXY(200, 200);
-    $.Msg("GameUI.CustomUIConfig().CustomDropDown ready");
 })();

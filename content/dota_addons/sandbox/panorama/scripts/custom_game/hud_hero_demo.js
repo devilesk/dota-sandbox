@@ -91,7 +91,6 @@ function OnHostTimeScaleSpeedChange(dir) {
 }
 
 function FireCustomGameEvent(eventName) {
-    $.Msg("FireCustomGameEvent", selectedHero);
     var playerId = Players.GetLocalPlayer();
     var selectedUnits = Players.GetSelectedEntities(playerId);
     var data = {
@@ -146,12 +145,10 @@ GameUI.SetMouseCallback(function(eventName, arg) {
 (function() {
     $('#NeutralSpawnIntervalDropDown').SetSelected("i_60");
     UpdatePosition();
-    $.Msg("hud_hero_demo.js");
 })();
 
 function OpenCustomDropDown() {
     GameUI.CustomUIConfig().CustomDropDown.OpenFor = $.GetContextPanel();
-    $.Msg("OpenCustomDropDown");
     var CustomDropDown = GameUI.CustomUIConfig().CustomDropDown;
     var pos = CustomDropDown.GetAbsoluteOffset($.GetContextPanel(), $("#HeroCustomDropDown"));
     CustomDropDown.SetPos(pos);
@@ -161,19 +158,16 @@ function OpenCustomDropDown() {
 }
 
 function CloseCustomDropDown() {
-    $.Msg("CloseCustomDropDown");
     GameUI.CustomUIConfig().CustomDropDown.Close();
 }
 
 function OnClose() {
-    $.Msg("OnClose");
     $("#HeroCustomDropDown").SetFocus();
 }
 
 function OnHeroSelected(heroId, heroName) {
     selectedHero = heroId;
     $("#HeroCustomDropDownLabel").text = heroName;
-    $.Msg("OnHeroSelected");
     $("#HeroCustomDropDown").SetFocus();
 }
 
