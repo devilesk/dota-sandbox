@@ -42,6 +42,7 @@
 	"RemoveSpawns_Button"						"Remove Spawns"
 	"GiveGold_Button"							"Give Gold"
 	"ResetGold_Button"							"Reset Gold"
+	"PassiveGold_Button"							"Disable Passive Gold"
 	"GiveItemsToAlliesButtonLabel"				"Allies get a copy of purchased items"
 	"GiveItemsToAllies_Button"					"Enabled"
 	"GiveItemsToEnemiesButtonLabel"				"Enemies get a copy of purchased items"

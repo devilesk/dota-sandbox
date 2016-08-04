@@ -252,6 +252,7 @@ function CHeroDemo:InitGameMode()
     CustomGameEventManager:RegisterListener( "RemoveSpawnedUnitsButtonPressed", function(...) return self:OnRemoveSpawnedUnitsButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "RemoveWardsButtonPressed", function(...) return self:OnRemoveWardsButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "ResetGoldButtonPressed", function(...) return self:OnResetGoldButtonPressed( ... ) end )
+    CustomGameEventManager:RegisterListener( "PassiveGoldButtonPressed", function(...) return self:OnPassiveGoldButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "ResetHeroButtonPressed", function(...) return self:OnResetHeroButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "ResetPlayerStatsButtonPressed", function(...) return self:OnResetPlayerStatsButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "RespawnHeroButtonPressed", function(...) return self:OnRespawnHeroButtonPressed( ... ) end )
@@ -304,6 +305,7 @@ function CHeroDemo:InitGameMode()
     self.m_bInvulnerabilityEnabled = false
     self.m_bAllyInvulnerabilityEnabled = false
     self.m_bEnemyInvulnerabilityEnabled = false
+    self.m_bPassiveGoldDisabled = false
     self.m_bCreepsEnabled = true
     self.m_bGiveItemsToAllies = false
     self.m_bGiveItemsToEnemies = false

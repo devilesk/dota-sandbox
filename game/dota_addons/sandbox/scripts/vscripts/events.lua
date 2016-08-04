@@ -527,6 +527,21 @@ function CHeroDemo:OnResetGoldButtonPressed( eventSourceIndex, data )
 end
 
 --------------------------------------------------------------------------------
+-- ButtonEvent: OnPassiveGoldButtonPressed
+--------------------------------------------------------------------------------
+function CHeroDemo:OnPassiveGoldButtonPressed( eventSourceIndex, data )
+	if self.m_bPassiveGoldDisabled == false then
+		self.m_bPassiveGoldDisabled = true
+        GameRules:SetGoldPerTick(0)
+		self:BroadcastMsg( "#PassiveGoldOff_Msg" )
+	elseif self.m_bPassiveGoldDisabled == true then
+		self.m_bPassiveGoldDisabled = false
+        GameRules:SetGoldPerTick(1)
+		self:BroadcastMsg( "#PassiveGoldOn_Msg" )
+	end
+end
+
+--------------------------------------------------------------------------------
 -- ButtonEvent: OnLaneCreepsButtonPressed
 --------------------------------------------------------------------------------
 function CHeroDemo:OnLaneCreepsButtonPressed( eventSourceIndex )

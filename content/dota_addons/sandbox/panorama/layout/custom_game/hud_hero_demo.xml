@@ -193,6 +193,11 @@
                                     <Label text="#ResetGold_Button"/>
                                   </Button>
                                 </Panel>
+                                <Panel class="Row">    
+                                    <ToggleButton class="DemoButton" onactivate="FireCustomGameEvent_Str( PassiveGoldButtonPressed )">
+                                        <Label text="#PassiveGold_Button" />
+                                    </ToggleButton>
+                                </Panel>
                             </Panel>
 
                         </Panel>
