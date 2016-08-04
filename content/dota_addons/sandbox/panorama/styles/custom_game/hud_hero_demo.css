@@ -197,9 +197,20 @@
 	width: 100%;
 }
 
-.TabContent .Category .Row2 Label
+.StatRow {
+    padding-top: 8px;
+    border-top: 1px solid #444444;
+}
+
+.StatRowLabel
 {
-    min-width: 50%;
+    width: 120px;
+    margin-left: 5px;
+}
+.StatRowValue
+{
+    width: 65px;
+    text-align: right;
 }
 
 .SectionLabel {

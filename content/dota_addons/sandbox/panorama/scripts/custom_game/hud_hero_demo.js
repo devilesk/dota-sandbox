@@ -14,8 +14,12 @@ function IsPlayerSelected(key) {
 }
 
 function RefreshStats() {
-    var hero = Players.GetPlayerHeroEntityIndex(parseInt(SelectedPlayerToKey()));
+    var selectedPlayer = parseInt(SelectedPlayerToKey());
+    var hero = Players.GetPlayerHeroEntityIndex(selectedPlayer);
     $('#ASValue').text = Entities.GetAttacksPerSecond(hero).toFixed(2);
+    $('#TotalGoldEarnedValue').text = Players.GetTotalEarnedGold(selectedPlayer);
+    $('#GPMValue').text = Players.GetGoldPerMin(selectedPlayer).toFixed(2);
+    $('#XPMValue').text = Players.GetXPPerMin(selectedPlayer).toFixed(2);
     $.Schedule(0.1, RefreshStats);
 }
 

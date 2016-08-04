@@ -369,33 +369,45 @@
                                         <Label text="Player 10" id="player10"/>
                                     </DropDown>
                                 </Panel>
-                                <Panel class="Row Row2">
-                                    <Label id="ASLabel" class="SectionLabel" text="#ASLabel" />
-                                    <Label id="ASValue" class="SectionLabel" text="0" />
+                                <Panel class="Row StatRow">
+                                    <Label id="ASLabel" class="SectionLabel StatRowLabel" text="#ASLabel" />
+                                    <Label id="ASValue" class="SectionLabel StatRowValue" text="0" />
                                 </Panel>
-                                <Panel class="Row Row2">
-                                    <Label id="DPSLabel" class="SectionLabel" text="#DPSLabel" />
-                                    <Label id="DPSValue" class="SectionLabel" text="0" />
+                                <Panel class="Row StatRow">
+                                    <Label id="DPSLabel" class="SectionLabel StatRowLabel" text="#DPSLabel" />
+                                    <Label id="DPSValue" class="SectionLabel StatRowValue" text="0" />
                                 </Panel>
-                                <Panel class="Row Row2">
-                                    <Label id="DPS10Label" class="SectionLabel" text="#DPS10Label" />
-                                    <Label id="DPS10Value" class="SectionLabel" text="0" />
+                                <Panel class="Row StatRow">
+                                    <Label id="DPS10Label" class="SectionLabel StatRowLabel" text="#DPS10Label" />
+                                    <Label id="DPS10Value" class="SectionLabel StatRowValue" text="0" />
                                 </Panel>
-                                <Panel class="Row Row2">
-                                    <Label id="LastAttackLabel" class="SectionLabel" text="#LastAttackLabel" />
-                                    <Label id="LastAttackValue" class="SectionLabel" text="0" />
+                                <Panel class="Row StatRow">
+                                    <Label id="LastAttackLabel" class="SectionLabel StatRowLabel" text="#LastAttackLabel" />
+                                    <Label id="LastAttackValue" class="SectionLabel StatRowValue" text="0" />
                                 </Panel>
-                                <Panel class="Row Row2">
-                                    <Label id="TotalDamageLabel" class="SectionLabel" text="#TotalDamageLabel" />
-                                    <Label id="TotalDamageValue" class="SectionLabel" text="0" />
+                                <Panel class="Row StatRow">
+                                    <Label id="TotalDamageLabel" class="SectionLabel StatRowLabel" text="#TotalDamageLabel" />
+                                    <Label id="TotalDamageValue" class="SectionLabel StatRowValue" text="0" />
                                 </Panel>
-                                <Panel class="Row Row2">
-                                    <Label id="LastDamageTakenLabel" class="SectionLabel" text="#LastDamageTakenLabel" />
-                                    <Label id="LastDamageTakenValue" class="SectionLabel" text="0" />
+                                <Panel class="Row StatRow">
+                                    <Label id="LastDamageTakenLabel" class="SectionLabel StatRowLabel" text="#LastDamageTakenLabel" />
+                                    <Label id="LastDamageTakenValue" class="SectionLabel StatRowValue" text="0" />
                                 </Panel>
-                                <Panel class="Row Row2">
-                                    <Label id="TotalDamageTakenLabel" class="SectionLabel" text="#TotalDamageTakenLabel" />
-                                    <Label id="TotalDamageTakenValue" class="SectionLabel" text="0" />
+                                <Panel class="Row StatRow">
+                                    <Label id="TotalDamageTakenLabel" class="SectionLabel StatRowLabel" text="#TotalDamageTakenLabel" />
+                                    <Label id="TotalDamageTakenValue" class="SectionLabel StatRowValue" text="0" />
+                                </Panel>
+                                <Panel class="Row StatRow">
+                                    <Label id="TotalGoldEarnedLabel" class="SectionLabel StatRowLabel" text="#TotalGoldEarnedLabel" />
+                                    <Label id="TotalGoldEarnedValue" class="SectionLabel StatRowValue" text="0" />
+                                </Panel>
+                                <Panel class="Row StatRow">
+                                    <Label id="GPMLabel" class="SectionLabel StatRowLabel" text="#GPMLabel" />
+                                    <Label id="GPMValue" class="SectionLabel StatRowValue" text="0" />
+                                </Panel>
+                                <Panel class="Row StatRow">
+                                    <Label id="XPMLabel" class="SectionLabel StatRowLabel" text="#XPMLabel" />
+                                    <Label id="XPMValue" class="SectionLabel StatRowValue" text="0" />
                                 </Panel>
                                 <Panel class="Row">    
                                   <Button class="DemoButton" onactivate="FireCustomGameEvent( 'ResetPlayerStatsButtonPressed' )">
