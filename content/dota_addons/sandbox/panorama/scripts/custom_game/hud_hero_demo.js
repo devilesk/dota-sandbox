@@ -3,6 +3,7 @@ var playerID = Players.GetLocalPlayer();
 var hostTimeScaleIndex = 1;
 var hostTimeScaleValues = [0.5, 1, 2, 4, 8];
 var indicator;
+var selectedHero = 'npc_dota_hero_abaddon';
 
 function SelectedPlayerToKey() {
     return (parseInt($('#PlayerDropDown').GetSelected().id.replace('player', '')) - 1).toString();
@@ -90,11 +91,12 @@ function OnHostTimeScaleSpeedChange(dir) {
 }
 
 function FireCustomGameEvent(eventName) {
+    $.Msg("FireCustomGameEvent", selectedHero);
     var playerId = Players.GetLocalPlayer();
     var selectedUnits = Players.GetSelectedEntities(playerId);
     var data = {
         eventName: eventName,
-        selectedHero: $('#HeroDropDown').GetSelected().id,
+        selectedHero: selectedHero,
         selectedUnits: selectedUnits,
         goldAmount: $('#GoldAmount').text,
         selectedPlayerID: SelectedPlayerToKey()
@@ -142,10 +144,38 @@ GameUI.SetMouseCallback(function(eventName, arg) {
 });
 
 (function() {
-    $('#HeroDropDown').SetSelected("npc_dota_hero_abaddon");
     $('#NeutralSpawnIntervalDropDown').SetSelected("i_60");
     UpdatePosition();
+    $.Msg("hud_hero_demo.js");
 })();
+
+function OpenCustomDropDown() {
+    GameUI.CustomUIConfig().CustomDropDown.OpenFor = $.GetContextPanel();
+    $.Msg("OpenCustomDropDown");
+    var CustomDropDown = GameUI.CustomUIConfig().CustomDropDown;
+    var pos = CustomDropDown.GetAbsoluteOffset($.GetContextPanel(), $("#HeroCustomDropDown"));
+    CustomDropDown.SetPos(pos);
+    CustomDropDown.OnHeroSelected = OnHeroSelected;
+    CustomDropDown.OnClose = OnClose;
+    CustomDropDown.Open();
+}
+
+function CloseCustomDropDown() {
+    $.Msg("CloseCustomDropDown");
+    GameUI.CustomUIConfig().CustomDropDown.Close();
+}
+
+function OnClose() {
+    $.Msg("OnClose");
+    $("#HeroCustomDropDown").SetFocus();
+}
+
+function OnHeroSelected(heroId, heroName) {
+    selectedHero = heroId;
+    $("#HeroCustomDropDownLabel").text = heroName;
+    $.Msg("OnHeroSelected");
+    $("#HeroCustomDropDown").SetFocus();
+}
 
 function GlobalTargetIndicator(data, unit) {
     this.data = data;

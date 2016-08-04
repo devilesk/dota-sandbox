@@ -128,18 +128,6 @@
     transform: translateX( 0px );
 }
 
-.ControlPanelContainer Label
-{
-
-	horizontal-align: left;
-	font-size: 24;	
-	color: #444444;
-	margin-top: 6px;
-	margin-bottom: 6px;
-	margin-left: 6px;
-	margin-right: 6px;
-}
-
 #Maximized
 {
     flow-children: down;
@@ -153,7 +141,7 @@
     background-color: #444444;
 }
 
-.TabContent .Category Label
+.Header
 {
 	horizontal-align: left;
 	margin-left: 5px;
@@ -214,17 +202,9 @@
     min-width: 50%;
 }
 
-.Category .Row Label
-{
-	horizontal-align: right;
-	margin-left: 5px;
-	margin-right: 5px;
-	font-size: 18;
+.SectionLabel {
+	font-size: 15;
 	color: #888888;
-}
-
-.Category .Row Label {
-  font-size: 12;
 }
 
 .Row #DemoButton
@@ -320,7 +300,8 @@
 
 .Category .DemoButton Label
 {
-    margin-top: 5px;
+	horizontal-align: left;
+	margin: 5px;
     color: #cccccc;
     font-size: 16;
     font-weight: thin;
@@ -340,24 +321,9 @@
 	pre-transform-scale2d: 1.02;
 }
 
-.Category .DemoButton:active Label
-{
-  /*color: #eeeeee;*/
-}
-
 .Category .DemoButton:selected
 {
 	background-color: gradient( linear, 0% 0%, 0% 100%, from( #777777 ), to( #999999 ) );
-}
-
-.Category ToggleButton.DemoButton:active Label
-{
-  /*color: #eeeeee;*/
-}
-
-.Category ToggleButton:selected Label
-{
-  /*color: #cccccc;*/
 }
 
 .Category .DemoButton Label.text-center{

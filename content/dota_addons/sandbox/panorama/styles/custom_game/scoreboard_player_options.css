@@ -4,12 +4,19 @@
     margin-top: 44px;
     width: 500px;
     flow-children: down;
-    height: 800px;
+    height: 850px;
     transform: translateY(-900px);
     horizontal-align: middle;
 }
 .options-container.active {
     transform: translateY(0px);
+}
+
+.inputLabel {
+    vertical-align: middle;
+    text-align: right;
+    width: 100px;
+    padding-right: 5px;
 }
 
 DOTAItemImage {
@@ -24,10 +31,11 @@ DOTAItemImage {
 
 .shop-tabs {
   flow-children: right;
+  horizontal-align: middle;
 }
 
 .shop-tabs Button {
-  width: 100px;
+  width: 33%;
 }
 
 .shop-item {
@@ -40,6 +48,8 @@ DOTAItemImage {
 .DemoButton Label {
 	margin-left: 5px;
 	margin-right: 5px;
+    width: 100%;
+    text-align: center;
 }
 
 .DemoButton.CloseButton {

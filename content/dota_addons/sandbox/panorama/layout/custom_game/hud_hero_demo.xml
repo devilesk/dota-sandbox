@@ -2,6 +2,7 @@
     <styles>
         <include src="file://{resources}/styles/dotastyles.css" />
         <include src="file://{resources}/styles/custom_game/hud_hero_demo.css" />
+        <include src="file://{resources}/styles/custom_game/custom_dropdown.css" />
     </styles>
     <scripts>
         <include src="file://{resources}/scripts/custom_game/vector.js" />
@@ -31,7 +32,7 @@
                     <Panel class="TabContentContainer">
                         <Panel id="TabContent1" class="TabContent">
                             <Panel class="Category">
-                                <Label class="CanCollapse" text="#Hero_ButtonCategory" />
+                                <Label class="Header" text="#Hero_ButtonCategory" />
                                 <Panel class="Row">
                                     <Button class="DemoButton" onactivate="FireCustomGameEvent( 'RefreshButtonPressed' )">
                                         <Label text="#Refresh_Button" />
@@ -79,7 +80,7 @@
                                 </Panel>
                                 <Panel class="hr"></Panel>
                                 <Panel class="Row">
-                                    <Label id="ShowDamageDealtLabel" class="small" text="#ShowDamageDealtLabel" />
+                                    <Label id="ShowDamageDealtLabel" class="SectionLabel" text="#ShowDamageDealtLabel" />
                                 </Panel>
                                 <Panel class="Row">
                                     <ToggleButton class="DemoButton" onactivate="FireCustomGameEvent_Str( ShowDamageDealtButtonPressed )">
@@ -87,7 +88,7 @@
                                     </ToggleButton>
                                 </Panel>
                                 <Panel class="Row">
-                                    <Label id="ShowTargetHealthLabel" class="small" text="#ShowTargetHealthLabel" />
+                                    <Label id="ShowTargetHealthLabel" class="SectionLabel"  text="#ShowTargetHealthLabel" />
                                 </Panel>
                                 <Panel class="Row">
                                     <ToggleButton class="DemoButton" onactivate="FireCustomGameEvent_Str( ShowTargetHealthPreAttackButtonPressed )">
@@ -103,7 +104,7 @@
                         </Panel>
                         <Panel id="TabContent2" class="TabContent">
                             <Panel class="Category">
-                                <Label class="CanCollapse" text="#Spawn_ButtonCategory" />
+                                <Label class="Header" text="#Spawn_ButtonCategory" />
                                 <Panel class="Row">
                                     <Button class="DemoButton" onactivate="FireCustomGameEvent_Str( StartGameButtonPressed )">
                                         <Label text="#StartGame_Button" />
@@ -111,124 +112,13 @@
                                 </Panel>
                                 <Panel class="hr"></Panel>
                                 <Panel class="Row">
-                                    <DropDown id="HeroDropDown" class="DemoButton">
-                                        <Label text="Abaddon" id="npc_dota_hero_abaddon"/>
-                                        <!--<Label text="Abyssal Underlord" id="npc_dota_hero_abyssal_underlord"/>-->
-                                        <Label text="Alchemist" id="npc_dota_hero_alchemist"/>
-                                        <Label text="Ancient Apparition" id="npc_dota_hero_ancient_apparition"/>
-                                        <Label text="Anti-Mage" id="npc_dota_hero_antimage"/>
-                                        <Label text="Arc Warden" id="npc_dota_hero_arc_warden"/>
-                                        <Label text="Axe" id="npc_dota_hero_axe"/>
-                                        <Label text="Bane" id="npc_dota_hero_bane"/>
-                                        <Label text="Batrider" id="npc_dota_hero_batrider"/>
-                                        <Label text="Beastmaster" id="npc_dota_hero_beastmaster"/>
-                                        <Label text="Bloodseeker" id="npc_dota_hero_bloodseeker"/>
-                                        <Label text="Bounty Hunter" id="npc_dota_hero_bounty_hunter"/>
-                                        <Label text="Brewmaster" id="npc_dota_hero_brewmaster"/>
-                                        <Label text="Bristleback" id="npc_dota_hero_bristleback"/>
-                                        <Label text="Broodmother" id="npc_dota_hero_broodmother"/>
-                                        <Label text="Centaur Warrunner" id="npc_dota_hero_centaur"/>
-                                        <Label text="Chaos Knight" id="npc_dota_hero_chaos_knight"/>
-                                        <Label text="Chen" id="npc_dota_hero_chen"/>
-                                        <Label text="Clinkz" id="npc_dota_hero_clinkz"/>
-                                        <Label text="Clockwerk" id="npc_dota_hero_rattletrap"/>
-                                        <Label text="Crystal Maiden" id="npc_dota_hero_crystal_maiden"/>
-                                        <Label text="Dark Seer" id="npc_dota_hero_dark_seer"/>
-                                        <Label text="Dazzle" id="npc_dota_hero_dazzle"/>
-                                        <Label text="Death Prophet" id="npc_dota_hero_death_prophet"/>
-                                        <Label text="Disruptor" id="npc_dota_hero_disruptor"/>
-                                        <Label text="Doom" id="npc_dota_hero_doom_bringer"/>
-                                        <Label text="Dragon Knight" id="npc_dota_hero_dragon_knight"/>
-                                        <Label text="Drow Ranger" id="npc_dota_hero_drow_ranger"/>
-                                        <Label text="Earth Spirit" id="npc_dota_hero_earth_spirit"/>
-                                        <Label text="Earthshaker" id="npc_dota_hero_earthshaker"/>
-                                        <Label text="Elder Titan" id="npc_dota_hero_elder_titan"/>
-                                        <Label text="Ember Spirit" id="npc_dota_hero_ember_spirit"/>
-                                        <Label text="Enchantress" id="npc_dota_hero_enchantress"/>
-                                        <Label text="Enigma" id="npc_dota_hero_enigma"/>
-                                        <Label text="Faceless Void" id="npc_dota_hero_faceless_void"/>
-                                        <Label text="Gyrocopter" id="npc_dota_hero_gyrocopter"/>
-                                        <Label text="Huskar" id="npc_dota_hero_huskar"/>
-                                        <Label text="Invoker" id="npc_dota_hero_invoker"/>
-                                        <Label text="Io" id="npc_dota_hero_wisp"/>
-                                        <Label text="Jakiro" id="npc_dota_hero_jakiro"/>
-                                        <Label text="Juggernaut" id="npc_dota_hero_juggernaut"/>
-                                        <Label text="Keeper of the Light" id="npc_dota_hero_keeper_of_the_light"/>
-                                        <Label text="Kunkka" id="npc_dota_hero_kunkka"/>
-                                        <Label text="Legion Commander" id="npc_dota_hero_legion_commander"/>
-                                        <Label text="Leshrac" id="npc_dota_hero_leshrac"/>
-                                        <Label text="Lich" id="npc_dota_hero_lich"/>
-                                        <Label text="Lifestealer" id="npc_dota_hero_life_stealer"/>
-                                        <Label text="Lina" id="npc_dota_hero_lina"/>
-                                        <Label text="Lion" id="npc_dota_hero_lion"/>
-                                        <Label text="Lone Druid" id="npc_dota_hero_lone_druid"/>
-                                        <Label text="Luna" id="npc_dota_hero_luna"/>
-                                        <Label text="Lycan" id="npc_dota_hero_lycan"/>
-                                        <Label text="Magnus" id="npc_dota_hero_magnataur"/>
-                                        <Label text="Medusa" id="npc_dota_hero_medusa"/>
-                                        <Label text="Meepo" id="npc_dota_hero_meepo"/>
-                                        <Label text="Mirana" id="npc_dota_hero_mirana"/>
-                                        <Label text="Morphling" id="npc_dota_hero_morphling"/>
-                                        <Label text="Naga Siren" id="npc_dota_hero_naga_siren"/>
-                                        <Label text="Nature's Prophet" id="npc_dota_hero_furion"/>
-                                        <Label text="Necrophos" id="npc_dota_hero_necrolyte"/>
-                                        <Label text="Night Stalker" id="npc_dota_hero_night_stalker"/>
-                                        <Label text="Nyx Assassin" id="npc_dota_hero_nyx_assassin"/>
-                                        <Label text="Ogre Magi" id="npc_dota_hero_ogre_magi"/>
-                                        <Label text="Omniknight" id="npc_dota_hero_omniknight"/>
-                                        <Label text="Oracle" id="npc_dota_hero_oracle"/>
-                                        <Label text="Outworld Devourer" id="npc_dota_hero_obsidian_destroyer"/>
-                                        <Label text="Phantom Assassin" id="npc_dota_hero_phantom_assassin"/>
-                                        <Label text="Phantom Lancer" id="npc_dota_hero_phantom_lancer"/>
-                                        <Label text="Phoenix" id="npc_dota_hero_phoenix"/>
-                                        <Label text="Puck" id="npc_dota_hero_puck"/>
-                                        <Label text="Pudge" id="npc_dota_hero_pudge"/>
-                                        <Label text="Pugna" id="npc_dota_hero_pugna"/>
-                                        <Label text="Queen of Pain" id="npc_dota_hero_queenofpain"/>
-                                        <Label text="Razor" id="npc_dota_hero_razor"/>
-                                        <Label text="Riki" id="npc_dota_hero_riki"/>
-                                        <Label text="Rubick" id="npc_dota_hero_rubick"/>
-                                        <Label text="Sand King" id="npc_dota_hero_sand_king"/>
-                                        <Label text="Shadow Demon" id="npc_dota_hero_shadow_demon"/>
-                                        <Label text="Shadow Fiend" id="npc_dota_hero_nevermore"/>
-                                        <Label text="Shadow Shaman" id="npc_dota_hero_shadow_shaman"/>
-                                        <Label text="Silencer" id="npc_dota_hero_silencer"/>
-                                        <Label text="Skywrath Mage" id="npc_dota_hero_skywrath_mage"/>
-                                        <Label text="Slardar" id="npc_dota_hero_slardar"/>
-                                        <Label text="Slark" id="npc_dota_hero_slark"/>
-                                        <Label text="Sniper" id="npc_dota_hero_sniper"/>
-                                        <Label text="Spectre" id="npc_dota_hero_spectre"/>
-                                        <Label text="Spirit Breaker" id="npc_dota_hero_spirit_breaker"/>
-                                        <Label text="Storm Spirit" id="npc_dota_hero_storm_spirit"/>
-                                        <Label text="Sven" id="npc_dota_hero_sven"/>
-                                        <Label text="Techies" id="npc_dota_hero_techies"/>
-                                        <Label text="Templar Assassin" id="npc_dota_hero_templar_assassin"/>
-                                        <Label text="Terrorblade" id="npc_dota_hero_terrorblade"/>
-                                        <Label text="Tidehunter" id="npc_dota_hero_tidehunter"/>
-                                        <Label text="Timbersaw" id="npc_dota_hero_shredder"/>
-                                        <Label text="Tinker" id="npc_dota_hero_tinker"/>
-                                        <Label text="Tiny" id="npc_dota_hero_tiny"/>
-                                        <Label text="Treant Protector" id="npc_dota_hero_treant"/>
-                                        <Label text="Troll Warlord" id="npc_dota_hero_troll_warlord"/>
-                                        <Label text="Tusk" id="npc_dota_hero_tusk"/>
-                                        <Label text="Undying" id="npc_dota_hero_undying"/>
-                                        <Label text="Ursa" id="npc_dota_hero_ursa"/>
-                                        <Label text="Vengeful Spirit" id="npc_dota_hero_vengefulspirit"/>
-                                        <Label text="Venomancer" id="npc_dota_hero_venomancer"/>
-                                        <Label text="Viper" id="npc_dota_hero_viper"/>
-                                        <Label text="Visage" id="npc_dota_hero_visage"/>
-                                        <Label text="Warlock" id="npc_dota_hero_warlock"/>
-                                        <Label text="Weaver" id="npc_dota_hero_weaver"/>
-                                        <Label text="Windranger" id="npc_dota_hero_windrunner"/>
-                                        <Label text="Winter Wyvern" id="npc_dota_hero_winter_wyvern"/>
-                                        <Label text="Witch Doctor" id="npc_dota_hero_witch_doctor"/>
-                                        <Label text="Wraith King" id="npc_dota_hero_skeleton_king"/>
-                                        <Label text="Zeus" id="npc_dota_hero_zuus"/>
-                                    </DropDown>
+                                    <Button id="HeroCustomDropDown" class="CustomDropDownButton" onactivate="OpenCustomDropDown()">
+                                        <Label id="HeroCustomDropDownLabel" class="CustomDropDownLabel" text="Abaddon" />
+                                    </Button>
                                 </Panel>
                                 <Panel class="Row">
                                     <Button class="DemoButton" onactivate="FireCustomGameEvent( 'SpawnAllyButtonPressed' )">
-                                        <Label text="#Ally_Button" />
+                                        <Label class="SectionLabel" text="#Ally_Button" />
                                     </Button>
                                 </Panel>
                                 <Panel class="Row">
@@ -238,7 +128,7 @@
                                 </Panel>
                                 <Panel class="hr"></Panel>
                                 <Panel class="Row">
-                                    <Label id="SpawnInvulnerabilityButtonLabel" class="small" text="#SpawnInvulnerabilityButtonLabel" />
+                                    <Label id="SpawnInvulnerabilityButtonLabel" class="SectionLabel" text="#SpawnInvulnerabilityButtonLabel" />
                                 </Panel>
                                 <Panel class="Row">
                                     <ToggleButton class="DemoButton" onactivate="FireCustomGameEvent_Str( AllyInvulnerabilityButtonPressed )">
@@ -308,7 +198,7 @@
                         </Panel>
                         <Panel id="TabContent3" class="TabContent">
                             <Panel class="Category">
-                                <Label class="CanCollapse" text="#Misc_ButtonCategory" />
+                                <Label class="Header" text="#Misc_ButtonCategory" />
                                 <Panel class="Row">
                                     <ToggleButton class="DemoButton" onactivate="FireCustomGameEvent_Str( InstantRespawnEnabledButtonPressed )">
                                         <Label text="#InstantRespawnEnabled_Button" />
@@ -351,7 +241,7 @@
                                 </Panel>
                                 <Panel class="hr"></Panel>
                                 <Panel class="Row">
-                                    <Label id="NeutralSpawnIntervalDropDownLabel" class="small" text="#NeutralSpawnIntervalDropDownLabel" />
+                                    <Label id="NeutralSpawnIntervalDropDownLabel" class="SectionLabel" text="#NeutralSpawnIntervalDropDownLabel" />
                                 </Panel>
                                 <Panel class="Row">
                                     <DropDown id="NeutralSpawnIntervalDropDown" class="DemoButton" oninputsubmit="OnNeutralSpawnIntervalDropDownChanged()">
@@ -366,8 +256,8 @@
                                     </Button>
                                 </Panel>
                                 <Panel class="Row">
-                                    <Label id="HostTimeScaleDropDownLabel" class="small col-2" text="#HostTimeScaleDropDownLabel" />
-                                    <Label id="HostTimeScaleValueLabel" class="small col-2" text="#HostTimeScaleValueLabel" />
+                                    <Label id="HostTimeScaleDropDownLabel" class="SectionLabel col-2" text="#HostTimeScaleDropDownLabel" />
+                                    <Label id="HostTimeScaleValueLabel" class="SectionLabel col-2" text="#HostTimeScaleValueLabel" />
                                 </Panel>
                                 <Panel class="Row">
                                     <Button class="DemoButton col-4" onactivate="OnHostTimeScaleSpeedChange(-1)">
@@ -384,9 +274,9 @@
                         </Panel>
                         <Panel id="TabContent4" class="TabContent">
                             <Panel class="Category">
-                                <Label class="CanCollapse" text="#Overlay_ButtonCategory" />
+                                <Label class="Header" text="#Overlay_ButtonCategory" />
                                 <Panel class="Row">
-                                    <Label id="TowersLabel" class="small" text="#TowersLabel" />
+                                    <Label id="TowersLabel" class="SectionLabel" text="#TowersLabel" />
                                 </Panel>
                                 <Panel class="Row">
                                     <ToggleButton id="TowerDayVisionRangeButtonPressed" class="DemoButton" onactivate="FireOverlayToggleEvent( 'TowerDayVisionRangeButtonPressed' )">
@@ -409,7 +299,7 @@
                                     </ToggleButton>
                                 </Panel>
                                 <Panel class="Row">
-                                    <Label id="NeutralsLabel" class="small" text="#NeutralsLabel" />
+                                    <Label id="NeutralsLabel" class="SectionLabel" text="#NeutralsLabel" />
                                 </Panel>
                                 <Panel class="Row">
                                     <ToggleButton id="ShowNeutralSpawnBoxButtonPressed" class="DemoButton" onactivate="FireOverlayToggleEvent( 'ShowNeutralSpawnBoxButtonPressed' )">
@@ -422,7 +312,7 @@
                                     </ToggleButton>
                                 </Panel>
                                 <Panel class="Row">
-                                    <Label id="WardsLabel" class="small" text="#WardsLabel" />
+                                    <Label id="WardsLabel" class="SectionLabel" text="#WardsLabel" />
                                 </Panel>
                                 <Panel class="Row">
                                     <ToggleButton id="SentryVisionButtonPressed" class="DemoButton" onactivate="FireOverlayToggleEvent( 'SentryVisionButtonPressed' )">
@@ -435,7 +325,7 @@
                                     </ToggleButton>
                                 </Panel>
                                 <Panel class="Row">
-                                    <Label id="HeroLabel" class="small" text="#HeroLabel" />
+                                    <Label id="HeroLabel" class="SectionLabel" text="#HeroLabel" />
                                 </Panel>
                                 <Panel class="Row">
                                     <ToggleButton id="HeroXPRangeButtonPressed" class="DemoButton" onactivate="FireOverlayToggleEvent( 'HeroXPRangeButtonPressed' )">
@@ -448,7 +338,7 @@
                                     </ToggleButton>
                                 </Panel>
                                 <Panel class="Row">
-                                    <Label id="CreepLabel" class="small" text="#CreepLabel" />
+                                    <Label id="CreepLabel" class="SectionLabel" text="#CreepLabel" />
                                 </Panel>
                                 <Panel class="Row">
                                     <ToggleButton id="CreepAggroRangeButtonPressed" class="DemoButton" onactivate="FireOverlayToggleEvent( 'CreepAggroRangeButtonPressed' )">
@@ -459,7 +349,7 @@
                         </Panel>
                         <Panel id="TabContent5" class="TabContent">
                             <Panel class="Category">
-                                <Label class="CanCollapse" text="#Stats_ButtonCategory" />
+                                <Label class="Header" text="#Stats_ButtonCategory" />
                                 <Panel class="Row">
                                     <DropDown id="PlayerDropDown" class="DemoButton" oninputsubmit="OnPlayerDropDownChanged()">
                                         <Label text="Player 1" id="player1"/>
@@ -475,32 +365,32 @@
                                     </DropDown>
                                 </Panel>
                                 <Panel class="Row Row2">
-                                    <Label id="ASLabel" class="small" text="#ASLabel" />
-                                    <Label id="ASValue" class="small" text="0" />
+                                    <Label id="ASLabel" class="SectionLabel" text="#ASLabel" />
+                                    <Label id="ASValue" class="SectionLabel" text="0" />
                                 </Panel>
                                 <Panel class="Row Row2">
-                                    <Label id="DPSLabel" class="small" text="#DPSLabel" />
-                                    <Label id="DPSValue" class="small" text="0" />
+                                    <Label id="DPSLabel" class="SectionLabel" text="#DPSLabel" />
+                                    <Label id="DPSValue" class="SectionLabel" text="0" />
                                 </Panel>
                                 <Panel class="Row Row2">
-                                    <Label id="DPS10Label" class="small" text="#DPS10Label" />
-                                    <Label id="DPS10Value" class="small" text="0" />
+                                    <Label id="DPS10Label" class="SectionLabel" text="#DPS10Label" />
+                                    <Label id="DPS10Value" class="SectionLabel" text="0" />
                                 </Panel>
                                 <Panel class="Row Row2">
-                                    <Label id="LastAttackLabel" class="small" text="#LastAttackLabel" />
-                                    <Label id="LastAttackValue" class="small" text="0" />
+                                    <Label id="LastAttackLabel" class="SectionLabel" text="#LastAttackLabel" />
+                                    <Label id="LastAttackValue" class="SectionLabel" text="0" />
                                 </Panel>
                                 <Panel class="Row Row2">
-                                    <Label id="TotalDamageLabel" class="small" text="#TotalDamageLabel" />
-                                    <Label id="TotalDamageValue" class="small" text="0" />
+                                    <Label id="TotalDamageLabel" class="SectionLabel" text="#TotalDamageLabel" />
+                                    <Label id="TotalDamageValue" class="SectionLabel" text="0" />
                                 </Panel>
                                 <Panel class="Row Row2">
-                                    <Label id="LastDamageTakenLabel" class="small" text="#LastDamageTakenLabel" />
-                                    <Label id="LastDamageTakenValue" class="small" text="0" />
+                                    <Label id="LastDamageTakenLabel" class="SectionLabel" text="#LastDamageTakenLabel" />
+                                    <Label id="LastDamageTakenValue" class="SectionLabel" text="0" />
                                 </Panel>
                                 <Panel class="Row Row2">
-                                    <Label id="TotalDamageTakenLabel" class="small" text="#TotalDamageTakenLabel" />
-                                    <Label id="TotalDamageTakenValue" class="small" text="0" />
+                                    <Label id="TotalDamageTakenLabel" class="SectionLabel" text="#TotalDamageTakenLabel" />
+                                    <Label id="TotalDamageTakenValue" class="SectionLabel" text="0" />
                                 </Panel>
                                 <Panel class="Row">    
                                   <Button class="DemoButton" onactivate="FireCustomGameEvent( 'ResetPlayerStatsButtonPressed' )">
