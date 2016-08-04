@@ -81,6 +81,10 @@ function OnNeutralSpawnIntervalDropDownChanged() {
     });
 }
 
+function UpdateNeutralSpawnIntervalUI(data) {
+    $('#NeutralSpawnIntervalDropDown').SetSelected('i_' + data.value.toString());
+}
+
 function OnHostTimeScaleSpeedChange(dir) {
     if (dir == 0) {
         hostTimeScaleIndex = 1;
@@ -90,8 +94,14 @@ function OnHostTimeScaleSpeedChange(dir) {
     var value = hostTimeScaleValues[hostTimeScaleIndex];
     $('#HostTimeScaleValueLabel').text = value + 'X';
     GameEvents.SendCustomGameEventToServer("HostTimeScaleChange", {
-        value: value
+        value: value,
+        hostTimeScaleIndex: hostTimeScaleIndex
     });
+}
+
+function UpdateHostTimeScaleUI(data) {
+    $('#HostTimeScaleValueLabel').text = data.value.toString() + 'X';
+    hostTimeScaleIndex = parseInt(data.hostTimeScaleIndex);
 }
 
 function FireCustomGameEvent(eventName) {
@@ -146,9 +156,23 @@ GameUI.SetMouseCallback(function(eventName, arg) {
     return CONTINUE_PROCESSING_EVENT;
 });
 
+function UpdateToggleUI(data) {
+    for (var i in data) {
+        if (data.hasOwnProperty(i)) {
+            var toggleElement = $('#' + i);
+            if (toggleElement) {
+                toggleElement.checked = data[i] == 1;
+            }
+        }
+    }
+}
+
 (function() {
     $('#NeutralSpawnIntervalDropDown').SetSelected("i_60");
     UpdatePosition();
+    GameEvents.Subscribe( "update_toggle_ui", UpdateToggleUI );
+    GameEvents.Subscribe( "update_neutral_spawn_interval_ui", UpdateNeutralSpawnIntervalUI );
+    GameEvents.Subscribe( "update_host_time_scale_ui", UpdateHostTimeScaleUI );
 })();
 
 function OpenCustomDropDown() {

@@ -34,10 +34,9 @@ function modifier_damage_tracking:OnAttack(params)
         return
     end
     if params.attacker == self:GetParent() then
-        --print ( "modifier_damage_tracking:OnAttack attacker")
-        -- params.target:GetHealth() target health at time attack is launched (after attack point)
-        --print (params.target:GetName() .. " " .. tostring(params.target:IsAlive()) .. " " .. tostring(params.target:GetHealth()) )
-        if GameRules.herodemo.m_bShowTargetHealthPreAttack == true then
+        local playerID = params.attacker:GetPlayerOwnerID()
+
+        if GameRules.herodemo.m_bShowTargetHealthPreAttack[playerID] == true then
             SendOverheadEventMessage(nil, 3, params.target, params.target:GetHealth(), nil)
         end
     end
@@ -69,19 +68,16 @@ function modifier_damage_tracking:OnTakeDamage(params)
         return
     end
     if params.attacker == self:GetParent() then
-        --print ( "modifier_damage_tracking:OnTakeDamage attacker")
-        --print (tostring(params.damage) .. " " .. tostring(params.original_damage))
-        --print (params.unit:GetClassname())
-        --print (params.unit:GetName() .. " " .. tostring(params.unit:IsAlive()) .. " " .. tostring(params.unit:GetHealth()) )
-        if GameRules.herodemo.m_bShowTargetHealthPostAttack == true then
+        local playerID = params.attacker:GetPlayerOwnerID()
+        
+        if GameRules.herodemo.m_bShowTargetHealthPostAttack[playerID] == true then
             SendOverheadEventMessage(nil, 6, params.unit, params.unit:GetHealth(), nil)
         end
-        if GameRules.herodemo.m_bShowDamageDealt == true then
+        if GameRules.herodemo.m_bShowDamageDealt[playerID] == true then
             SendOverheadEventMessage(nil, 10, params.unit, params.damage, nil)
         end
         ----printTable(params, " ")
         
-        local playerID = params.attacker:GetPlayerOwnerID()
         local m_tPlayerDPS = GameRules.herodemo.m_tPlayerDPS
         m_tPlayerDPS[playerID] = m_tPlayerDPS[playerID] + params.damage
         CustomNetTables:SetTableValue( "la_nettable", tostring(playerID), { value = params.damage } )

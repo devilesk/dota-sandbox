@@ -173,12 +173,12 @@ end
 --------------------------------------------------------------------------------
 -- GameEvent: OnShowDamageDealtButtonPressed
 --------------------------------------------------------------------------------
-function CHeroDemo:OnShowDamageDealtButtonPressed( event )
-	if self.m_bShowDamageDealt == false then
-		self.m_bShowDamageDealt = true
+function CHeroDemo:OnShowDamageDealtButtonPressed( event, data )
+	if self.m_bShowDamageDealt[data.PlayerID] == false then
+		self.m_bShowDamageDealt[data.PlayerID] = true
 		self:BroadcastMsg( "#ShowDamageDealtOn_Msg" )
-	elseif self.m_bShowDamageDealt == true then
-		self.m_bShowDamageDealt = false
+	elseif self.m_bShowDamageDealt[data.PlayerID] == true then
+		self.m_bShowDamageDealt[data.PlayerID] = false
 		self:BroadcastMsg( "#ShowDamageDealtOff_Msg" )
 	end	
 end
@@ -186,12 +186,12 @@ end
 --------------------------------------------------------------------------------
 -- GameEvent: OnShowTargetHealthPreAttackButtonPressed
 --------------------------------------------------------------------------------
-function CHeroDemo:OnShowTargetHealthPreAttackButtonPressed( event )
-	if self.m_bShowTargetHealthPreAttack == false then
-		self.m_bShowTargetHealthPreAttack = true
+function CHeroDemo:OnShowTargetHealthPreAttackButtonPressed( event, data )
+	if self.m_bShowTargetHealthPreAttack[data.PlayerID] == false then
+		self.m_bShowTargetHealthPreAttack[data.PlayerID] = true
 		self:BroadcastMsg( "#ShowTargetHealthPreAttackOn_Msg" )
-	elseif self.m_bShowTargetHealthPreAttack == true then
-		self.m_bShowTargetHealthPreAttack = false
+	elseif self.m_bShowTargetHealthPreAttack[data.PlayerID] == true then
+		self.m_bShowTargetHealthPreAttack[data.PlayerID] = false
 		self:BroadcastMsg( "#ShowTargetHealthPreAttackOff_Msg" )
 	end	
 end
@@ -199,12 +199,12 @@ end
 --------------------------------------------------------------------------------
 -- GameEvent: OnShowTargetHealthPostAttackButtonPressed
 --------------------------------------------------------------------------------
-function CHeroDemo:OnShowTargetHealthPostAttackButtonPressed( event )
-	if self.m_bShowTargetHealthPostAttack == false then
-		self.m_bShowTargetHealthPostAttack = true
+function CHeroDemo:OnShowTargetHealthPostAttackButtonPressed( event, data )
+	if self.m_bShowTargetHealthPostAttack[data.PlayerID] == false then
+		self.m_bShowTargetHealthPostAttack[data.PlayerID] = true
 		self:BroadcastMsg( "#ShowTargetHealthPostAttackOn_Msg" )
-	elseif self.m_bShowTargetHealthPostAttack == true then
-		self.m_bShowTargetHealthPostAttack = false
+	elseif self.m_bShowTargetHealthPostAttack[data.PlayerID] == true then
+		self.m_bShowTargetHealthPostAttack[data.PlayerID] = false
 		self:BroadcastMsg( "#ShowTargetHealthPostAttackOff_Msg" )
 	end	
 end
@@ -363,7 +363,8 @@ function CHeroDemo:OnFreeSpellsButtonPressed( eventSourceIndex )
             SendToServerConsole( "dota_ability_debug 0" )
         end
 		self:BroadcastMsg( "#FreeSpellsOff_Msg" )
-	end	
+	end
+    self:UpdateToggleUI()
 end
 
 --------------------------------------------------------------------------------
@@ -382,6 +383,7 @@ function CHeroDemo:OnInvulnerabilityButtonPressed( eventSourceIndex, data )
 		self.m_bInvulnerabilityEnabled = false
 		self:BroadcastMsg( "#InvulnerabilityOff_Msg" )
 	end
+    self:UpdateToggleUI()
 end
 
 --------------------------------------------------------------------------------
@@ -500,6 +502,7 @@ function CHeroDemo:OnResetPlayerStatsButtonPressed( eventSourceIndex, data )
         CustomNetTables:SetTableValue( "la_nettable", tostring(selectedPlayerID), { value = 0 } )
         CustomNetTables:SetTableValue( "dps_nettable", tostring(selectedPlayerID), { value = 0 } )
         CustomNetTables:SetTableValue( "dps10_nettable", tostring(selectedPlayerID), { value = 0 } )
+        PlayerResource:ResetTotalEarnedGold(selectedPlayerID)
         self.m_tPlayerDPS[selectedPlayerID] = 0
         self.m_tPlayerDPS10[selectedPlayerID] = Queue()
         self:BroadcastMsg( "#ResetPlayerStats_Msg" )
@@ -539,23 +542,26 @@ function CHeroDemo:OnPassiveGoldButtonPressed( eventSourceIndex, data )
         GameRules:SetGoldPerTick(1)
 		self:BroadcastMsg( "#PassiveGoldOn_Msg" )
 	end
+    self:UpdateToggleUI()
 end
 
 --------------------------------------------------------------------------------
 -- ButtonEvent: OnLaneCreepsButtonPressed
 --------------------------------------------------------------------------------
 function CHeroDemo:OnLaneCreepsButtonPressed( eventSourceIndex )
-	SendToServerConsole( "toggle dota_creeps_no_spawning" )
-	if self.m_bCreepsEnabled == false then
-		self.m_bCreepsEnabled = true
-		self:BroadcastMsg( "#LaneCreepsOn_Msg" )
-	elseif self.m_bCreepsEnabled == true then
+	if self.m_bCreepsDisabled == false then
+		self.m_bCreepsDisabled = true
 		-- if we're disabling creep spawns, then also kill existing creep waves
 		SendToServerConsole( "dota_kill_creeps radiant" )
 		SendToServerConsole( "dota_kill_creeps dire" )
-		self.m_bCreepsEnabled = false
+        SendToServerConsole( "dota_creeps_no_spawning 1" )
 		self:BroadcastMsg( "#LaneCreepsOff_Msg" )
+	elseif self.m_bCreepsDisabled == true then
+        SendToServerConsole( "dota_creeps_no_spawning 0" )
+		self.m_bCreepsDisabled = false
+		self:BroadcastMsg( "#LaneCreepsOn_Msg" )
 	end
+    self:UpdateToggleUI()
 end
 
 --------------------------------------------------------------------------------
@@ -802,21 +808,23 @@ function CHeroDemo:OnInstantRespawnEnabledButtonPressed( eventSourceIndex )
     else
         mode:SetFixedRespawnTime(-1)
     end
+    self:UpdateToggleUI()
 end
 
 --------------------------------------------------------------------------------
 -- ButtonEvent: OnFOWButtonPressed
 --------------------------------------------------------------------------------
 function CHeroDemo:OnFOWButtonPressed( eventSourceIndex )
-	if self.m_bFOWEnabled == false then
-		self.m_bFOWEnabled = true
-        self:BroadcastMsg( "#FOWOn_Msg" )
-	else
-		self.m_bFOWEnabled = false
+	if self.m_bFOWDisabled == false then
+		self.m_bFOWDisabled = true
         self:BroadcastMsg( "#FOWOff_Msg" )
+	else
+		self.m_bFOWDisabled = false
+        self:BroadcastMsg( "#FOWOn_Msg" )
 	end
     local mode = GameRules:GetGameModeEntity()      
-    mode:SetFogOfWarDisabled(not self.m_bFOWEnabled)
+    mode:SetFogOfWarDisabled(self.m_bFOWDisabled)
+    self:UpdateToggleUI()
 end
 
 --------------------------------------------------------------------------------
@@ -849,6 +857,7 @@ end
 function CHeroDemo:OnNeutralSpawnIntervalChange( eventSourceIndex, data )
     SendToServerConsole("dota_neutral_spawn_interval " .. data.value)
     self:BroadcastMsg( "#NeutralSpawnInterval_Msg" )
+    CustomGameEventManager:Send_ServerToAllClients("update_neutral_spawn_interval_ui", data )
 end
 
 --------------------------------------------------------------------------------
@@ -866,6 +875,7 @@ function CHeroDemo:OnHostTimeScaleChange( eventSourceIndex, data )
   DebugPrint ("host_timescale " .. data.value)
 	SendToServerConsole("host_timescale " .. data.value)
   self:BroadcastMsg( "#HostTimeScale_Msg" )
+  CustomGameEventManager:Send_ServerToAllClients("update_host_time_scale_ui", data )
 end
 
 --------------------------------------------------------------------------------
@@ -944,6 +954,7 @@ function CHeroDemo:OnAllyInvulnerabilityButtonPressed( eventSourceIndex, data )
 		self.m_bAllyInvulnerabilityEnabled = false
 		self:BroadcastMsg( "#AllyInvulnerabilityOff_Msg" )
 	end
+    self:UpdateToggleUI()
 end
 
 --------------------------------------------------------------------------------
@@ -957,6 +968,7 @@ function CHeroDemo:OnEnemyInvulnerabilityButtonPressed( eventSourceIndex, data )
 		self.m_bEnemyInvulnerabilityEnabled = false
 		self:BroadcastMsg( "#EnemyInvulnerabilityOff_Msg" )
 	end
+    self:UpdateToggleUI()
 end
 
 --------------------------------------------------------------------------------

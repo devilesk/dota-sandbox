@@ -39,12 +39,12 @@
                                     </Button>
                                 </Panel>
                                 <Panel class="Row">
-                                    <ToggleButton class="DemoButton" onactivate="FireCustomGameEvent_Str( FreeSpellsButtonPressed )">
+                                    <ToggleButton id="FreeSpells_Button" class="DemoButton" onactivate="FireCustomGameEvent_Str( FreeSpellsButtonPressed )">
                                         <Label text="#FreeSpells_Button" />
                                     </ToggleButton>
                                 </Panel>
                                 <Panel class="Row">
-                                    <ToggleButton class="DemoButton" onactivate="FireCustomGameEvent_Str( InvulnerabilityButtonPressed )">
+                                    <ToggleButton id="Invulnerability_Button" class="DemoButton" onactivate="FireCustomGameEvent_Str( InvulnerabilityButtonPressed )">
                                         <Label text="#Invulnerability_Button" />
                                     </ToggleButton>
                                 </Panel>
@@ -131,12 +131,12 @@
                                     <Label id="SpawnInvulnerabilityButtonLabel" class="SectionLabel" text="#SpawnInvulnerabilityButtonLabel" />
                                 </Panel>
                                 <Panel class="Row">
-                                    <ToggleButton class="DemoButton" onactivate="FireCustomGameEvent_Str( AllyInvulnerabilityButtonPressed )">
+                                    <ToggleButton id="AllyInvulnerability_Button" class="DemoButton" onactivate="FireCustomGameEvent_Str( AllyInvulnerabilityButtonPressed )">
                                         <Label text="#AllyInvulnerability_Button" />
                                     </ToggleButton>
                                 </Panel>
                                 <Panel class="Row">
-                                    <ToggleButton class="DemoButton" onactivate="FireCustomGameEvent_Str( EnemyInvulnerabilityButtonPressed )">
+                                    <ToggleButton id="EnemyInvulnerability_Button" class="DemoButton" onactivate="FireCustomGameEvent_Str( EnemyInvulnerabilityButtonPressed )">
                                         <Label text="#EnemyInvulnerability_Button" />
                                     </ToggleButton>
                                 </Panel>
@@ -194,7 +194,7 @@
                                   </Button>
                                 </Panel>
                                 <Panel class="Row">    
-                                    <ToggleButton class="DemoButton" onactivate="FireCustomGameEvent_Str( PassiveGoldButtonPressed )">
+                                    <ToggleButton id="PassiveGold_Button" class="DemoButton" onactivate="FireCustomGameEvent_Str( PassiveGoldButtonPressed )">
                                         <Label text="#PassiveGold_Button" />
                                     </ToggleButton>
                                 </Panel>
@@ -205,17 +205,17 @@
                             <Panel class="Category">
                                 <Label class="Header" text="#Misc_ButtonCategory" />
                                 <Panel class="Row">
-                                    <ToggleButton class="DemoButton" onactivate="FireCustomGameEvent_Str( InstantRespawnEnabledButtonPressed )">
+                                    <ToggleButton id="InstantRespawnEnabled_Button" class="DemoButton" onactivate="FireCustomGameEvent_Str( InstantRespawnEnabledButtonPressed )">
                                         <Label text="#InstantRespawnEnabled_Button" />
                                     </ToggleButton>
                                 </Panel>
                                 <Panel class="Row">
-                                    <ToggleButton class="DemoButton" onactivate="FireCustomGameEvent_Str( FOWButtonPressed )">
+                                    <ToggleButton id="FOW_Button" class="DemoButton" onactivate="FireCustomGameEvent_Str( FOWButtonPressed )">
                                         <Label text="#FOW_Button" />
                                     </ToggleButton>
                                 </Panel>
                                 <Panel class="Row">
-                                    <ToggleButton class="DemoButton" onactivate="FireCustomGameEvent_Str( LaneCreepsButtonPressed )">
+                                    <ToggleButton id="LaneCreeps_Button" class="DemoButton" onactivate="FireCustomGameEvent_Str( LaneCreepsButtonPressed )">
                                         <Label text="#LaneCreeps_Button" />
                                     </ToggleButton>
                                 </Panel>

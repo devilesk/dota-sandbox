@@ -300,18 +300,19 @@ function CHeroDemo:InitGameMode()
     self.m_nDummiesCount = 0
     self.m_bDummiesEnabled = false
 
-    self.m_bInstantRespawnEnabled = false
     self.m_bFreeSpellsEnabled = false
     self.m_bInvulnerabilityEnabled = false
     self.m_bAllyInvulnerabilityEnabled = false
     self.m_bEnemyInvulnerabilityEnabled = false
     self.m_bPassiveGoldDisabled = false
-    self.m_bCreepsEnabled = true
+    self.m_bInstantRespawnEnabled = false
+    self.m_bFOWDisabled = false
+    self.m_bCreepsDisabled = false
     self.m_bGiveItemsToAllies = false
     self.m_bGiveItemsToEnemies = false
-    self.m_bShowDamageDealt = false
-    self.m_bShowTargetHealthPreAttack = false
-    self.m_bShowTargetHealthPostAttack = false
+    self.m_bShowDamageDealt = {}
+    self.m_bShowTargetHealthPreAttack = {}
+    self.m_bShowTargetHealthPostAttack = {}
 
     self._hNeutralCaster = CreateUnitByName( "npc_dota_neutral_caster", Vector(0, 0, 0), false, nil, nil, NEUTRAL_TEAM )
 
@@ -328,6 +329,10 @@ function CHeroDemo:InitGameMode()
         self.m_tPlayerDPS[nPlayerID] = 0
         self.m_tPlayerDPS10[nPlayerID] = Queue()
         
+        self.m_bShowDamageDealt[nPlayerID] = false
+        self.m_bShowTargetHealthPreAttack[nPlayerID] = false
+        self.m_bShowTargetHealthPostAttack[nPlayerID] = false
+        
         self.overlays[nPlayerID] = {
             TowerDayVisionRangeButtonPressed = false,
             TowerNightVisionRangeButtonPressed = false,
@@ -342,6 +347,20 @@ function CHeroDemo:InitGameMode()
         }
     end
     GameRules:GetGameModeEntity():SetThink("CalculateDPS", self)
+end
+
+function CHeroDemo:UpdateToggleUI()
+    local data = {
+        FreeSpells_Button = self.m_bFreeSpellsEnabled,
+        Invulnerability_Button = self.m_bInvulnerabilityEnabled,
+        AllyInvulnerability_Button = self.m_bAllyInvulnerabilityEnabled,
+        EnemyInvulnerability_Button = self.m_bEnemyInvulnerabilityEnabled,
+        PassiveGold_Button = self.m_bPassiveGoldDisabled,
+        InstantRespawnEnabled_Button = self.m_bInstantRespawnEnabled,
+        FOW_Button = self.m_bFOWDisabled,
+        LaneCreeps_Button = self.m_bCreepsDisabled,
+    }
+    CustomGameEventManager:Send_ServerToAllClients("update_toggle_ui", data )
 end
 
 function CHeroDemo:BroadcastMsg( sMsg )
