@@ -1,6 +1,3 @@
---[[ Hero Demo game mode ]]
--- Note: Hero Demo makes use of some mode-specific Dota2 C++ code for its activation from the main Dota2 UI.  Regular custom games can't do this.
-
 print( "Hero Demo game mode loaded." )
 
 _G.NEUTRAL_TEAM = 4 -- global const for neutral team int
@@ -14,21 +11,11 @@ LinkLuaModifier( "modifier_range_xp", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_range_creep_aggro", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_target", LUA_MODIFIER_MOTION_NONE )
 
--- "demo_hero_name" is a magic term, "default_value" means no string was passed, so we'd probably want to put them in hero selection
---sHeroSelection = GameRules:GetGameSessionConfigValue( "demo_hero_name", "default_value" )
---DebugPrint( "sHeroSelection: " .. sHeroSelection )
-
-------------------------------------------------------------------------------------------------------------------------------------------------------
--- HeroDemo class
-------------------------------------------------------------------------------------------------------------------------------------------------------
 if CHeroDemo == nil then
     _G.CHeroDemo = class({}) -- put CHeroDemo in the global scope
     --refer to: http://stackoverflow.com/questions/6586145/lua-require-with-global-local
 end
 
-------------------------------------------------------------------------------------------------------------------------------------------------------
--- Required .lua files, which just exist to help organize functions contained in our addon.  Make sure to call these beneath the mode's class creation.
-------------------------------------------------------------------------------------------------------------------------------------------------------
 require( "libraries/timers" )
 require( "libraries/util" )
 require( "libraries/queue" )

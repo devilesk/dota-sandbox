@@ -31,7 +31,6 @@ function CreateParticleLine(a, b, particle_name, hPlayer)
 end
 
 function CreateParticleCircle(ent, radius, particle_name, hPlayer)
-    print ("CreateParticleCircle")
 	local particle
     if hPlayer == nil then
         particle = ParticleManager:CreateParticle(particle_name, PATTACH_ABSORIGIN_FOLLOW, ent)
@@ -43,7 +42,6 @@ function CreateParticleCircle(ent, radius, particle_name, hPlayer)
 end
 
 function CreateParticleTarget(ent, hPlayer)
-    print ("CreateParticleCircle")
 	local particle
     if hPlayer == nil then
         particle = ParticleManager:CreateParticle(RANGE_TARGET, PATTACH_ABSORIGIN_FOLLOW, ent)

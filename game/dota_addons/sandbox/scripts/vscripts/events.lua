@@ -22,7 +22,6 @@ function CHeroDemo:OnGameRulesStateChange()
 		DebugPrint( "OnGameRulesStateChange: Pre Game Selection" )
 	elseif nNewState == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
 		DebugPrint( "OnGameRulesStateChange: Game In Progress" )
-
 	end
 end
 
@@ -975,8 +974,6 @@ end
 -- ButtonEvent: OnOverlayToggleButtonPressed
 --------------------------------------------------------------------------------
 function CHeroDemo:OnOverlayToggleButtonPressed( eventSourceIndex, data )
-    print ("OnOverlayToggleButtonPressed")
-    print (data.PlayerID)
 	if data.value == 1 then
 		self.overlays[data.PlayerID][data.overlayName] = true
     self:BroadcastMsg( "#" .. data.overlayName .. "On_Msg" )
