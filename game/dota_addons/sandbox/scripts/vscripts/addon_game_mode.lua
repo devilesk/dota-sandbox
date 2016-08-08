@@ -595,13 +595,13 @@ function CHeroDemo:SpawnBoxThink()
                     for i = 0, 9, 1 do
                         ent._Particles[i] = {TowerDayVision=nil, TowerNightVision=nil, TowerTrueSight=nil, TowerAttack=nil}
                     end
-                    ent._isRed = {
-                        TowerDayVision = any(IsInRangeFuncGenerator(ent, 1800), heroes),
-                        TowerTrueSight = any(IsInRangeFuncGenerator(ent, 900), heroes),
-                        TowerNightVision = any(IsInRangeFuncGenerator(ent, 800), heroes),
-                        TowerAttack = any(IsDistBetweenEntOBBFuncGenerator(ent, 700), heroes),
-                    }
                 end
+                ent._isRed = {
+                    TowerDayVision = any(IsInRangeFuncGenerator(ent, 1800), heroes),
+                    TowerTrueSight = any(IsInRangeFuncGenerator(ent, 900), heroes),
+                    TowerNightVision = any(IsInRangeFuncGenerator(ent, 800), heroes),
+                    TowerAttack = any(IsDistBetweenEntOBBFuncGenerator(ent, 700), heroes),
+                }
             end
         end
         
