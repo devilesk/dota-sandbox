@@ -14,6 +14,7 @@ function CHeroDemo:OnGameRulesStateChange()
 	elseif nNewState == DOTA_GAMERULES_STATE_HERO_SELECTION then
 		DebugPrint( "OnGameRulesStateChange: Hero Selection" )
 	elseif nNewState == DOTA_GAMERULES_STATE_PRE_GAME then
+        self.towers = Entities:FindAllByClassname("npc_dota_tower")
     if GameRules:IsCheatMode() then
         SendToServerConsole( "sv_cheats 1" )
     else

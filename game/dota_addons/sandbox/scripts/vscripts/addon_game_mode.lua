@@ -541,8 +541,8 @@ function CHeroDemo:SpawnBoxThink()
         local wards = Entities:FindAllByClassname("npc_dota_ward_base")
         local sentries = Entities:FindAllByClassname("npc_dota_ward_base_truesight")
         local neutrals = Entities:FindAllByClassname("npc_dota_creep_neutral")
-        local towers = Entities:FindAllByClassname("npc_dota_tower")
-
+        local towers = self.towers
+        
         if wards ~= nil then
             for k,ent in pairs(wards) do
                 if ent:IsAlive() then
@@ -625,11 +625,6 @@ function CHeroDemo:SpawnBoxThink()
                 end            
             end
         end
-        
-        wards = nil
-        sentries = nil
-        towers = nil
-        neutrals = nil
     end
     return .01
 end
