@@ -20,3 +20,6 @@ end
 function modifier_range_xp:RemoveOnDeath()
     return modifier_range_base.RemoveOnDeath(self)
 end
+function modifier_range_xp:IsHidden()
+    return true
+end

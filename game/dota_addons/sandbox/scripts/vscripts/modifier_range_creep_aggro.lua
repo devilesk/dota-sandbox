@@ -36,3 +36,6 @@ end
 function modifier_range_creep_aggro:GetModifierAura()
 	return "modifier_target"
 end
+function modifier_range_creep_aggro:IsHidden()
+    return true
+end

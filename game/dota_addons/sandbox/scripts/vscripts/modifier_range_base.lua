@@ -60,5 +60,5 @@ function modifier_range_base:GetEffectAttachType()
     return PATTACH_OVERHEAD_FOLLOW
 end
 function modifier_range_base:IsHidden()
-    return false
+    return true
 end

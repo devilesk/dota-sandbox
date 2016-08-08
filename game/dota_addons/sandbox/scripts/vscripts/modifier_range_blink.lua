@@ -20,3 +20,6 @@ end
 function modifier_range_blink:RemoveOnDeath()
     return modifier_range_base.RemoveOnDeath(self)
 end
+function modifier_range_blink:IsHidden()
+    return true
+end

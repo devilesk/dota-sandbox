@@ -53,5 +53,5 @@ function modifier_target:GetEffectAttachType()
     return PATTACH_OVERHEAD_FOLLOW
 end
 function modifier_target:IsHidden()
-    return false
+    return true
 end
