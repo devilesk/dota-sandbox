@@ -480,10 +480,10 @@ function CreateTowerRangeOverlayForPlayer(player, heroes, towers)
 	if towers ~= nil then
 		for k, tower in pairs(towers) do
 			if tower ~= nil and IsValidEntity(tower) then
-				CreateRangeOverlayForPlayer(player, tower, "TowerDayVisionRangeButtonPressed", "TowerDayVision", 1800, any(IsInRangeFuncGenerator(tower, 1800), heroes))
-				CreateRangeOverlayForPlayer(player, tower, "TowerTrueSightRangeButtonPressed", "TowerTrueSight", 900, any(IsInRangeFuncGenerator(tower, 900), heroes))
-				CreateRangeOverlayForPlayer(player, tower, "TowerNightVisionRangeButtonPressed", "TowerNightVision", 800, any(IsInRangeFuncGenerator(tower, 800), heroes))
-				CreateRangeOverlayForPlayer(player, tower, "TowerAttackRangeButtonPressed", "TowerAttack", 700 + tower:GetHullRadius(), any(IsDistBetweenEntOBBFuncGenerator(tower, 700), heroes))
+				CreateRangeOverlayForPlayer(player, tower, "TowerDayVisionRangeButtonPressed", "TowerDayVision", 1800, tower._isRed.TowerDayVision)
+				CreateRangeOverlayForPlayer(player, tower, "TowerTrueSightRangeButtonPressed", "TowerTrueSight", 900, tower._isRed.TowerTrueSight)
+				CreateRangeOverlayForPlayer(player, tower, "TowerNightVisionRangeButtonPressed", "TowerNightVision", 800, tower._isRed.TowerNightVision)
+				CreateRangeOverlayForPlayer(player, tower, "TowerAttackRangeButtonPressed", "TowerAttack", 700 + tower:GetHullRadius(), tower._isRed.TowerAttack)
 			end
 		end
 	end
@@ -542,17 +542,7 @@ function CHeroDemo:SpawnBoxThink()
         local sentries = Entities:FindAllByClassname("npc_dota_ward_base_truesight")
         local neutrals = Entities:FindAllByClassname("npc_dota_creep_neutral")
         local towers = Entities:FindAllByClassname("npc_dota_tower")
-        
-        if towers ~= nil then
-            for k,ent in pairs(towers) do
-                if ent._Particles == nil then
-                    ent._Particles = {}
-                    for i = 0, 9, 1 do
-                        ent._Particles[i] = {TowerDayVision=nil, TowerNightVision=nil, TowerTrueSight=nil, TowerAttack=nil}
-                    end
-                end
-            end
-        end
+
         if wards ~= nil then
             for k,ent in pairs(wards) do
                 if ent:IsAlive() then
@@ -598,6 +588,22 @@ function CHeroDemo:SpawnBoxThink()
                 end
             end
         end
+        if towers ~= nil then
+            for k,ent in pairs(towers) do
+                if ent._Particles == nil then
+                    ent._Particles = {}
+                    for i = 0, 9, 1 do
+                        ent._Particles[i] = {TowerDayVision=nil, TowerNightVision=nil, TowerTrueSight=nil, TowerAttack=nil}
+                    end
+                    ent._isRed = {
+                        TowerDayVision = any(IsInRangeFuncGenerator(ent, 1800), heroes),
+                        TowerTrueSight = any(IsInRangeFuncGenerator(ent, 900), heroes),
+                        TowerNightVision = any(IsInRangeFuncGenerator(ent, 800), heroes),
+                        TowerAttack = any(IsDistBetweenEntOBBFuncGenerator(ent, 700), heroes),
+                    }
+                end
+            end
+        end
         
         self.spawnBoxController:UpdateIsBlockedState(heroes, wards, sentries, neutrals)
         
@@ -609,22 +615,13 @@ function CHeroDemo:SpawnBoxThink()
                     if hero._Particles == nil then
                         hero._Particles = {HeroXPRange=nil, BlinkRange=nil}
                     end
-                    
-                    --CreateHeroRangeOverlayForPlayer(player, hero)
-                    
+
                     local bShowBox = self.overlays[i].ShowNeutralSpawnBoxButtonPressed
                     local bDetectNeutrals = self.overlays[i].DetectNeutralsButtonPressed
                     self.spawnBoxController:UpdateOverlayForPlayer(player, bShowBox, bDetectNeutrals)
                     
                     CreateTowerRangeOverlayForPlayer(player, heroes, towers)
                     CreateWardRangeOverlayForPlayer(player, wards, sentries)
-
-                    local enemies = FindUnitsInRadius( DOTA_TEAM_GOODGUYS, hero:GetOrigin(), nil, 1000, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_CREEP, 0, 0, false )
-                    for _, creep in pairs(enemies) do
-                        if not creep:HasModifier("modifier_target") then
-                            creep:AddNewModifier(creep, nil, "modifier_target", {duration = -1, overlayName="BlinkRangeButtonPressed"})
-                        end
-                    end
                 end            
             end
         end
