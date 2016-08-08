@@ -218,11 +218,6 @@
 	color: #888888;
 }
 
-.Row #DemoButton
-{
-	
-}
-
 .Row TextEntry
 {
     background-color: gradient( linear, 0% 0%, 0% 100%, from( #111111FF ), to( #222222FF ) );
@@ -284,6 +279,10 @@
     transition-property: background-color;
     transition-duration: 0.15s;
     transition-timing-function: linear;
+}
+
+.HalfButton {
+    width: 95px;
 }
 
 .col-2

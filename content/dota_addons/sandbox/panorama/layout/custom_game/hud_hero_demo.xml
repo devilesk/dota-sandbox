@@ -131,12 +131,10 @@
                                     <Label id="SpawnInvulnerabilityButtonLabel" class="SectionLabel" text="#SpawnInvulnerabilityButtonLabel" />
                                 </Panel>
                                 <Panel class="Row">
-                                    <ToggleButton id="AllyInvulnerability_Button" class="DemoButton" onactivate="FireCustomGameEvent_Str( AllyInvulnerabilityButtonPressed )">
+                                    <ToggleButton id="AllyInvulnerability_Button" class="DemoButton HalfButton" onactivate="FireCustomGameEvent_Str( AllyInvulnerabilityButtonPressed )">
                                         <Label text="#AllyInvulnerability_Button" />
                                     </ToggleButton>
-                                </Panel>
-                                <Panel class="Row">
-                                    <ToggleButton id="EnemyInvulnerability_Button" class="DemoButton" onactivate="FireCustomGameEvent_Str( EnemyInvulnerabilityButtonPressed )">
+                                    <ToggleButton id="EnemyInvulnerability_Button" class="DemoButton HalfButton" onactivate="FireCustomGameEvent_Str( EnemyInvulnerabilityButtonPressed )">
                                         <Label text="#EnemyInvulnerability_Button" />
                                     </ToggleButton>
                                 </Panel>
@@ -150,24 +148,7 @@
                                     <Button class="DemoButton" onactivate="FireCustomGameEvent_Str( LevelUpEnemyButtonPressed )">
                                         <Label text="#LevelUpEnemy_Button" />
                                     </Button>
-                                </Panel><!-- 
-                                <Panel class="hr"></Panel>
-                                <Panel class="Row">
-                                    <Label id="GiveItemsToAlliesButtonLabel" class="small" text="#GiveItemsToAlliesButtonLabel" />
                                 </Panel>
-                                <Panel class="Row">
-                                    <ToggleButton class="DemoButton" onactivate="FireCustomGameEvent_Str( GiveItemsToAlliesButtonPressed )">
-                                        <Label text="#GiveItemsToAllies_Button" />
-                                    </ToggleButton>
-                                </Panel>
-                                <Panel class="Row">
-                                    <Label id="GiveItemsToEnemiesButtonLabel" class="small" text="#GiveItemsToEnemiesButtonLabel" />
-                                </Panel>
-                                <Panel class="Row">
-                                    <ToggleButton class="DemoButton" onactivate="FireCustomGameEvent_Str( GiveItemsToEnemiesButtonPressed )">
-                                        <Label text="#GiveItemsToEnemies_Button" />
-                                    </ToggleButton>
-                                </Panel> -->
                                 <Panel class="hr"></Panel>
                                 <Panel class="Row">    
                                   <Button class="DemoButton" onactivate="FireCustomGameEvent_Str( DummyTargetButtonPressed )">
@@ -184,12 +165,10 @@
                                   <TextEntry id="GoldAmount" maxchars="6" placeholder="Gold amount" oninputsubmit="FireCustomGameEvent( 'GiveGoldButtonPressed' )" />
                                 </Panel>
                                 <Panel class="Row">    
-                                  <Button class="DemoButton" onactivate="FireCustomGameEvent( 'GiveGoldButtonPressed' )">
+                                  <Button class="DemoButton HalfButton" onactivate="FireCustomGameEvent( 'GiveGoldButtonPressed' )">
                                     <Label text="#GiveGold_Button"/>
                                   </Button>
-                                </Panel>
-                                <Panel class="Row">    
-                                  <Button class="DemoButton" onactivate="FireCustomGameEvent_Str( ResetGoldButtonPressed )">
+                                  <Button class="DemoButton HalfButton" onactivate="FireCustomGameEvent_Str( ResetGoldButtonPressed )">
                                     <Label text="#ResetGold_Button"/>
                                   </Button>
                                 </Panel>
