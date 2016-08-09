@@ -775,7 +775,7 @@ end
 function CHeroDemo:OnTargetButtonPress( eventSourceIndex, data )
     DebugPrint( "OnTargetButtonPress" )
     DeepDebugPrintTable(data)
-    self.m_tCurrentMouseClick = {
+    self.m_tCurrentMouseClick[data.PlayerID] = {
         data = data,
         eventSourceIndex = eventSourceIndex
     }
@@ -785,18 +785,18 @@ end
 -- GameEvent: OnMouseClick
 --------------------------------------------------------------------------------
 function CHeroDemo:OnMouseClick( eventSourceIndex, data )
-    if self.m_tCurrentMouseClick ~= nil then
-        local clickEvent = self.m_tCurrentMouseClick.data.eventName
+    if self.m_tCurrentMouseClick[data.PlayerID] ~= nil then
+        local clickEvent = self.m_tCurrentMouseClick[data.PlayerID].data.eventName
         if clickEvent == "TeleportButtonPressed" then
             CHeroDemo.OnTeleportButtonPressedHandler(self, eventSourceIndex, data)
         elseif clickEvent == "SpawnAllyButtonPressed" then
-            data.selectedHero = self.m_tCurrentMouseClick.data.selectedHero
+            data.selectedHero = self.m_tCurrentMouseClick[data.PlayerID].data.selectedHero
             CHeroDemo.OnSpawnAllyButtonPressedHandler(self, eventSourceIndex, data)
         elseif clickEvent == "SpawnEnemyButtonPressed" then
-            data.selectedHero = self.m_tCurrentMouseClick.data.selectedHero
+            data.selectedHero = self.m_tCurrentMouseClick[data.PlayerID].data.selectedHero
             CHeroDemo.OnSpawnEnemyButtonPressedHandler(self, eventSourceIndex, data)
         end
-        self.m_tCurrentMouseClick = nil
+        self.m_tCurrentMouseClick[data.PlayerID] = nil
     end
 end
 

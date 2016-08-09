@@ -287,7 +287,9 @@ function CHeroDemo:InitGameMode()
     self.m_tDummiesList = {}
     self.m_nDummiesCount = 0
     self.m_bDummiesEnabled = false
-
+    
+    self.m_tCurrentMouseClick = {}
+    
     self.m_bFreeSpellsEnabled = false
     self.m_bInvulnerabilityEnabled = false
     self.m_bAllyInvulnerabilityEnabled = false
