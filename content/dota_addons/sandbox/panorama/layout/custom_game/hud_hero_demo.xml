@@ -115,19 +115,25 @@
                                         <Label text="#SwitchTeam_Button" />
                                     </Button>
                                 </Panel>
+                                <Panel class="Row">
+                                    <Button class="DemoButton" onactivate="FireCustomGameEvent( 'RefreshAllButtonPressed' )">
+                                        <Label text="#RefreshAll_Button" />
+                                    </Button>
+                                </Panel>
                                 <Panel class="hr"></Panel>
+                                <Panel class="Row">
+                                    <Label id="SpawnHeroButtonLabel" class="SectionLabel" text="#SpawnHeroButtonLabel" />
+                                </Panel>
                                 <Panel class="Row">
                                     <Button id="HeroCustomDropDown" class="CustomDropDownButton" onactivate="OpenCustomDropDown()">
                                         <Label id="HeroCustomDropDownLabel" class="CustomDropDownLabel" text="Abaddon" />
                                     </Button>
                                 </Panel>
                                 <Panel class="Row">
-                                    <Button class="DemoButton" onactivate="FireCustomGameEvent( 'SpawnAllyButtonPressed' )">
+                                    <Button class="DemoButton HalfButton" onactivate="FireCustomGameEvent( 'SpawnAllyButtonPressed' )">
                                         <Label class="SectionLabel" text="#Ally_Button" />
                                     </Button>
-                                </Panel>
-                                <Panel class="Row">
-                                    <Button class="DemoButton" onactivate="FireCustomGameEvent( 'SpawnEnemyButtonPressed' )">
+                                    <Button class="DemoButton HalfButton" onactivate="FireCustomGameEvent( 'SpawnEnemyButtonPressed' )">
                                         <Label text="#Enemy_Button" />
                                     </Button>
                                 </Panel>
@@ -145,13 +151,14 @@
                                 </Panel>
                                 <Panel class="hr"></Panel>
                                 <Panel class="Row">
-                                    <Button class="DemoButton" onactivate="FireCustomGameEvent_Str( LevelUpAllyButtonPressed )">
-                                        <Label text="#LevelUpAlly_Button" />
-                                    </Button>
+                                    <Label id="LevelUpHeroButtonLabel" class="SectionLabel" text="#LevelUpHeroButtonLabel" />
                                 </Panel>
                                 <Panel class="Row">
-                                    <Button class="DemoButton" onactivate="FireCustomGameEvent_Str( LevelUpEnemyButtonPressed )">
-                                        <Label text="#LevelUpEnemy_Button" />
+                                    <Button class="DemoButton HalfButton" onactivate="FireCustomGameEvent_Str( LevelUpAllyButtonPressed )">
+                                        <Label text="#Ally_Button" />
+                                    </Button>
+                                    <Button class="DemoButton HalfButton" onactivate="FireCustomGameEvent_Str( LevelUpEnemyButtonPressed )">
+                                        <Label text="#Enemy_Button" />
                                     </Button>
                                 </Panel>
                                 <Panel class="hr"></Panel>
@@ -202,6 +209,16 @@
                                     <ToggleButton id="LaneCreeps_Button" class="DemoButton" onactivate="FireCustomGameEvent_Str( LaneCreepsButtonPressed )">
                                         <Label text="#LaneCreeps_Button" />
                                     </ToggleButton>
+                                </Panel>
+                                <Panel class="Row">
+                                    <ToggleButton id="BuildingInvulnerability_Button" class="DemoButton" onactivate="FireCustomGameEvent_Str( BuildingInvulnerabilityButtonPressed )">
+                                        <Label text="#BuildingInvulnerability_Button" />
+                                    </ToggleButton>
+                                </Panel>
+                                <Panel class="Row">
+                                    <Button class="DemoButton" onactivate="FireCustomGameEvent_Str( BuildingHealButtonPressed )">
+                                        <Label text="#BuildingHeal_Button" />
+                                    </Button>
                                 </Panel>
                                 <Panel class="Row">
                                     <Button class="DemoButton" onactivate="FireCustomGameEvent_Str( RemoveWardsButtonPressed )">

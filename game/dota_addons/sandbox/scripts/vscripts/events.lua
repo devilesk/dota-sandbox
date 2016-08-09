@@ -15,6 +15,25 @@ function CHeroDemo:OnGameRulesStateChange()
 		DebugPrint( "OnGameRulesStateChange: Hero Selection" )
 	elseif nNewState == DOTA_GAMERULES_STATE_PRE_GAME then
         self.towers = Entities:FindAllByClassname("npc_dota_tower")
+        self.buildings = {}
+        for _, v in pairs(self.towers) do
+            table.insert(self.buildings, v)
+        end
+        for _, v in pairs(Entities:FindAllByClassname("npc_dota_building")) do
+            table.insert(self.buildings, v)
+        end
+        for _, v in pairs(Entities:FindAllByClassname("npc_dota_barracks")) do
+            table.insert(self.buildings, v)
+        end
+        for _, v in pairs(Entities:FindAllByClassname("npc_dota_fort")) do
+            table.insert(self.buildings, v)
+        end
+        
+        for _, v in pairs(self.buildings) do
+            if IsValidEntity(v) and v:IsAlive() then
+                v:AddNewModifier(v, nil, "modifier_fountain_glyph", {duration = -1})
+            end
+        end
     if GameRules:IsCheatMode() then
         SendToServerConsole( "sv_cheats 1" )
     else
@@ -287,6 +306,16 @@ function RefreshUnitCooldowns(hUnit)
             hAbility:EndCooldown()
         end
     end
+end
+
+--------------------------------------------------------------------------------
+-- ButtonEvent: OnRefreshAllButtonPressed
+--------------------------------------------------------------------------------
+function CHeroDemo:OnRefreshAllButtonPressed( eventSourceIndex, data )
+    if GameRules:IsCheatMode() then
+        SendToServerConsole( "dota_dev hero_refresh" )
+    end
+	self:BroadcastMsg( "#RefreshAll_Msg" )
 end
 
 --------------------------------------------------------------------------------
@@ -950,6 +979,42 @@ function ResetHero( hPlayerHero )
     end
   
     hPlayerHero:SetAbilityPoints( 1 )
+end
+
+--------------------------------------------------------------------------------
+-- GameEvent: OnBuildingHealButtonPressed
+--------------------------------------------------------------------------------
+function CHeroDemo:OnBuildingHealButtonPressed( eventSourceIndex, data )
+    for _, v in pairs(self.buildings) do
+        if IsValidEntity(v) and v:IsAlive() then
+            v:SetHealth(v:GetMaxHealth())
+        end
+    end
+    self:BroadcastMsg( "#BuildingHeal_Msg" )
+end
+
+--------------------------------------------------------------------------------
+-- ButtonEvent: OnBuildingInvulnerabilityButtonPressed
+--------------------------------------------------------------------------------
+function CHeroDemo:OnBuildingInvulnerabilityButtonPressed( eventSourceIndex, data )
+	if self.m_bBuildingInvulnerabilityEnabled == false then
+		self.m_bBuildingInvulnerabilityEnabled = true
+        for _, v in pairs(self.buildings) do
+            if IsValidEntity(v) and v:IsAlive() then
+                v:AddNewModifier(v, nil, "modifier_fountain_glyph", {duration = -1})
+            end
+        end
+		self:BroadcastMsg( "#BuildingInvulnerabilityOn_Msg" )
+	elseif self.m_bBuildingInvulnerabilityEnabled == true then
+		self.m_bBuildingInvulnerabilityEnabled = false
+        for _, v in pairs(self.buildings) do
+            if IsValidEntity(v) and v:IsAlive() then
+                v:RemoveModifierByName("modifier_fountain_glyph")
+            end
+        end
+		self:BroadcastMsg( "#BuildingInvulnerabilityOff_Msg" )
+	end
+    self:UpdateToggleUI()
 end
 
 --------------------------------------------------------------------------------

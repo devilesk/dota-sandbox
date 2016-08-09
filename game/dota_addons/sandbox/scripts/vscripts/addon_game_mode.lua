@@ -207,6 +207,8 @@ function CHeroDemo:InitGameMode()
     
     CustomGameEventManager:RegisterListener( "AllyInvulnerabilityButtonPressed", function(...) return self:OnAllyInvulnerabilityButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "BlinkRangeButtonPressed", function(...) return self:OnOverlayToggleButtonPressed( ... ) end )
+    CustomGameEventManager:RegisterListener( "BuildingHealButtonPressed", function(...) return self:OnBuildingHealButtonPressed( ... ) end )
+    CustomGameEventManager:RegisterListener( "BuildingInvulnerabilityButtonPressed", function(...) return self:OnBuildingInvulnerabilityButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "ChangeCosmeticsButtonPressed", function(...) return self:OnChangeCosmeticsButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "ChangeHeroButtonPressed", function(...) return self:OnChangeHeroButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "ClearInventoryButtonPressed", function(...) return self:OnClearInventoryButtonPressed( ... ) end )
@@ -235,9 +237,9 @@ function CHeroDemo:InitGameMode()
     CustomGameEventManager:RegisterListener( "NeutralSpawnIntervalChange", function(...) return self:OnNeutralSpawnIntervalChange( ... ) end )
     CustomGameEventManager:RegisterListener( "PauseButtonPressed", function(...) return self:OnPauseButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "RefreshButtonPressed", function(...) return self:OnRefreshButtonPressed( ... ) end )
+    CustomGameEventManager:RegisterListener( "RefreshAllButtonPressed", function(...) return self:OnRefreshAllButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "RegrowTreesButtonPressed", function(...) return self:OnRegrowTreesButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "RemoveSpawnedUnitsButtonPressed", function(...) return self:OnRemoveSpawnedUnitsButtonPressed( ... ) end )
-    CustomGameEventManager:RegisterListener( "SwitchTeamButtonPressed", function(...) return self:OnSwitchTeamButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "RemoveWardsButtonPressed", function(...) return self:OnRemoveWardsButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "ResetGoldButtonPressed", function(...) return self:OnResetGoldButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "PassiveGoldButtonPressed", function(...) return self:OnPassiveGoldButtonPressed( ... ) end )
@@ -257,6 +259,7 @@ function CHeroDemo:InitGameMode()
     CustomGameEventManager:RegisterListener( "SpawnNeutralsButtonPressed", function(...) return self:OnSpawnNeutralsButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "SpawnRunesButtonPressed", function(...) return self:OnSpawnRunesButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "StartGameButtonPressed", function(...) return self:OnStartGameButtonPressed( ... ) end )
+    CustomGameEventManager:RegisterListener( "SwitchTeamButtonPressed", function(...) return self:OnSwitchTeamButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "TeleportButtonPressed", function(...) return self:OnTeleportButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "TowerAttackRangeButtonPressed", function(...) return self:OnOverlayToggleButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "TowerDayVisionRangeButtonPressed", function(...) return self:OnOverlayToggleButtonPressed( ... ) end )
@@ -292,6 +295,7 @@ function CHeroDemo:InitGameMode()
     
     self.m_bFreeSpellsEnabled = false
     self.m_bInvulnerabilityEnabled = false
+    self.m_bBuildingInvulnerabilityEnabled = true
     self.m_bAllyInvulnerabilityEnabled = false
     self.m_bEnemyInvulnerabilityEnabled = false
     self.m_bPassiveGoldDisabled = false
@@ -349,6 +353,7 @@ function CHeroDemo:UpdateToggleUI()
         InstantRespawnEnabled_Button = self.m_bInstantRespawnEnabled,
         FOW_Button = self.m_bFOWDisabled,
         LaneCreeps_Button = self.m_bCreepsDisabled,
+        BuildingInvulnerability_Button = self.m_bBuildingInvulnerabilityEnabled,
     }
     CustomGameEventManager:Send_ServerToAllClients("update_toggle_ui", data )
 end

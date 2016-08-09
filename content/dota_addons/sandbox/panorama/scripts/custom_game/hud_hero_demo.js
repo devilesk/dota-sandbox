@@ -168,6 +168,7 @@ function UpdateToggleUI(data) {
 }
 
 (function() {
+    $('#BuildingInvulnerability_Button').checked = true;
     $('#NeutralSpawnIntervalDropDown').SetSelected("i_60");
     UpdatePosition();
     GameEvents.Subscribe( "update_toggle_ui", UpdateToggleUI );
