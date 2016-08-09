@@ -491,6 +491,24 @@ function CHeroDemo:OnRemoveSpawnedUnitsButtonPressed( eventSourceIndex )
 end
 
 --------------------------------------------------------------------------------
+-- ButtonEvent: OnSwitchTeamButtonPressed
+--------------------------------------------------------------------------------
+function CHeroDemo:OnSwitchTeamButtonPressed( eventSourceIndex, data )
+    local hero = PlayerResource:GetSelectedHeroEntity( data.PlayerID )
+    hero:SetTeam(self.m_nENEMIES_TEAM)
+    PlayerResource:SetCustomTeamAssignment(data.PlayerID, self.m_nENEMIES_TEAM)
+    CustomGameEventManager:Send_ServerToAllClients("update_scoreboard", {} )
+    self:BroadcastMsg( "#SwitchTeam_Msg" )
+    
+    local mode = GameRules:GetGameModeEntity()
+    mode:SetFogOfWarDisabled(not self.m_bFOWDisabled)
+    Timers:CreateTimer(0.5, function()
+        mode:SetFogOfWarDisabled(self.m_bFOWDisabled)
+        return nil
+    end)
+end
+
+--------------------------------------------------------------------------------
 -- ButtonEvent: OnResetPlayerStatsButtonPressed
 --------------------------------------------------------------------------------
 function CHeroDemo:OnResetPlayerStatsButtonPressed( eventSourceIndex, data )
@@ -914,17 +932,17 @@ end
 -- GameEvent: OnResetHeroButtonPressed
 --------------------------------------------------------------------------------
 function CHeroDemo:OnResetHeroButtonPressed( eventSourceIndex, data )
-  for key,entIndex in pairs(data.selectedUnits) do
-    DebugPrint(key,entIndex)
-    local ent = EntIndexToHScript(entIndex)
-    if ent:IsHero() and not ent:IsClone() then
-      ResetHero(ent)
-      local owner = ent:GetPlayerOwnerID()
-      local hero = PlayerResource:ReplaceHeroWith(owner, PlayerResource:GetSelectedHeroName(owner), PlayerResource:GetGold(owner), 0)
-      ResetHero(hero)
+    for key,entIndex in pairs(data.selectedUnits) do
+        DebugPrint(key,entIndex)
+        local ent = EntIndexToHScript(entIndex)
+        if ent:IsHero() and not ent:IsClone() then
+            ResetHero(ent)
+            local owner = ent:GetPlayerOwnerID()
+            local hero = PlayerResource:ReplaceHeroWith(owner, PlayerResource:GetSelectedHeroName(owner), PlayerResource:GetGold(owner), 0)
+            ResetHero(hero)
+        end
     end
-  end
-  self:BroadcastMsg( "#ResetHero_Msg" )
+    self:BroadcastMsg( "#ResetHero_Msg" )
 end
 
 function ResetHero( hPlayerHero )

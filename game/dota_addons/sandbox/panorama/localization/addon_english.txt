@@ -40,6 +40,7 @@
 	"LevelUpEnemy_Button"						"Level Up Enemy"
 	"DummyTarget_Button"						"Dummy Target"
 	"RemoveSpawns_Button"						"Remove Spawns"
+	"SwitchTeam_Button"						    "Switch Team"
 	"GiveGold_Button"							"Give Gold"
 	"ResetGold_Button"							"Reset Gold"
 	"PassiveGold_Button"							"Disable Passive Gold"

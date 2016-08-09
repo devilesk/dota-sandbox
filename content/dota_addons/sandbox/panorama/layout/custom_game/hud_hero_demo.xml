@@ -110,6 +110,11 @@
                                         <Label text="#StartGame_Button" />
                                     </Button>
                                 </Panel>
+                                <Panel class="Row">
+                                    <Button class="DemoButton" onactivate="FireCustomGameEvent_Str( SwitchTeamButtonPressed )">
+                                        <Label text="#SwitchTeam_Button" />
+                                    </Button>
+                                </Panel>
                                 <Panel class="hr"></Panel>
                                 <Panel class="Row">
                                     <Button id="HeroCustomDropDown" class="CustomDropDownButton" onactivate="OpenCustomDropDown()">

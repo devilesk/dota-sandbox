@@ -2,6 +2,7 @@
 
 var g_ScoreboardHandle = null;
 var optionsPanels = [];
+var scoreboardConfig;
 
 function OnPortraitClicked(playerPanel)
 {
@@ -19,6 +20,20 @@ function UpdateScoreboard()
 	ScoreboardUpdater_SetScoreboardActive( g_ScoreboardHandle, true );
 
 	$.Schedule( 0.2, UpdateScoreboard );
+}
+
+function DeleteTeamPanel(teamId) {
+    var teamPanelName = "_dynamic_team_" + teamId;
+    var teamPanel = $( "#MultiteamScoreboard" ).FindChild( teamPanelName );
+    if (teamPanel != null) {
+        teamPanel.DeleteAsync(0);
+    }
+}
+
+function ReinitializeScoreboard() {
+    DeleteTeamPanel(2);
+    DeleteTeamPanel(3);
+    //g_ScoreboardHandle = ScoreboardUpdater_InitializeScoreboard( scoreboardConfig, $( "#MultiteamScoreboard" ) );
 }
 
 (function()
@@ -53,7 +68,7 @@ function UpdateScoreboard()
 	
 	if ( ScoreboardUpdater_InitializeScoreboard === null ) { $.Msg( "WARNING: This file requires shared_scoreboard_updater.js to be included." ); }
 
-	var scoreboardConfig =
+	scoreboardConfig =
 	{
 		"teamXmlName" : "file://{resources}/layout/custom_game/multiteam_top_scoreboard_team.xml",
 		"playerXmlName" : "file://{resources}/layout/custom_game/multiteam_top_scoreboard_player.xml",
@@ -62,5 +77,7 @@ function UpdateScoreboard()
 	g_ScoreboardHandle = ScoreboardUpdater_InitializeScoreboard( scoreboardConfig, $( "#MultiteamScoreboard" ) );
 
 	UpdateScoreboard();
+    
+    GameEvents.Subscribe( "update_scoreboard", ReinitializeScoreboard );
 })();
 
