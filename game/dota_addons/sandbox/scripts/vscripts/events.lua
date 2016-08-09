@@ -494,18 +494,22 @@ end
 -- ButtonEvent: OnSwitchTeamButtonPressed
 --------------------------------------------------------------------------------
 function CHeroDemo:OnSwitchTeamButtonPressed( eventSourceIndex, data )
-    local hero = PlayerResource:GetSelectedHeroEntity( data.PlayerID )
-    hero:SetTeam(self.m_nENEMIES_TEAM)
-    PlayerResource:SetCustomTeamAssignment(data.PlayerID, self.m_nENEMIES_TEAM)
-    CustomGameEventManager:Send_ServerToAllClients("update_scoreboard", {} )
-    self:BroadcastMsg( "#SwitchTeam_Msg" )
-    
-    local mode = GameRules:GetGameModeEntity()
-    mode:SetFogOfWarDisabled(not self.m_bFOWDisabled)
-    Timers:CreateTimer(0.5, function()
-        mode:SetFogOfWarDisabled(self.m_bFOWDisabled)
-        return nil
-    end)
+    if PlayerResource:GetPlayerCountForTeam(self.m_nENEMIES_TEAM) >= 5 then
+        self:BroadcastMsg( "#SwitchTeamFail_Msg" )
+    else
+        local hero = PlayerResource:GetSelectedHeroEntity( data.PlayerID )
+        hero:SetTeam(self.m_nENEMIES_TEAM)
+        PlayerResource:SetCustomTeamAssignment(data.PlayerID, self.m_nENEMIES_TEAM)
+        CustomGameEventManager:Send_ServerToAllClients("update_scoreboard", {} )
+        self:BroadcastMsg( "#SwitchTeam_Msg" )
+        
+        local mode = GameRules:GetGameModeEntity()
+        mode:SetFogOfWarDisabled(not self.m_bFOWDisabled)
+        Timers:CreateTimer(0.5, function()
+            mode:SetFogOfWarDisabled(self.m_bFOWDisabled)
+            return nil
+        end)
+    end
 end
 
 --------------------------------------------------------------------------------
