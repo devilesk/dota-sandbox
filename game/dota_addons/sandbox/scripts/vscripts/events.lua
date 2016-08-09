@@ -53,19 +53,19 @@ end
 -- GameEvent: OnQuit
 --------------------------------------------------------------------------------
 function CHeroDemo:OnQuit( event )
-  DebugPrint("OnQuit")
-  GameRules:Defeated()
-  GameRules:MakeTeamLose(DOTA_TEAM_GOODGUYS)
+    DebugPrint("OnQuit")
+    GameRules:Defeated()
+    GameRules:MakeTeamLose(DOTA_TEAM_GOODGUYS)
 end
 
 --------------------------------------------------------------------------------
 -- GameEvent: OnPlayerConnect
 --------------------------------------------------------------------------------
 function CHeroDemo:OnPlayerConnect( event )
-  DebugPrint("OnPlayerConnect")
-	DebugPrintTable(event, " ")
-  --[[if event.bot == 1 then
-  end]]
+    DebugPrint("OnPlayerConnect")
+    DebugPrintTable(event, " ")
+    --[[if event.bot == 1 then
+    end]]
 end
 
 --------------------------------------------------------------------------------
@@ -110,7 +110,7 @@ function CHeroDemo:Think_InitializeNeutralCaster( neutralCaster )
 
 	DebugPrint( "neutralCaster:AddAbility( \"la_spawn_enemy_at_target\" )" )
 	neutralCaster:AddAbility( "la_spawn_enemy_at_target" )
-  DebugPrint( "neutralCaster:AddAbility( \"la_spawn_ally_at_target\" )" )
+    DebugPrint( "neutralCaster:AddAbility( \"la_spawn_ally_at_target\" )" )
 	neutralCaster:AddAbility( "la_spawn_ally_at_target" )
 	return
 end
@@ -121,7 +121,7 @@ end
 function CHeroDemo:OnGiveItemsToAlliesButtonPressed( event )
 	if self.m_bGiveItemsToAllies == false then
 		self.m_bGiveItemsToAllies = true
-    self:BroadcastMsg( "#GiveItemsToAlliesOn_Msg" )
+        self:BroadcastMsg( "#GiveItemsToAlliesOn_Msg" )
 	elseif self.m_bGiveItemsToAllies == true then
 		self.m_bGiveItemsToAllies = false
 		self:BroadcastMsg( "#GiveItemsToAlliesOff_Msg" )
@@ -134,7 +134,7 @@ end
 function CHeroDemo:OnGiveItemsToEnemiesButtonPressed( event )
 	if self.m_bGiveItemsToEnemies == false then
 		self.m_bGiveItemsToEnemies = true
-    self:BroadcastMsg( "#GiveItemsToEnemiesOn_Msg" )
+        self:BroadcastMsg( "#GiveItemsToEnemiesOn_Msg" )
 	elseif self.m_bGiveItemsToEnemies == true then
 		self.m_bGiveItemsToEnemies = false
 		self:BroadcastMsg( "#GiveItemsToEnemiesOff_Msg" )
@@ -149,25 +149,25 @@ function CHeroDemo:OnItemPurchased( event )
 	local hBuyerHero = hBuyer:GetAssignedHero()
 	hBuyerHero:ModifyGold( event.itemcost, true, 0 )
   
-  if self.m_bGiveItemsToAllies == true then
-    for k, v in pairs( self.m_tAlliesList ) do
-      local item = CreateItem(event.itemname, self.m_tAlliesList[ k ], self.m_tAlliesList[ k ])
-      self.m_tAlliesList[ k ]:AddItem(item)
+    if self.m_bGiveItemsToAllies == true then
+        for k, v in pairs( self.m_tAlliesList ) do
+            local item = CreateItem(event.itemname, self.m_tAlliesList[ k ], self.m_tAlliesList[ k ])
+            self.m_tAlliesList[ k ]:AddItem(item)
+        end
     end
-  end
-  if self.m_bGiveItemsToEnemies == true then
-    for k, v in pairs( self.m_tEnemiesList ) do
-      local item = CreateItem(event.itemname, self.m_tEnemiesList[ k ], self.m_tEnemiesList[ k ])
-      self.m_tEnemiesList[ k ]:AddItem(item)
+    if self.m_bGiveItemsToEnemies == true then
+        for k, v in pairs( self.m_tEnemiesList ) do
+            local item = CreateItem(event.itemname, self.m_tEnemiesList[ k ], self.m_tEnemiesList[ k ])
+            self.m_tEnemiesList[ k ]:AddItem(item)
+        end
     end
-  end
 end
 
 --------------------------------------------------------------------------------
 -- GameEvent: OnSelectNewHeroButtonPressed
 --------------------------------------------------------------------------------
 function CHeroDemo:OnSelectNewHeroButtonPressed( event )
-  GameRules:ResetToHeroSelection()
+    GameRules:ResetToHeroSelection()
 end
 
 --------------------------------------------------------------------------------
@@ -229,86 +229,86 @@ end
 -- ButtonEvent: OnRefreshButtonPressed
 --------------------------------------------------------------------------------
 function CHeroDemo:OnRefreshButtonPressed( eventSourceIndex, data )
-	--SendToServerConsole( "dota_dev hero_refresh" )
-  --RefreshAllUnits(self.m_tAlliesList, self.m_tEnemiesList, true, true, true)
-  for key,entIndex in pairs(data.selectedUnits) do
-    DebugPrint(key,entIndex)
-    local ent = EntIndexToHScript(entIndex)
-    if ent:IsHero() then
-      RefreshUnit(ent, true, true, true)
+    --SendToServerConsole( "dota_dev hero_refresh" )
+    --RefreshAllUnits(self.m_tAlliesList, self.m_tEnemiesList, true, true, true)
+    for key,entIndex in pairs(data.selectedUnits) do
+        DebugPrint(key,entIndex)
+        local ent = EntIndexToHScript(entIndex)
+        if ent:IsHero() then
+            RefreshUnit(ent, true, true, true)
+        end
     end
-  end
 	self:BroadcastMsg( "#Refresh_Msg" )
 end
 
 function RefreshAllUnits(m_tAlliesList, m_tEnemiesList, bHealth, bMana, bCooldowns)
-	local hPlayerHero = PlayerResource:GetSelectedHeroEntity(0)
-  if hPlayerHero ~= nil then
-    RefreshUnit(hPlayerHero, bHealth, bMana, bCooldowns)
-  end
-  for k, v in pairs( m_tAlliesList ) do
-    RefreshUnit(m_tAlliesList[ k ], bHealth, bMana, bCooldowns)
-  end
-  for k, v in pairs( m_tEnemiesList ) do
-    RefreshUnit(m_tEnemiesList[ k ], bHealth, bMana, bCooldowns)
-  end
+    local hPlayerHero = PlayerResource:GetSelectedHeroEntity(0)
+    if hPlayerHero ~= nil then
+        RefreshUnit(hPlayerHero, bHealth, bMana, bCooldowns)
+    end
+    for k, v in pairs( m_tAlliesList ) do
+        RefreshUnit(m_tAlliesList[ k ], bHealth, bMana, bCooldowns)
+    end
+    for k, v in pairs( m_tEnemiesList ) do
+        RefreshUnit(m_tEnemiesList[ k ], bHealth, bMana, bCooldowns)
+    end
 end
 
 function RefreshUnit(hUnit, bHealth, bMana, bCooldowns)
-  if bHealth == true then
-    hUnit:SetHealth(hUnit:GetMaxHealth())
-  end
-  if bMana == true then
-    hUnit:SetMana(hUnit:GetMaxMana())
-  end
-  if bCooldowns == true then
-    RefreshUnitCooldowns(hUnit)
-  end
-  
-  if hUnit:IsHero() and hUnit:GetClassname() == "npc_dota_hero_meepo" and not hUnit:IsClone() then
-    for k, clone in pairs(Entities:FindAllByClassname("npc_dota_hero_meepo")) do
-      if clone:IsClone() and clone:GetCloneSource() == hUnit then
-        RefreshUnit(clone, bHealth, bMana, bCooldowns)
-      end
+    if bHealth == true then
+        hUnit:SetHealth(hUnit:GetMaxHealth())
     end
-  end
+    if bMana == true then
+        hUnit:SetMana(hUnit:GetMaxMana())
+    end
+    if bCooldowns == true then
+        RefreshUnitCooldowns(hUnit)
+    end
+
+    if hUnit:IsHero() and hUnit:GetClassname() == "npc_dota_hero_meepo" and not hUnit:IsClone() then
+        for k, clone in pairs(Entities:FindAllByClassname("npc_dota_hero_meepo")) do
+            if clone:IsClone() and clone:GetCloneSource() == hUnit then
+                RefreshUnit(clone, bHealth, bMana, bCooldowns)
+            end
+        end
+    end
 end
 
 function RefreshUnitCooldowns(hUnit)
-  for i = 0, 5 do
-    local item = hUnit:GetItemInSlot(i)
-    if item ~= nil then
-      item:EndCooldown()
+    for i = 0, 5 do
+        local item = hUnit:GetItemInSlot(i)
+        if item ~= nil then
+            item:EndCooldown()
+        end
     end
-  end
-  for i = 0, DOTA_MAX_ABILITIES - 1 do
-		local hAbility = hUnit:GetAbilityByIndex( i )
-		if hAbility and hAbility:GetLevel() > 0 and not hAbility:IsHidden() then
-      hAbility:EndCooldown()
-		end
-	end
+    for i = 0, DOTA_MAX_ABILITIES - 1 do
+        local hAbility = hUnit:GetAbilityByIndex( i )
+        if hAbility and hAbility:GetLevel() > 0 and not hAbility:IsHidden() then
+            hAbility:EndCooldown()
+        end
+    end
 end
 
 --------------------------------------------------------------------------------
 -- ButtonEvent: OnLevelUpButtonPressed
 --------------------------------------------------------------------------------
 function CHeroDemo:OnLevelUpButtonPressed( eventSourceIndex, data )
-	--SendToServerConsole( "dota_dev hero_level 1" )
-  --local hPlayerHero = PlayerResource:GetSelectedHeroEntity( data.PlayerID )
-  --hPlayerHero:HeroLevelUp( true )
-  for key,entIndex in pairs(data.selectedUnits) do
-    DebugPrint(key,entIndex)
-    local ent = EntIndexToHScript(entIndex)
-    if ent:IsHero() then
-      ent:HeroLevelUp( true )
+    --SendToServerConsole( "dota_dev hero_level 1" )
+    --local hPlayerHero = PlayerResource:GetSelectedHeroEntity( data.PlayerID )
+    --hPlayerHero:HeroLevelUp( true )
+    for key,entIndex in pairs(data.selectedUnits) do
+        DebugPrint(key,entIndex)
+        local ent = EntIndexToHScript(entIndex)
+        if ent:IsHero() then
+            ent:HeroLevelUp( true )
+        end
     end
-  end
-  
-  --[[DebugPrint (hPlayerHero:GetCurrentXP() .."")
-  hPlayerHero:AddExperience( 10400, false, false )
-  DebugPrint (hPlayerHero:GetCurrentXP() .."")]]
-	self:BroadcastMsg( "#LevelUp_Msg" )
-  
+
+    --[[DebugPrint (hPlayerHero:GetCurrentXP() .."")
+    hPlayerHero:AddExperience( 10400, false, false )
+    DebugPrint (hPlayerHero:GetCurrentXP() .."")]]
+    self:BroadcastMsg( "#LevelUp_Msg" )
+
   
 end
 
@@ -316,14 +316,14 @@ end
 -- ButtonEvent: OnMaxLevelButtonPressed
 --------------------------------------------------------------------------------
 function CHeroDemo:OnMaxLevelButtonPressed( eventSourceIndex, data )
-  for key,entIndex in pairs(data.selectedUnits) do
-    DebugPrint(key,entIndex)
-    local ent = EntIndexToHScript(entIndex)
-    if ent:IsHero() then
-      LevelHeroToMax(ent)
+    for key,entIndex in pairs(data.selectedUnits) do
+        DebugPrint(key,entIndex)
+        local ent = EntIndexToHScript(entIndex)
+        if ent:IsHero() then
+            LevelHeroToMax(ent)
+        end
     end
-  end
-  self:BroadcastMsg( "#MaxLevel_Msg" )
+    self:BroadcastMsg( "#MaxLevel_Msg" )
 end
 
 function LevelHeroToMax( hPlayerHero )
@@ -598,36 +598,26 @@ end
 -- GameEvent: OnChangeHeroButtonPressed
 --------------------------------------------------------------------------------
 function CHeroDemo:OnChangeHeroButtonPressed( eventSourceIndex, data )
-	-- currently running the command directly in XML, should run it here if possible
-	local nHeroID = PlayerResource:GetSelectedHeroID( data.pID )
-  DebugPrint ("data.pID", data.pID, PlayerResource:GetSelectedHeroName(data.pID))
-  DebugPrint ("data.pID", data.PlayerID)
-	DebugPrint( "PlayerResource:GetSelectedHeroID( data.PlayerID ) == " .. nHeroID, nHeroID, data.selectedHero, data.pID )
-  DebugPrint ("nHeroID == -1", nHeroID, nHeroID == -1)
-  DebugPrint ("nHeroID == -1", nHeroID, nHeroID == -1)
-  DebugPrint ("nHeroID == nil", nHeroID, nHeroID == nil)
-  if nHeroID == -1 then
-    --PlayerResource:GetPlayer(data.pID):MakeRandomHeroSelection()
-    --DebugPrint ("randomed hero", PlayerResource:GetSelectedHeroName(data.pID))
-    --DebugPrint ("randomed herro", PlayerResource:GetSelectedHeroEntity(data.pID))
-    --DebugPrint ("HasSelectedHero", PlayerResource:HasSelectedHero(data.pID))
-    CreateHeroForPlayer(data.selectedHero, PlayerResource:GetPlayer(data.pID))
-  else
-    PlayerResource:ReplaceHeroWith(data.pID, data.selectedHero, PlayerResource:GetGold(data.pID), 0)
-  end
-  CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(data.PlayerID), "select_hero", {entId=PlayerResource:GetSelectedHeroEntity(data.pID):GetEntityIndex()} )
-  
+    -- currently running the command directly in XML, should run it here if possible
+    local nHeroID = PlayerResource:GetSelectedHeroID( data.pID )
+    if nHeroID == -1 then
+        CreateHeroForPlayer(data.selectedHero, PlayerResource:GetPlayer(data.pID))
+    else
+        PlayerResource:ReplaceHeroWith(data.pID, data.selectedHero, PlayerResource:GetGold(data.pID), 0)
+    end
+    CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(data.PlayerID), "select_hero", {entId=PlayerResource:GetSelectedHeroEntity(data.pID):GetEntityIndex()} )
+
 end
 
 --------------------------------------------------------------------------------
 -- GameEvent: OnShopItemButtonPressed
 --------------------------------------------------------------------------------
 function CHeroDemo:OnShopItemButtonPressed( eventSourceIndex, data )
-  DebugPrint ("data.pID", data.pID)
-	DebugPrint ("data.item", data.item)
-  local hero = PlayerResource:GetSelectedHeroEntity(data.pID)
-  local item = CreateItem(data.item, hero, hero)
-  hero:AddItem(item)
+    DebugPrint ("data.pID", data.pID)
+    DebugPrint ("data.item", data.item)
+    local hero = PlayerResource:GetSelectedHeroEntity(data.pID)
+    local item = CreateItem(data.item, hero, hero)
+    hero:AddItem(item)
 end
 
 --------------------------------------------------------------------------------
@@ -656,7 +646,7 @@ end
 -- ButtonEvent: OnSpawnAllyButtonPressed
 --------------------------------------------------------------------------------
 function CHeroDemo:OnSpawnAllyButtonPressed( eventSourceIndex, data )
-  CHeroDemo.OnTargetButtonPress(self, eventSourceIndex, data)
+    CHeroDemo.OnTargetButtonPress(self, eventSourceIndex, data)
 end
 
 function CHeroDemo:OnSpawnAllyButtonPressedHandler( eventSourceIndex, data )
@@ -692,11 +682,11 @@ end
 -- ButtonEvent: SpawnEnemyButtonPressed
 --------------------------------------------------------------------------------
 function CHeroDemo:OnSpawnEnemyButtonPressed( eventSourceIndex, data )
-  CHeroDemo.OnTargetButtonPress(self, eventSourceIndex, data)
+    CHeroDemo.OnTargetButtonPress(self, eventSourceIndex, data)
 end
 
 function CHeroDemo:OnSpawnEnemyButtonPressedHandler( eventSourceIndex, data )
-  DebugPrint ("GetPlayerCountForTeam", PlayerResource:GetPlayerCountForTeam(DOTA_TEAM_GOODGUYS))
+    DebugPrint ("GetPlayerCountForTeam", PlayerResource:GetPlayerCountForTeam(DOTA_TEAM_GOODGUYS))
 	if self.m_nEnemiesCount >= 100 then
 		DebugPrint( "#self.m_tEnemiesList == " .. #self.m_tEnemiesList )
 
@@ -730,33 +720,33 @@ end
 -- GameEvent: OnClearInventoryButtonPressed
 --------------------------------------------------------------------------------
 function CHeroDemo:OnClearInventoryButtonPressed( eventSourceIndex, data )
-  for key,entIndex in pairs(data.selectedUnits) do
-    DebugPrint(key,entIndex)
-    local ent = EntIndexToHScript(entIndex)
-    if ent:IsHero() then
-      for i = 0, 11 do
-        local item = ent:GetItemInSlot(i)
-        if item ~= nil then
-          ent:RemoveItem(item);
+    for key,entIndex in pairs(data.selectedUnits) do
+        DebugPrint(key,entIndex)
+        local ent = EntIndexToHScript(entIndex)
+        if ent:IsHero() then
+            for i = 0, 11 do
+                local item = ent:GetItemInSlot(i)
+                if item ~= nil then
+                    ent:RemoveItem(item);
+                end
+            end
         end
-      end
     end
-  end
-  self:BroadcastMsg( "#ClearInventory_Msg" )
+    self:BroadcastMsg( "#ClearInventory_Msg" )
 end
 
 --------------------------------------------------------------------------------
 -- GameEvent: OnRespawnHeroButtonPressed
 --------------------------------------------------------------------------------
 function CHeroDemo:OnRespawnHeroButtonPressed( eventSourceIndex, data )
-  for key,entIndex in pairs(data.selectedUnits) do
-    DebugPrint(key,entIndex)
-    local ent = EntIndexToHScript(entIndex)
-    if ent:IsHero() and PlayerResource:GetRespawnSeconds(ent:GetPlayerOwnerID()) > 0 then
-      ent:RespawnHero(false, false, false)
+    for key,entIndex in pairs(data.selectedUnits) do
+        DebugPrint(key,entIndex)
+        local ent = EntIndexToHScript(entIndex)
+        if ent:IsHero() and PlayerResource:GetRespawnSeconds(ent:GetPlayerOwnerID()) > 0 then
+            ent:RespawnHero(false, false, false)
+        end
     end
-  end
-  self:BroadcastMsg( "#RespawnHero_Msg" )
+    self:BroadcastMsg( "#RespawnHero_Msg" )
 end
 
 --------------------------------------------------------------------------------
@@ -764,53 +754,50 @@ end
 --------------------------------------------------------------------------------
 function CHeroDemo:OnTeleportButtonPressed( eventSourceIndex, data )
 	DebugPrint( "teleport hero" )
-  CHeroDemo.OnTargetButtonPress(self, eventSourceIndex, data)
+    CHeroDemo.OnTargetButtonPress(self, eventSourceIndex, data)
 end
 
 function CHeroDemo:OnTeleportButtonPressedHandler( eventSourceIndex, data )
-  for key,value in pairs(data.pos) do DebugPrint(key,value) end
-  DebugPrint (data.pos.x)
-  
-  for key,entIndex in pairs(data.selectedUnits) do
-    DebugPrint(key,entIndex)
-    local ent = EntIndexToHScript(entIndex)
-    local point = GetGroundPosition(Vector(data.pos.x, data.pos.y, 0), nil)
-    FindClearSpaceForUnit(ent, point, false)
-    -- Stop the hero, so he doesn't move
-    ent:Stop()
-    SendToConsole("dota_camera_center")
-  end
+    for key,value in pairs(data.pos) do DebugPrint(key,value) end
+    DebugPrint (data.pos.x)
+
+    for key,entIndex in pairs(data.selectedUnits) do
+        DebugPrint(key,entIndex)
+        local ent = EntIndexToHScript(entIndex)
+        local point = GetGroundPosition(Vector(data.pos.x, data.pos.y, 0), nil)
+        FindClearSpaceForUnit(ent, point, false)
+        -- Stop the hero, so he doesn't move
+        ent:Stop()
+        SendToConsole("dota_camera_center")
+    end
 end
 
 function CHeroDemo:OnTargetButtonPress( eventSourceIndex, data )
-  DebugPrint( "OnTargetButtonPress" )
-  DeepDebugPrintTable(data)
-  self.m_tCurrentMouseClick = {
-    data = data,
-    eventSourceIndex = eventSourceIndex
-  }
+    DebugPrint( "OnTargetButtonPress" )
+    DeepDebugPrintTable(data)
+    self.m_tCurrentMouseClick = {
+        data = data,
+        eventSourceIndex = eventSourceIndex
+    }
 end
 
 --------------------------------------------------------------------------------
 -- GameEvent: OnMouseClick
 --------------------------------------------------------------------------------
 function CHeroDemo:OnMouseClick( eventSourceIndex, data )
-  --DebugPrint("OnMouseClick")
-  --DeepDebugPrintTable( data )
-  --DeepDebugPrintTable( self.m_tCurrentMouseClick )
-  if self.m_tCurrentMouseClick ~= nil then
-    local clickEvent = self.m_tCurrentMouseClick.data.eventName
-    if clickEvent == "TeleportButtonPressed" then
-      CHeroDemo.OnTeleportButtonPressedHandler(self, eventSourceIndex, data)
-    elseif clickEvent == "SpawnAllyButtonPressed" then
-      data.selectedHero = self.m_tCurrentMouseClick.data.selectedHero
-      CHeroDemo.OnSpawnAllyButtonPressedHandler(self, eventSourceIndex, data)
-    elseif clickEvent == "SpawnEnemyButtonPressed" then
-      data.selectedHero = self.m_tCurrentMouseClick.data.selectedHero
-      CHeroDemo.OnSpawnEnemyButtonPressedHandler(self, eventSourceIndex, data)
+    if self.m_tCurrentMouseClick ~= nil then
+        local clickEvent = self.m_tCurrentMouseClick.data.eventName
+        if clickEvent == "TeleportButtonPressed" then
+            CHeroDemo.OnTeleportButtonPressedHandler(self, eventSourceIndex, data)
+        elseif clickEvent == "SpawnAllyButtonPressed" then
+            data.selectedHero = self.m_tCurrentMouseClick.data.selectedHero
+            CHeroDemo.OnSpawnAllyButtonPressedHandler(self, eventSourceIndex, data)
+        elseif clickEvent == "SpawnEnemyButtonPressed" then
+            data.selectedHero = self.m_tCurrentMouseClick.data.selectedHero
+            CHeroDemo.OnSpawnEnemyButtonPressedHandler(self, eventSourceIndex, data)
+        end
+        self.m_tCurrentMouseClick = nil
     end
-    self.m_tCurrentMouseClick = nil
-  end
 end
 
 --------------------------------------------------------------------------------
@@ -887,17 +874,17 @@ end
 --------------------------------------------------------------------------------
 function CHeroDemo:OnSpawnNeutralsButtonPressed( eventSourceIndex, data )
 	SendToServerConsole("dota_spawn_neutrals")
-  self:BroadcastMsg( "#SpawnNeutrals_Msg" )
+    self:BroadcastMsg( "#SpawnNeutrals_Msg" )
 end
 
 --------------------------------------------------------------------------------
 -- GameEvent: OnHostTimeScaleChange
 --------------------------------------------------------------------------------
 function CHeroDemo:OnHostTimeScaleChange( eventSourceIndex, data )
-  DebugPrint ("host_timescale " .. data.value)
+    DebugPrint ("host_timescale " .. data.value)
 	SendToServerConsole("host_timescale " .. data.value)
-  self:BroadcastMsg( "#HostTimeScale_Msg" )
-  CustomGameEventManager:Send_ServerToAllClients("update_host_time_scale_ui", data )
+    self:BroadcastMsg( "#HostTimeScale_Msg" )
+    CustomGameEventManager:Send_ServerToAllClients("update_host_time_scale_ui", data )
 end
 
 --------------------------------------------------------------------------------
@@ -905,7 +892,7 @@ end
 --------------------------------------------------------------------------------
 function CHeroDemo:OnRegrowTreesButtonPressed( eventSourceIndex, data )
 	GridNav:RegrowAllTrees()
-  self:BroadcastMsg( "#RegrowTrees_Msg" )
+    self:BroadcastMsg( "#RegrowTrees_Msg" )
 end
 
 --------------------------------------------------------------------------------
@@ -913,7 +900,7 @@ end
 --------------------------------------------------------------------------------
 function CHeroDemo:OnSpawnCreepsButtonPressed( eventSourceIndex, data )
 	SendToServerConsole("dota_spawn_creeps")
-  self:BroadcastMsg( "#SpawnCreeps_Msg" )
+    self:BroadcastMsg( "#SpawnCreeps_Msg" )
 end
 
 --------------------------------------------------------------------------------
@@ -921,7 +908,7 @@ end
 --------------------------------------------------------------------------------
 function CHeroDemo:OnSpawnRunesButtonPressed( eventSourceIndex, data )
 	SendToServerConsole("dota_spawn_rune")
-  self:BroadcastMsg( "#SpawnRunes_Msg" )
+    self:BroadcastMsg( "#SpawnRunes_Msg" )
 end
 
 --------------------------------------------------------------------------------
@@ -929,7 +916,7 @@ end
 --------------------------------------------------------------------------------
 function CHeroDemo:OnIncrementTimeOfDayButtonPressed( eventSourceIndex, data )
 	GameRules:SetTimeOfDay(GameRules:GetTimeOfDay() + .1)
-  self:BroadcastMsg( "#IncrementTimeOfDay_Msg" )
+    self:BroadcastMsg( "#IncrementTimeOfDay_Msg" )
 end
 
 --------------------------------------------------------------------------------
@@ -950,19 +937,19 @@ function CHeroDemo:OnResetHeroButtonPressed( eventSourceIndex, data )
 end
 
 function ResetHero( hPlayerHero )
-	for i = 0, DOTA_MAX_ABILITIES - 1 do
-		local hAbility = hPlayerHero:GetAbilityByIndex( i )
-    DebugPrint (i, hAbility, hAbility ~= nil)
-		if hAbility ~= nil and hAbility:GetLevel() > 0 and not hAbility:IsHidden() then
-      DebugPrint ("setting level", hAbility:GetLevel(), hAbility:IsHidden())
-      hAbility:SetLevel(0)
-      if hAbility:GetName() == "earth_spirit_stone_caller" then
-        hAbility:SetLevel(1)
-      end
-		end
-	end
+    for i = 0, DOTA_MAX_ABILITIES - 1 do
+        local hAbility = hPlayerHero:GetAbilityByIndex( i )
+        DebugPrint (i, hAbility, hAbility ~= nil)
+        if hAbility ~= nil and hAbility:GetLevel() > 0 and not hAbility:IsHidden() then
+            DebugPrint ("setting level", hAbility:GetLevel(), hAbility:IsHidden())
+            hAbility:SetLevel(0)
+            if hAbility:GetName() == "earth_spirit_stone_caller" then
+                hAbility:SetLevel(1)
+            end
+        end
+    end
   
-  hPlayerHero:SetAbilityPoints( 1 )
+    hPlayerHero:SetAbilityPoints( 1 )
 end
 
 --------------------------------------------------------------------------------
@@ -999,9 +986,9 @@ end
 function CHeroDemo:OnOverlayToggleButtonPressed( eventSourceIndex, data )
 	if data.value == 1 then
 		self.overlays[data.PlayerID][data.overlayName] = true
-    self:BroadcastMsg( "#" .. data.overlayName .. "On_Msg" )
+        self:BroadcastMsg( "#" .. data.overlayName .. "On_Msg" )
 	else
 		self.overlays[data.PlayerID][data.overlayName] = false
-    self:BroadcastMsg( "#" .. data.overlayName .. "Off_Msg" )
+        self:BroadcastMsg( "#" .. data.overlayName .. "Off_Msg" )
 	end
 end
