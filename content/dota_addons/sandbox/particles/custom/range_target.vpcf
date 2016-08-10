@@ -2,8 +2,8 @@
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
-	m_nMaxParticles = 4
-	m_ConstantColor = [ 170, 0, 0, 255 ]
+	m_nMaxParticles = 3
+	m_ConstantColor = [ 255, 255, 255, 128 ]
 	m_Renderers = 
 	[
 		{
@@ -70,8 +70,8 @@
 		},
 		{
 			_class = "C_INIT_RandomRadius"
-			m_flRadiusMax = 84.0
-			m_flRadiusMin = 84.0
+			m_flRadiusMax = 64.0
+			m_flRadiusMin = 64.0
 		},
 		{
 			_class = "C_INIT_RandomRotation"
@@ -82,6 +82,15 @@
 		{
 			_class = "C_INIT_RandomAlpha"
 			m_nAlphaMin = 150
+		},
+		{
+			_class = "C_INIT_RemapCPtoVector"
+			m_nCPInput = 1
+			m_nFieldOutput = 6
+			m_vInputMax = [ 255.0, 255.0, 255.0 ]
+			m_vOutputMin = [ 0.1, 0.1, 0.1 ]
+			m_vOutputMax = [ 1.0, 1.0, 1.0 ]
+			m_bScaleInitialRange = true
 		},
 	]
 	m_Emitters = 
