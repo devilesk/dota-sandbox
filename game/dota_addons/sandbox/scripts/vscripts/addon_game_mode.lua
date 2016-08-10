@@ -530,6 +530,7 @@ function CreateRangeOverlayForPlayer(player, ent, overlayName, particleOverlay, 
 		if ent._Particles[playerID][particleOverlay] ~= nil then
 			if ent._Particles[playerID][particleOverlay][2] ~= isRed then
 				ParticleManager:DestroyParticle(ent._Particles[playerID][particleOverlay][1], true)
+                ParticleManager:ReleaseParticleIndex(ent._Particles[playerID][particleOverlay][1])
 				ent._Particles[playerID][particleOverlay] = {CreateParticleCircle(ent, radius, particle_name, player), isRed}
 			end
 		else
@@ -538,6 +539,7 @@ function CreateRangeOverlayForPlayer(player, ent, overlayName, particleOverlay, 
 	else
 		if ent._Particles[playerID][particleOverlay] ~= nil then
 			ParticleManager:DestroyParticle(ent._Particles[playerID][particleOverlay][1], true)
+            ParticleManager:ReleaseParticleIndex(ent._Particles[playerID][particleOverlay][1])
 			ent._Particles[playerID][particleOverlay] = nil
 		end
 	end

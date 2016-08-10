@@ -20,10 +20,12 @@ function modifier_range_base:UpdateParticleForPlayer(i)
             end
         elseif self._particles[i] ~= nil then
             ParticleManager:DestroyParticle(self._particles[i], true)
+            ParticleManager:ReleaseParticleIndex(self._particles[i])
             self._particles[i] = nil
         end
     elseif self._particles[i] ~= nil then
         ParticleManager:DestroyParticle(self._particles[i], true)
+        ParticleManager:ReleaseParticleIndex(self._particles[i])
         self._particles[i] = nil
     end
 end
@@ -47,6 +49,7 @@ function modifier_range_base:OnDestroy(params)
     end
     for _, particle in pairs(self._particles) do
         ParticleManager:DestroyParticle(particle, true)
+        ParticleManager:ReleaseParticleIndex(particle)
     end
     self._particles = {}
 end

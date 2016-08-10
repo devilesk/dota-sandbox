@@ -88,6 +88,7 @@ function SPAWNBOX:ClearBoxesForPlayer(hPlayer)
         for k, box_particles in pairs(self.particles[playerID].particles) do
             for k, particle in pairs(box_particles) do
                 ParticleManager:DestroyParticle(particle, true)
+                ParticleManager:ReleaseParticleIndex(particle)
             end
         end
         self.particles[playerID] = nil
