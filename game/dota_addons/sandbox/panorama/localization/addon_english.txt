@@ -96,7 +96,9 @@
 	
 	"RequiresCustomLobbyLabel"					"These options only work in a custom lobby with cheats enabled"
 	"NeutralSpawnIntervalDropDownLabel"			"Neutral Camp Spawn Interval"
-	"SpawnNeutrals_Button"						"Spawn Neutrals"
+	"NeutralsButtonLabel"						"Neutrals"
+	"SpawnNeutrals_Button"						"Spawn"
+	"KillNeutrals_Button"						"Remove"
 	"HostTimeScaleDropDownLabel"				"Game Speed:"
 	"HostTimeScaleValueLabel"					"1X"
 	"HostTimeScaleSpeedUp_Button"				"+"

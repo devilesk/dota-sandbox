@@ -907,6 +907,19 @@ function CHeroDemo:OnSpawnNeutralsButtonPressed( eventSourceIndex, data )
 end
 
 --------------------------------------------------------------------------------
+-- GameEvent: OnKillNeutralsButtonPressed
+--------------------------------------------------------------------------------
+function CHeroDemo:OnKillNeutralsButtonPressed( eventSourceIndex, data )
+    local neutrals = Entities:FindAllByClassname("npc_dota_creep_neutral")
+    if neutrals ~= nil then
+        for k,ent in pairs(neutrals) do
+            ent:RemoveSelf()
+        end
+    end
+    self:BroadcastMsg( "#KillNeutrals_Msg" )
+end
+
+--------------------------------------------------------------------------------
 -- GameEvent: OnHostTimeScaleChange
 --------------------------------------------------------------------------------
 function CHeroDemo:OnHostTimeScaleChange( eventSourceIndex, data )

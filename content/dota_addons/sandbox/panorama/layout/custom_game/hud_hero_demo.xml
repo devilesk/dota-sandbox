@@ -257,8 +257,14 @@
                                     </DropDown>
                                 </Panel>
                                 <Panel class="Row">
-                                    <Button class="DemoButton" onactivate="FireCustomGameEvent_Str( SpawnNeutralsButtonPressed )">
+                                    <Label id="NeutralsButtonLabel" class="SectionLabel" text="#NeutralsButtonLabel" />
+                                </Panel>
+                                <Panel class="Row">
+                                    <Button class="DemoButton HalfButton" onactivate="FireCustomGameEvent_Str( SpawnNeutralsButtonPressed )">
                                         <Label text="#SpawnNeutrals_Button" />
+                                    </Button>
+                                    <Button class="DemoButton HalfButton" onactivate="FireCustomGameEvent_Str( KillNeutralsButtonPressed )">
+                                        <Label text="#KillNeutrals_Button" />
                                     </Button>
                                 </Panel>
                                 <Panel class="Row">
