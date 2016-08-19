@@ -8,6 +8,7 @@
 	"Tab3"										"Map"	
 	"Tab4"										"Overlay"	
 	"Tab5"										"Stats"
+	"Tab6"										"Other"
 	"Hero_ButtonCategory"						"Selected Heroes"
 	"Spawn_ButtonCategory"						"Game"
 	"Misc_ButtonCategory"						"Map Settings"
@@ -15,6 +16,7 @@
 	"Playback_ButtonCategory"					""
 	"Overlay_ButtonCategory"					"Overlays"
 	"Stats_ButtonCategory"						"Stats"
+	"Other_ButtonCategory"						"Other"
     
     "HeroOptionsBasic"                         "Basic"
     "HeroOptionsUpgrades"                      "Upgrades"
@@ -26,6 +28,7 @@
     "CheatsQuit_Button"                                          "Quit Game"
     "CheatsContinue_Button"                                          "Continue Playing"
     
+	"Reset_Button"							"Reset"
 	"Refresh_Button"							"Refresh"
 	"RefreshAll_Button"							"Refresh All"
 	"LevelUp_Button"							"Level Up"
@@ -116,4 +119,15 @@
 	"GPMLabel"							        "GPM"
 	"XPMLabel"							        "XPM"
 	"ResetPlayerStats_Button"							"Clear"
+    
+	"SpawnRoshan_Button"							"Spawn Roshan"
+	"RoshanUpgradeRateLabel"							"Roshan Upgrade Rate"
+	"RoshanUpgradeRate_Button"							"Set Rate"
+	"EffectiveCreepSpawnTimeLabel"							"Effective Creep Spawn Time"
+    "EffectiveCreepSpawnTime_Button"							"Set Time"
+	"SetCreepUpgradesLabel"							"Override Creep Upgrades"
+    "SetCreepUpgrades_Button"							"Set Upgrade Count"
+    "OverrideCreepUpgrades_Button"							"Override Enabled"
+    "EasyBuyEnabled_Button"							"Shop Easy Buy"
+    "PauseDayNightCycle_Button"							"Pause Day/Night"
 }

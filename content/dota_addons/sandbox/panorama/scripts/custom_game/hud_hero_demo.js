@@ -1,4 +1,4 @@
-var NUM_TABS = 5;
+var NUM_TABS = 6;
 var playerID = Players.GetLocalPlayer();
 var hostTimeScaleIndex = 1;
 var hostTimeScaleValues = [0.5, 1, 2, 4, 8];
@@ -104,6 +104,11 @@ function UpdateHostTimeScaleUI(data) {
     hostTimeScaleIndex = parseInt(data.hostTimeScaleIndex);
 }
 
+function ResetFireCustomGameEvent(eventName, textEntry, value) {
+    $('#' + textEntry).text = parseInt(value);
+    FireCustomGameEvent(eventName);
+}
+
 function FireCustomGameEvent(eventName) {
     var playerId = Players.GetLocalPlayer();
     var selectedUnits = Players.GetSelectedEntities(playerId);
@@ -112,6 +117,9 @@ function FireCustomGameEvent(eventName) {
         selectedHero: selectedHero,
         selectedUnits: selectedUnits,
         goldAmount: $('#GoldAmount').text,
+        roshanUpgradeRate: $('#RoshanUpgradeRate').text,
+        effectiveCreepSpawnTime: $('#EffectiveCreepSpawnTime').text,
+        creepUpgradeLevel: $('#SetCreepUpgrades').text,
         selectedPlayerID: SelectedPlayerToKey()
     }
     GameEvents.SendCustomGameEventToServer(eventName, data);
@@ -167,10 +175,25 @@ function UpdateToggleUI(data) {
     }
 }
 
+function UpdateTextUI(data) {
+    for (var i in data) {
+        if (data.hasOwnProperty(i)) {
+            var textElement = $('#' + i);
+            if (textElement) {
+                textElement.text = data[i];
+            }
+        }
+    }
+}
+
 (function() {
     $('#BuildingInvulnerability_Button').checked = true;
     $('#NeutralSpawnIntervalDropDown').SetSelected("i_60");
+    $('#RoshanUpgradeRate').text = 240;
+    $('#EffectiveCreepSpawnTime').text = 0;
+    $('#SetCreepUpgrades').text = 0;
     UpdatePosition();
+    GameEvents.Subscribe( "update_text_ui", UpdateTextUI );
     GameEvents.Subscribe( "update_toggle_ui", UpdateToggleUI );
     GameEvents.Subscribe( "update_neutral_spawn_interval_ui", UpdateNeutralSpawnIntervalUI );
     GameEvents.Subscribe( "update_host_time_scale_ui", UpdateHostTimeScaleUI );

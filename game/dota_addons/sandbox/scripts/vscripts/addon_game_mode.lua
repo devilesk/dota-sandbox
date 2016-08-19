@@ -3,6 +3,22 @@ print( "Hero Demo game mode loaded." )
 _G.NEUTRAL_TEAM = 4 -- global const for neutral team int
 _G.DOTA_MAX_ABILITIES = 16
 _G.HERO_MAX_LEVEL = 25
+_G.CREEP_HP_PER_UPGRADE = 12
+_G.CREEP_MELEE_DAMAGE_PER_UPGRADE = 1
+_G.CREEP_RANGED_DAMAGE_PER_UPGRADE = 2
+_G.DEFAULT_TIME_OF_DAY_RATE = 0.00208
+_G.CREEP_BASE_STATS = {
+    MELEE = {
+        baseMaxHealth = 550,
+        baseDamageMin = 19,
+        baseDamageMax = 23,
+    },
+    RANGED = {
+        baseMaxHealth = 300,
+        baseDamageMin = 21,
+        baseDamageMax = 26,
+    }
+}
 
 LinkLuaModifier( "modifier_damage_tracking", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_range_base", LUA_MODIFIER_MOTION_NONE )
@@ -216,6 +232,8 @@ function CHeroDemo:InitGameMode()
     CustomGameEventManager:RegisterListener( "DetectNeutralsButtonPressed", function(...) return self:OnOverlayToggleButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "DummyTargetButtonPressed", function(...) return self:OnDummyTargetButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "DummyTargetsButtonPressed", function(...) return self:OnDummyTargetsButtonPressed( ... ) end )
+    CustomGameEventManager:RegisterListener( "EasyBuyEnabledButtonPressed", function(...) return self:OnEasyBuyEnabledButtonPressed( ... ) end )
+    CustomGameEventManager:RegisterListener( "EffectiveCreepSpawnTimeButtonPressed", function(...) return self:OnEffectiveCreepSpawnTimeButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "EnemyInvulnerabilityButtonPressed", function(...) return self:OnEnemyInvulnerabilityButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "FOWButtonPressed", function(...) return self:OnFOWButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "FreeSpellsButtonPressed", function(...) return self:OnFreeSpellsButtonPressed( ... ) end )
@@ -236,7 +254,9 @@ function CHeroDemo:InitGameMode()
     CustomGameEventManager:RegisterListener( "MaxLevelButtonPressed", function(...) return self:OnMaxLevelButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "MouseClick", function(...) return self:OnMouseClick( ... ) end )
     CustomGameEventManager:RegisterListener( "NeutralSpawnIntervalChange", function(...) return self:OnNeutralSpawnIntervalChange( ... ) end )
+    CustomGameEventManager:RegisterListener( "OverrideCreepUpgradesButtonPressed", function(...) return self:OnOverrideCreepUpgradesButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "PauseButtonPressed", function(...) return self:OnPauseButtonPressed( ... ) end )
+    CustomGameEventManager:RegisterListener( "PauseDayNightCycleButtonPressed", function(...) return self:OnPauseDayNightCycleButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "RefreshButtonPressed", function(...) return self:OnRefreshButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "RefreshAllButtonPressed", function(...) return self:OnRefreshAllButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "RegrowTreesButtonPressed", function(...) return self:OnRegrowTreesButtonPressed( ... ) end )
@@ -247,8 +267,10 @@ function CHeroDemo:InitGameMode()
     CustomGameEventManager:RegisterListener( "ResetHeroButtonPressed", function(...) return self:OnResetHeroButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "ResetPlayerStatsButtonPressed", function(...) return self:OnResetPlayerStatsButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "RespawnHeroButtonPressed", function(...) return self:OnRespawnHeroButtonPressed( ... ) end )
+    CustomGameEventManager:RegisterListener( "RoshanUpgradeRateButtonPressed", function(...) return self:OnRoshanUpgradeRateButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "SelectNewHeroButtonPressed", function(...) return self:OnSelectNewHeroButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "SentryVisionButtonPressed", function(...) return self:OnOverlayToggleButtonPressed( ... ) end )
+    CustomGameEventManager:RegisterListener( "SetCreepUpgradesButtonPressed", function(...) return self:OnSetCreepUpgradesButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "ShopItemButtonPressed", function(...) return self:OnShopItemButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "ShowDamageDealtButtonPressed", function(...) return self:OnShowDamageDealtButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "ShowNeutralSpawnBoxButtonPressed", function(...) return self:OnOverlayToggleButtonPressed( ... ) end )
@@ -258,6 +280,7 @@ function CHeroDemo:InitGameMode()
     CustomGameEventManager:RegisterListener( "SpawnCreepsButtonPressed", function(...) return self:OnSpawnCreepsButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "SpawnEnemyButtonPressed", function(...) return self:OnSpawnEnemyButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "SpawnNeutralsButtonPressed", function(...) return self:OnSpawnNeutralsButtonPressed( ... ) end )
+    CustomGameEventManager:RegisterListener( "SpawnRoshanButtonPressed", function(...) return self:OnSpawnRoshanButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "SpawnRunesButtonPressed", function(...) return self:OnSpawnRunesButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "StartGameButtonPressed", function(...) return self:OnStartGameButtonPressed( ... ) end )
     CustomGameEventManager:RegisterListener( "SwitchTeamButtonPressed", function(...) return self:OnSwitchTeamButtonPressed( ... ) end )
@@ -292,8 +315,28 @@ function CHeroDemo:InitGameMode()
     self.m_nDummiesCount = 0
     self.m_bDummiesEnabled = false
     
+    self.m_nRoshanUpgradeRate = 240
+    self.m_nEffectiveCreepSpawnTime = 0
+    self.m_nCreepUpgradeLevel = 0
+    
+    self.CREEP_STATS = {
+        MELEE = {
+            baseMaxHealth = CREEP_BASE_STATS.MELEE.baseMaxHealth,
+            baseDamageMin = CREEP_BASE_STATS.MELEE.baseDamageMin,
+            baseDamageMax = CREEP_BASE_STATS.MELEE.baseDamageMax,
+        },
+        RANGED = {
+            baseMaxHealth = CREEP_BASE_STATS.RANGED.baseMaxHealth,
+            baseDamageMin = CREEP_BASE_STATS.RANGED.baseDamageMin,
+            baseDamageMax = CREEP_BASE_STATS.RANGED.baseDamageMax,
+        }
+    }
+
     self.m_tCurrentMouseClick = {}
     
+    self.m_bPauseDayNightCycle = false
+    self.m_bEasyBuyEnabled = false
+    self.m_bOverrideCreepUpgrades = false
     self.m_bFreeSpellsEnabled = false
     self.m_bInvulnerabilityEnabled = false
     self.m_bBuildingInvulnerabilityEnabled = true
@@ -344,6 +387,15 @@ function CHeroDemo:InitGameMode()
     GameRules:GetGameModeEntity():SetThink("CalculateDPS", self)
 end
 
+function CHeroDemo:UpdateTextUI()
+    local data = {
+        RoshanUpgradeRate = self.m_nRoshanUpgradeRate,
+        EffectiveCreepSpawnTime = self.m_nEffectiveCreepSpawnTime,
+        SetCreepUpgrades = self.m_nCreepUpgradeLevel,
+    }
+    CustomGameEventManager:Send_ServerToAllClients("update_text_ui", data )
+end
+
 function CHeroDemo:UpdateToggleUI()
     local data = {
         FreeSpells_Button = self.m_bFreeSpellsEnabled,
@@ -355,6 +407,9 @@ function CHeroDemo:UpdateToggleUI()
         FOW_Button = self.m_bFOWDisabled,
         LaneCreeps_Button = self.m_bCreepsDisabled,
         BuildingInvulnerability_Button = self.m_bBuildingInvulnerabilityEnabled,
+        OverrideCreepUpgrades_Button = self.m_bOverrideCreepUpgrades,
+        EasyBuyEnabled_Button = self.m_bEasyBuyEnabled,
+        PauseDayNightCycle_Button = self.m_bPauseDayNightCycle,
     }
     CustomGameEventManager:Send_ServerToAllClients("update_toggle_ui", data )
 end
@@ -466,6 +521,34 @@ function CHeroDemo:GameThink()
         else
             for k, v in pairs( self.m_tAlliesList ) do
                 self.m_tAlliesList[ k ]:SetHealth( self.m_tAlliesList[ k ]:GetMaxHealth() )
+            end
+        end
+    end
+    
+    if self.m_bOverrideCreepUpgrades == true then
+        local creeps = Entities:FindAllByClassname("npc_dota_creep_lane")
+        for _, v in pairs(creeps) do
+            if IsValidEntity(v) and 
+               (not v:IsUnselectable() or not v:IsInvulnerable() or not v:NotOnMinimap()) and
+               v._creepUpgradeLevel ~= self.m_nCreepUpgradeLevel then
+                
+                local creepStats
+                if v:IsRangedAttacker() then
+                    creepStats = self.CREEP_STATS.RANGED
+                else
+                    creepStats = self.CREEP_STATS.MELEE
+                end
+                
+                local bUpdateCurrentHealth = v:GetMaxHealth() == v:GetHealth()
+                v:SetBaseMaxHealth(creepStats.baseMaxHealth)
+                v:SetMaxHealth(creepStats.baseMaxHealth)
+                if bUpdateCurrentHealth then
+                    v:SetHealth(creepStats.baseMaxHealth)
+                end
+                
+                v:SetBaseDamageMin(creepStats.baseDamageMin)
+                v:SetBaseDamageMax(creepStats.baseDamageMax)
+                v._creepUpgradeLevel = self.m_nCreepUpgradeLevel
             end
         end
     end

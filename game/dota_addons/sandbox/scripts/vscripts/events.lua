@@ -561,13 +561,93 @@ function CHeroDemo:OnResetPlayerStatsButtonPressed( eventSourceIndex, data )
 end
 
 --------------------------------------------------------------------------------
+-- ButtonEvent: OnRoshanUpgradeRateButtonPressed
+--------------------------------------------------------------------------------
+function CHeroDemo:OnRoshanUpgradeRateButtonPressed( eventSourceIndex, data )
+    local roshanUpgradeRate = tonumber(data.roshanUpgradeRate)
+    if roshanUpgradeRate ~= nil and roshanUpgradeRate >= 0 then
+        self.m_nRoshanUpgradeRate = roshanUpgradeRate
+        SendToServerConsole("dota_roshan_upgrade_rate " .. tostring(data.roshanUpgradeRate))
+        self:BroadcastMsg( "#RoshanUpgradeRate_Msg" )
+        self:UpdateTextUI()
+    else
+        self:BroadcastMsg( "#InvalidInput_Msg" )
+    end
+end
+
+--------------------------------------------------------------------------------
+-- GameEvent: OnEffectiveCreepSpawnTimeButtonPressed
+--------------------------------------------------------------------------------
+function CHeroDemo:OnEffectiveCreepSpawnTimeButtonPressed( eventSourceIndex, data )
+    local effectiveCreepSpawnTime = tonumber(data.effectiveCreepSpawnTime)
+    if effectiveCreepSpawnTime ~= nil and effectiveCreepSpawnTime >= 0 then
+        self.m_nEffectiveCreepSpawnTime = effectiveCreepSpawnTime
+        SendToServerConsole("dota_effective_creep_spawn_time " .. tostring(data.effectiveCreepSpawnTime))
+        self:BroadcastMsg( "#EffectiveCreepSpawnTime_Msg" )
+        self:UpdateTextUI()
+    else
+        self:BroadcastMsg( "#InvalidInput_Msg" )
+    end
+end
+
+--------------------------------------------------------------------------------
+-- GameEvent: OnSetCreepUpgradesButtonPressed
+--------------------------------------------------------------------------------
+function CHeroDemo:OnSetCreepUpgradesButtonPressed( eventSourceIndex, data )
+    local creepUpgradeLevel = tonumber(data.creepUpgradeLevel)
+    if creepUpgradeLevel ~= nil then
+        creepUpgradeLevel = math.min(30, math.max(0, creepUpgradeLevel))
+        self.m_nCreepUpgradeLevel = creepUpgradeLevel
+        self:SetCreepStats()
+        self:BroadcastMsg( "#SetCreepUpgrades_Msg" )
+        self:UpdateTextUI()
+    else
+        self:BroadcastMsg( "#InvalidInput_Msg" )
+    end
+end
+
+function CHeroDemo:SetCreepStats()
+    self.CREEP_STATS.MELEE.baseMaxHealth = CREEP_BASE_STATS.MELEE.baseMaxHealth + self.m_nCreepUpgradeLevel * CREEP_HP_PER_UPGRADE
+    self.CREEP_STATS.MELEE.baseDamageMin = CREEP_BASE_STATS.MELEE.baseDamageMin + self.m_nCreepUpgradeLevel * CREEP_MELEE_DAMAGE_PER_UPGRADE
+    self.CREEP_STATS.MELEE.baseDamageMax = CREEP_BASE_STATS.MELEE.baseDamageMax + self.m_nCreepUpgradeLevel * CREEP_MELEE_DAMAGE_PER_UPGRADE
+    self.CREEP_STATS.RANGED.baseMaxHealth = CREEP_BASE_STATS.RANGED.baseMaxHealth + self.m_nCreepUpgradeLevel * CREEP_HP_PER_UPGRADE
+    self.CREEP_STATS.RANGED.baseDamageMin = CREEP_BASE_STATS.RANGED.baseDamageMin + self.m_nCreepUpgradeLevel * CREEP_RANGED_DAMAGE_PER_UPGRADE
+    self.CREEP_STATS.RANGED.baseDamageMax = CREEP_BASE_STATS.RANGED.baseDamageMax + self.m_nCreepUpgradeLevel * CREEP_RANGED_DAMAGE_PER_UPGRADE
+end
+
+--------------------------------------------------------------------------------
+-- ButtonEvent: OnOverrideCreepUpgradesButtonPressed
+--------------------------------------------------------------------------------
+function CHeroDemo:OnOverrideCreepUpgradesButtonPressed( eventSourceIndex, data )
+    local creepUpgradeLevel = tonumber(data.creepUpgradeLevel)
+    if creepUpgradeLevel ~= nil then
+        creepUpgradeLevel = math.min(30, math.max(0, creepUpgradeLevel))
+        if self.m_nCreepUpgradeLevel ~= creepUpgradeLevel then
+            self.m_nCreepUpgradeLevel = creepUpgradeLevel
+            self:SetCreepStats()
+            self:UpdateTextUI()
+        end
+    end
+	if self.m_bOverrideCreepUpgrades == false then
+		self.m_bOverrideCreepUpgrades = true
+		self:BroadcastMsg( "#OverrideCreepUpgradesOn_Msg" )
+	elseif self.m_bOverrideCreepUpgrades == true then
+		self.m_bOverrideCreepUpgrades = false
+		self:BroadcastMsg( "#OverrideCreepUpgradesOff_Msg" )
+	end
+    self:UpdateToggleUI()
+end
+
+--------------------------------------------------------------------------------
 -- ButtonEvent: OnGiveGoldButtonPressed
 --------------------------------------------------------------------------------
 function CHeroDemo:OnGiveGoldButtonPressed( eventSourceIndex, data )
     local goldAmount = tonumber(data.goldAmount)
     if goldAmount ~= nil then
-        PlayerResource:SetGold( data.PlayerID, PlayerResource:GetUnreliableGold(data.PlayerID) + tonumber(data.goldAmount), false)
+        PlayerResource:SetGold( data.PlayerID, PlayerResource:GetUnreliableGold(data.PlayerID) + goldAmount, false)
         self:BroadcastMsg( "#GiveGold_Msg" )
+    else
+        self:BroadcastMsg( "#InvalidInput_Msg" )
     end
 end
 
@@ -611,6 +691,38 @@ function CHeroDemo:OnLaneCreepsButtonPressed( eventSourceIndex )
         SendToServerConsole( "dota_creeps_no_spawning 0" )
 		self.m_bCreepsDisabled = false
 		self:BroadcastMsg( "#LaneCreepsOn_Msg" )
+	end
+    self:UpdateToggleUI()
+end
+
+--------------------------------------------------------------------------------
+-- ButtonEvent: OnPauseDayNightCycleButtonPressed
+--------------------------------------------------------------------------------
+function CHeroDemo:OnPauseDayNightCycleButtonPressed( eventSourceIndex )
+	if self.m_bPauseDayNightCycle == false then
+		self.m_bPauseDayNightCycle = true
+        SendToServerConsole( "dota_time_of_day_rate 0" )
+		self:BroadcastMsg( "#PauseDayNightCycleOn_Msg" )
+	elseif self.m_bPauseDayNightCycle == true then
+		self.m_bPauseDayNightCycle = false
+        SendToServerConsole( "dota_time_of_day_rate " .. tostring(DEFAULT_TIME_OF_DAY_RATE) )
+		self:BroadcastMsg( "#PauseDayNightCycleOff_Msg" )
+	end
+    self:UpdateToggleUI()
+end
+
+--------------------------------------------------------------------------------
+-- ButtonEvent: OnEasyBuyEnabledButtonPressed
+--------------------------------------------------------------------------------
+function CHeroDemo:OnEasyBuyEnabledButtonPressed( eventSourceIndex )
+	if self.m_bEasyBuyEnabled == false then
+		self.m_bEasyBuyEnabled = true
+        SendToServerConsole( "dota_easybuy 1" )
+		self:BroadcastMsg( "#EasyBuyEnabledOn_Msg" )
+	elseif self.m_bEasyBuyEnabled == true then
+		self.m_bEasyBuyEnabled = false
+        SendToServerConsole( "dota_easybuy 0" )
+		self:BroadcastMsg( "#EasyBuyEnabledOff_Msg" )
 	end
     self:UpdateToggleUI()
 end
@@ -935,6 +1047,14 @@ end
 function CHeroDemo:OnRegrowTreesButtonPressed( eventSourceIndex, data )
 	GridNav:RegrowAllTrees()
     self:BroadcastMsg( "#RegrowTrees_Msg" )
+end
+
+--------------------------------------------------------------------------------
+-- GameEvent: OnSpawnRoshanButtonPressed
+--------------------------------------------------------------------------------
+function CHeroDemo:OnSpawnRoshanButtonPressed( eventSourceIndex, data )
+	SendToServerConsole("dota_respawn_roshan")
+    self:BroadcastMsg( "#SpawnRoshan_Msg" )
 end
 
 --------------------------------------------------------------------------------

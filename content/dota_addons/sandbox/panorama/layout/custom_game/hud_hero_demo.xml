@@ -25,6 +25,9 @@
             <Button id="TabButton5" class="TabButton" onactivate="ToggleTab(5);">
                 <Label class="TabButtonLabel" text="#Tab5" />
             </Button>
+            <Button id="TabButton6" class="TabButton" onactivate="ToggleTab(6);">
+                <Label class="TabButtonLabel" text="#Tab6" />
+            </Button>
         </Panel>
         <Panel class="ControlPanelOuterContainer">
             <Panel class="ControlPanelContainer">
@@ -420,6 +423,73 @@
                                   <Button class="DemoButton" onactivate="FireCustomGameEvent( 'ResetPlayerStatsButtonPressed' )">
                                     <Label text="#ResetPlayerStats_Button"/>
                                   </Button>
+                                </Panel>
+                            </Panel>
+                        </Panel>
+                        <Panel id="TabContent6" class="TabContent">
+                            <Panel class="Category">
+                                <Label class="Header" text="#Other_ButtonCategory" />
+                                <Panel class="Row">
+                                    <ToggleButton id="EasyBuyEnabled_Button" class="DemoButton" onactivate="FireCustomGameEvent_Str( EasyBuyEnabledButtonPressed )">
+                                        <Label text="#EasyBuyEnabled_Button" />
+                                    </ToggleButton>
+                                </Panel>
+                                <Panel class="Row">
+                                    <ToggleButton id="PauseDayNightCycle_Button" class="DemoButton" onactivate="FireCustomGameEvent_Str( PauseDayNightCycleButtonPressed )">
+                                        <Label text="#PauseDayNightCycle_Button" />
+                                    </ToggleButton>
+                                </Panel>
+                                <Panel class="hr"></Panel>
+                                <Panel class="Row">
+                                    <Button class="DemoButton" onactivate="FireCustomGameEvent( 'SpawnRoshanButtonPressed' )">
+                                        <Label text="#SpawnRoshan_Button" />
+                                    </Button>
+                                </Panel>
+                                <Panel class="Row">
+                                    <Label id="RoshanUpgradeRateLabel" class="SectionLabel" text="#RoshanUpgradeRateLabel" />
+                                </Panel>
+                                <Panel class="Row">  
+                                  <TextEntry id="RoshanUpgradeRate" maxchars="9" placeholder="Seconds Per Upgrade" oninputsubmit="FireCustomGameEvent( 'RoshanUpgradeRateButtonPressed' )" />
+                                </Panel>
+                                <Panel class="Row">    
+                                  <Button class="DemoButton HalfButton" onactivate="FireCustomGameEvent( 'RoshanUpgradeRateButtonPressed' )">
+                                    <Label text="#RoshanUpgradeRate_Button"/>
+                                  </Button>    
+                                  <Button class="DemoButton HalfButton" onactivate="ResetFireCustomGameEvent( 'RoshanUpgradeRateButtonPressed', 'RoshanUpgradeRate', 240 )">
+                                    <Label text="#Reset_Button"/>
+                                  </Button>
+                                </Panel>
+                                <Panel class="hr"></Panel>
+                                <Panel class="Row">
+                                    <Label id="EffectiveCreepSpawnTimeLabel" class="SectionLabel" text="#EffectiveCreepSpawnTimeLabel" />
+                                </Panel>
+                                <Panel class="Row">  
+                                  <TextEntry id="EffectiveCreepSpawnTime" maxchars="9" placeholder="Game Time in Seconds" oninputsubmit="FireCustomGameEvent( 'EffectiveCreepSpawnTimeButtonPressed' )" />
+                                </Panel>
+                                <Panel class="Row">    
+                                  <Button class="DemoButton HalfButton" onactivate="FireCustomGameEvent( 'EffectiveCreepSpawnTimeButtonPressed' )">
+                                    <Label text="#EffectiveCreepSpawnTime_Button"/>
+                                  </Button>    
+                                  <Button class="DemoButton HalfButton" onactivate="ResetFireCustomGameEvent( 'EffectiveCreepSpawnTimeButtonPressed', 'EffectiveCreepSpawnTime', 0 )">
+                                    <Label text="#Reset_Button"/>
+                                  </Button>
+                                </Panel>
+                                <Panel class="hr"></Panel>
+                                <Panel class="Row">
+                                    <Label id="SetCreepUpgradesLabel" class="SectionLabel" text="#SetCreepUpgradesLabel" />
+                                </Panel>
+                                <Panel class="Row">  
+                                  <TextEntry id="SetCreepUpgrades" maxchars="9" placeholder="Number of upgrades" oninputsubmit="FireCustomGameEvent( 'SetCreepUpgradesButtonPressed' )" />
+                                </Panel>
+                                <Panel class="Row">    
+                                  <Button class="DemoButton" onactivate="FireCustomGameEvent( 'SetCreepUpgradesButtonPressed' )">
+                                    <Label text="#SetCreepUpgrades_Button"/>
+                                  </Button>
+                                </Panel>
+                                <Panel class="Row">
+                                    <ToggleButton id="OverrideCreepUpgrades_Button" class="DemoButton" onactivate="FireCustomGameEvent( 'OverrideCreepUpgradesButtonPressed' )">
+                                        <Label text="#OverrideCreepUpgrades_Button" />
+                                    </ToggleButton>
                                 </Panel>
                             </Panel>
                         </Panel>
