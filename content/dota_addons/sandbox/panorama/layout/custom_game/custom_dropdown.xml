@@ -107,6 +107,7 @@
             <Button id="npc_dota_hero_treant" onactivate="OnClick('npc_dota_hero_treant')"><Label text="Treant Protector" id="label_npc_dota_hero_treant"></Label></Button>
             <Button id="npc_dota_hero_troll_warlord" onactivate="OnClick('npc_dota_hero_troll_warlord')"><Label text="Troll Warlord" id="label_npc_dota_hero_troll_warlord"></Label></Button>
             <Button id="npc_dota_hero_tusk" onactivate="OnClick('npc_dota_hero_tusk')"><Label text="Tusk" id="label_npc_dota_hero_tusk"></Label></Button>
+            <Button id="npc_dota_hero_abyssal_underlord" onactivate="OnClick('npc_dota_hero_abyssal_underlord')"><Label text="Underlord" id="label_npc_dota_hero_abyssal_underlord"></Label></Button>
             <Button id="npc_dota_hero_undying" onactivate="OnClick('npc_dota_hero_undying')"><Label text="Undying" id="label_npc_dota_hero_undying"></Label></Button>
             <Button id="npc_dota_hero_ursa" onactivate="OnClick('npc_dota_hero_ursa')"><Label text="Ursa" id="label_npc_dota_hero_ursa"></Label></Button>
             <Button id="npc_dota_hero_vengefulspirit" onactivate="OnClick('npc_dota_hero_vengefulspirit')"><Label text="Vengeful Spirit" id="label_npc_dota_hero_vengefulspirit"></Label></Button>

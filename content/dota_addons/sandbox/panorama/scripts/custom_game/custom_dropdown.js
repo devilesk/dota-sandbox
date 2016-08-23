@@ -442,6 +442,10 @@ var heroAliases = {
     "npc_dota_hero_ogre_magi": {
         "name": "Ogre Magi",
         "aliases": ["om", "magi"]
+    },
+    "npc_dota_hero_abyssal_underlord": {
+        "name": "Underlord",
+        "aliases": ["abyssal", "pitlord"]
     }
 }
 
