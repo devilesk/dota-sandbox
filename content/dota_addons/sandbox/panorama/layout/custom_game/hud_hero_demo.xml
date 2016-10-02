@@ -422,6 +422,10 @@
                                     <Label id="XPMLabel" class="SectionLabel StatRowLabel" text="#XPMLabel" />
                                     <Label id="XPMValue" class="SectionLabel StatRowValue" text="0" />
                                 </Panel>
+                                <Panel class="Row StatRow">
+                                    <Label id="NetWorthLabel" class="SectionLabel StatRowLabel" text="#NetWorthLabel" />
+                                    <Label id="NetWorthValue" class="SectionLabel StatRowValue" text="0" />
+                                </Panel>
                                 <Panel class="Row">    
                                   <Button class="DemoButton" onactivate="FireCustomGameEvent( 'ResetPlayerStatsButtonPressed' )">
                                     <Label text="#ResetPlayerStats_Button"/>

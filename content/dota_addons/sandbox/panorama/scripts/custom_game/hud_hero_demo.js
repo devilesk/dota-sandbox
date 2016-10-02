@@ -53,7 +53,8 @@ var netTableLabelMap = {
     "dt_nettable": $('#LastDamageTakenValue'),
     "tdt_nettable": $('#TotalDamageTakenValue'),
     "la_nettable": $('#LastAttackValue'),
-    "td_nettable": $('#TotalDamageValue')
+    "td_nettable": $('#TotalDamageValue'),
+    "nw_nettable": $('#NetWorthValue')
 }
 
 for (var netTable in netTableLabelMap) {

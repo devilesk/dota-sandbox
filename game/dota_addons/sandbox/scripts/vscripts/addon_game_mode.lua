@@ -372,6 +372,7 @@ function CHeroDemo:InitGameMode()
         CustomNetTables:SetTableValue( "la_nettable", tostring(nPlayerID), { value = 0 } )
         CustomNetTables:SetTableValue( "dps_nettable", tostring(nPlayerID), { value = 0 } )
         CustomNetTables:SetTableValue( "dps10_nettable", tostring(nPlayerID), { value = 0 } )
+        CustomNetTables:SetTableValue( "nw_nettable", tostring(nPlayerID), { value = 0 } )
         self.m_tPlayerDPS[nPlayerID] = 0
         self.m_tPlayerDPS10[nPlayerID] = Queue()
         
@@ -436,6 +437,8 @@ end
 
 function CHeroDemo:CalculateDPS()
     for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS - 1 do
+        CustomNetTables:SetTableValue( "nw_nettable", tostring(nPlayerID), { value = self:GetNetWorth(nPlayerID) } )
+        
         CustomNetTables:SetTableValue( "dps_nettable", tostring(nPlayerID), { value = self.m_tPlayerDPS[nPlayerID] } )
         self.m_tPlayerDPS10[nPlayerID]:PushRight(self.m_tPlayerDPS[nPlayerID])
         if self.m_tPlayerDPS10[nPlayerID].last - self.m_tPlayerDPS10[nPlayerID].first > 10 then

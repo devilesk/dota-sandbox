@@ -121,6 +121,7 @@
 	"TotalGoldEarnedLabel"							"Total Gold Earned"
 	"GPMLabel"							        "GPM"
 	"XPMLabel"							        "XPM"
+	"NetWorthLabel"							        "Net Worth"
 	"ResetPlayerStats_Button"							"Clear"
     
 	"SpawnRoshan_Button"							"Spawn Roshan"

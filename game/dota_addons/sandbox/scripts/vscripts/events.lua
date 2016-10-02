@@ -910,7 +910,7 @@ function CHeroDemo:OnClearInventoryButtonPressed( eventSourceIndex, data )
             for i = 0, 11 do
                 local item = ent:GetItemInSlot(i)
                 if item ~= nil then
-                    ent:RemoveItem(item);
+                    ent:RemoveItem(item)
                 end
             end
         end
@@ -1098,6 +1098,51 @@ end
 function CHeroDemo:FilterRuneSpawn( filterTable  )
     filterTable["rune_type"] = self.m_nRUNE
     return true
+end
+
+--------------------------------------------------------------------------------
+-- GameEvent: GetNetWorth
+--------------------------------------------------------------------------------
+function CHeroDemo:GetNetWorth( nPlayerID  )
+    local networth = 0
+    local ent = PlayerResource:GetSelectedHeroEntity(nPlayerID)
+    if ent ~= nil then
+        networth = self:GetNetWorthHelper(ent)
+        if ent:GetName() == "npc_dota_hero_lone_druid" then
+            for k,v in pairs(ent:GetAdditionalOwnedUnits()) do
+                if v:GetName() == "npc_dota_lone_druid_bear" then
+                    networth = networth + self:GetNetWorthHelper(v)
+                end
+            end
+        end
+    end
+    return networth
+end
+
+function CHeroDemo:GetNetWorthHelper( ent  )
+    local networth = 0
+    if ent == nil then return networth end
+    if ent:HasInventory() then
+        for i = 0, 5 do
+            local item = ent:GetItemInSlot(i)
+            if item ~= nil then
+                networth = networth + item:GetCost()
+            end
+        end
+    end
+    for k,v in pairs(ent:FindAllModifiers()) do
+        if v:GetName() == "modifier_item_moon_shard_consumed" then
+            local item = CreateItem("item_moon_shard", nil, nil)
+            networth = networth + item:GetCost()
+            item:RemoveSelf()
+        end
+        if v:GetName() == "modifier_item_ultimate_scepter_consumed" then
+            local item = CreateItem("item_ultimate_scepter", nil, nil)
+            networth = networth + item:GetCost()
+            item:RemoveSelf()
+        end
+    end
+    return networth
 end
 
 --------------------------------------------------------------------------------
