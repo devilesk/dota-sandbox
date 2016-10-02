@@ -212,7 +212,10 @@ function CHeroDemo:InitGameMode()
 
     GameMode:SetContextThink( "HeroDemo:GameThink", function() return self:GameThink() end, 0 )
     GameMode:SetContextThink( "HeroDemo:SpawnBoxThink", function() return self:SpawnBoxThink() end, 0 )
-
+    
+    GameMode:SetRuneEnabled(DOTA_RUNE_ARCANE, true)
+    GameMode:SetRuneSpawnFilter( Dynamic_Wrap( CHeroDemo, "FilterRuneSpawn" ), self )
+    
     -- Events
     ListenToGameEvent( "game_rules_state_change", Dynamic_Wrap( CHeroDemo, 'OnGameRulesStateChange' ), self )
     ListenToGameEvent( "npc_spawned", Dynamic_Wrap( CHeroDemo, "OnNPCSpawned" ), self )
@@ -302,6 +305,8 @@ function CHeroDemo:InitGameMode()
     --SendToServerConsole( "dota_bot_mode 1" )
 
     --self.m_sHeroSelection = sHeroSelection -- this seems redundant, but events.lua doesn't seem to know about sHeroSelection
+    self.m_nRUNE = 0
+    
     self.m_bPlayerDataCaptured = false
     self.m_nPlayerID = 0
 

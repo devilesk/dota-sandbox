@@ -1093,6 +1093,14 @@ function CHeroDemo:OnHostTimeScaleChange( eventSourceIndex, data )
 end
 
 --------------------------------------------------------------------------------
+-- GameEvent: FilterRuneSpawn
+--------------------------------------------------------------------------------
+function CHeroDemo:FilterRuneSpawn( filterTable  )
+    filterTable["rune_type"] = self.m_nRUNE
+    return true
+end
+
+--------------------------------------------------------------------------------
 -- GameEvent: OnRegrowTreesButtonPressed
 --------------------------------------------------------------------------------
 function CHeroDemo:OnRegrowTreesButtonPressed( eventSourceIndex, data )
@@ -1121,6 +1129,7 @@ end
 --------------------------------------------------------------------------------
 function CHeroDemo:OnSpawnRunesButtonPressed( eventSourceIndex, data )
 	SendToServerConsole("dota_spawn_rune")
+    self.m_nRUNE = (self.m_nRUNE + 1) % 7
     self:BroadcastMsg( "#SpawnRunes_Msg" )
 end
 
