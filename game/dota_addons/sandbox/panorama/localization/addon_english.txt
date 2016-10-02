@@ -9,6 +9,7 @@
 	"Tab4"										"Overlay"	
 	"Tab5"										"Stats"
 	"Tab6"										"Other"
+	"Tab7"										"Unit"
 	"Hero_ButtonCategory"						"Selected Heroes"
 	"Spawn_ButtonCategory"						"Game"
 	"Misc_ButtonCategory"						"Map Settings"
@@ -17,6 +18,7 @@
 	"Overlay_ButtonCategory"					"Overlays"
 	"Stats_ButtonCategory"						"Stats"
 	"Other_ButtonCategory"						"Other"
+	"Unit_ButtonCategory"						"Unit"
     
     "HeroOptionsBasic"                         "Basic"
     "HeroOptionsUpgrades"                      "Upgrades"
@@ -42,6 +44,7 @@
 	"EnemyInvulnerability_Button"				"Enemies"
 	"Ally_Button"								"Ally"
 	"Enemy_Button"								"Enemy"
+	"Neutral_Button"						    "Neutral"
 	"DummyTarget_Button"						"Dummy Target"
 	"RemoveSpawns_Button"						"Remove Spawns"
 	"SwitchTeam_Button"						    "Switch Team"
@@ -130,4 +133,6 @@
     "OverrideCreepUpgrades_Button"							"Override Enabled"
     "EasyBuyEnabled_Button"							"Shop Easy Buy"
     "PauseDayNightCycle_Button"							"Pause Day/Night"
+    
+    "SpawnUnitButtonLabel"			            "Spawn Unit"
 }

@@ -1,9 +1,10 @@
-var NUM_TABS = 6;
+var NUM_TABS = 7;
 var playerID = Players.GetLocalPlayer();
 var hostTimeScaleIndex = 1;
 var hostTimeScaleValues = [0.5, 1, 2, 4, 8];
 var indicator;
 var selectedHero = 'npc_dota_hero_abaddon';
+var selectedUnit = 'npc_dota_creep_badguys_melee';
 
 function SelectedPlayerToKey() {
     return (parseInt($('#PlayerDropDown').GetSelected().id.replace('player', '')) - 1).toString();
@@ -115,6 +116,7 @@ function FireCustomGameEvent(eventName) {
     var data = {
         eventName: eventName,
         selectedHero: selectedHero,
+        selectedUnit: $('#UnitCustomDropDown').GetSelected().id,
         selectedUnits: selectedUnits,
         goldAmount: $('#GoldAmount').text,
         roshanUpgradeRate: $('#RoshanUpgradeRate').text,
@@ -122,8 +124,11 @@ function FireCustomGameEvent(eventName) {
         creepUpgradeLevel: $('#SetCreepUpgrades').text,
         selectedPlayerID: SelectedPlayerToKey()
     }
+
     GameEvents.SendCustomGameEventToServer(eventName, data);
-    if (eventName == "TeleportButtonPressed" || eventName == "SpawnAllyButtonPressed" || eventName == "SpawnEnemyButtonPressed") {
+    if (eventName == "TeleportButtonPressed" || eventName == "SpawnAllyButtonPressed" || eventName == "SpawnEnemyButtonPressed" ||
+        eventName == "SpawnAllyUnitButtonPressed" || eventName == "SpawnEnemyUnitButtonPressed" || eventName == "SpawnNeutralUnitButtonPressed"
+    ) {
         var unit = Players.GetLocalPlayerPortraitUnit();
         if (indicator) indicator.Delete();
         indicator = new GlobalTargetIndicator({}, unit);
@@ -188,6 +193,7 @@ function UpdateTextUI(data) {
 
 (function() {
     $('#BuildingInvulnerability_Button').checked = true;
+    $('#UnitCustomDropDown').SetSelected("npc_dota_creep_badguys_melee");
     $('#NeutralSpawnIntervalDropDown').SetSelected("i_60");
     $('#RoshanUpgradeRate').text = 240;
     $('#EffectiveCreepSpawnTime').text = 0;

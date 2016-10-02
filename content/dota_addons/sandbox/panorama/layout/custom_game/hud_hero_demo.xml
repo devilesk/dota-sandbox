@@ -28,6 +28,9 @@
             <Button id="TabButton6" class="TabButton" onactivate="ToggleTab(6);">
                 <Label class="TabButtonLabel" text="#Tab6" />
             </Button>
+            <Button id="TabButton7" class="TabButton" onactivate="ToggleTab(7);">
+                <Label class="TabButtonLabel" text="#Tab7" />
+            </Button>
         </Panel>
         <Panel class="ControlPanelOuterContainer">
             <Panel class="ControlPanelContainer">
@@ -134,7 +137,7 @@
                                 </Panel>
                                 <Panel class="Row">
                                     <Button class="DemoButton HalfButton" onactivate="FireCustomGameEvent( 'SpawnAllyButtonPressed' )">
-                                        <Label class="SectionLabel" text="#Ally_Button" />
+                                        <Label text="#Ally_Button" />
                                     </Button>
                                     <Button class="DemoButton HalfButton" onactivate="FireCustomGameEvent( 'SpawnEnemyButtonPressed' )">
                                         <Label text="#Enemy_Button" />
@@ -490,6 +493,85 @@
                                     <ToggleButton id="OverrideCreepUpgrades_Button" class="DemoButton" onactivate="FireCustomGameEvent( 'OverrideCreepUpgradesButtonPressed' )">
                                         <Label text="#OverrideCreepUpgrades_Button" />
                                     </ToggleButton>
+                                </Panel>
+                            </Panel>
+                        </Panel>
+                        <Panel id="TabContent7" class="TabContent">
+                            <Panel class="Category">
+                                <Label class="Header" text="#Unit_ButtonCategory" />
+                                <Panel class="Row">
+                                    <Label id="SpawnUnitButtonLabel" class="SectionLabel" text="#SpawnUnitButtonLabel" />
+                                </Panel>
+                                <Panel class="Row">
+                                    <DropDown id="UnitCustomDropDown" class="DemoButton">
+                                        <Label text="Dire melee creep" id="npc_dota_creep_badguys_melee"/>
+                                        <Label text="Dire super melee creep" id="npc_dota_creep_badguys_melee_upgraded"/>
+                                        <Label text="Dire mega melee creep" id="npc_dota_creep_badguys_melee_upgraded_mega"/>
+                                        <Label text="Dire ranged creep" id="npc_dota_creep_badguys_ranged"/>
+                                        <Label text="Dire super ranged creep" id="npc_dota_creep_badguys_ranged_upgraded"/>
+                                        <Label text="Dire mega ranged creep" id="npc_dota_creep_badguys_ranged_upgraded_mega"/>
+                                        <Label text="Dire siege creep" id="npc_dota_badguys_siege"/>
+                                        <Label text="Dire super siege creep" id="npc_dota_badguys_siege_upgraded"/>
+                                        <Label text="Dire mega siege creep" id="npc_dota_badguys_siege_upgraded_mega"/>
+                                        <Label text="Radiant melee creep" id="npc_dota_creep_goodguys_melee"/>
+                                        <Label text="Radiant super melee creep" id="npc_dota_creep_goodguys_melee_upgraded"/>
+                                        <Label text="Radiant mega melee creep" id="npc_dota_creep_goodguys_melee_upgraded_mega"/>
+                                        <Label text="Radiant ranged creep" id="npc_dota_creep_goodguys_ranged"/>
+                                        <Label text="Radiant super ranged creep" id="npc_dota_creep_goodguys_ranged_upgraded"/>
+                                        <Label text="Radiant mega ranged creep" id="npc_dota_creep_goodguys_ranged_upgraded_mega"/>
+                                        <Label text="Radiant siege creep" id="npc_dota_goodguys_siege"/>
+                                        <Label text="Radiant super siege creep" id="npc_dota_goodguys_siege_upgraded"/>
+                                        <Label text="Radiant mega siege creep" id="npc_dota_goodguys_siege_upgraded_mega"/>
+                                        <Label text="Alpha Wolf" id="npc_dota_neutral_alpha_wolf"/>
+                                        <Label text="Centaur Conqueror" id="npc_dota_neutral_centaur_khan"/>
+                                        <Label text="Centaur Courser" id="npc_dota_neutral_centaur_outrunner"/>
+                                        <Label text="Dark Troll Summoner" id="npc_dota_neutral_dark_troll_warlord"/>
+                                        <Label text="Fell Spirit" id="npc_dota_neutral_fel_beast"/>
+                                        <Label text="Ghost" id="npc_dota_neutral_ghost"/>
+                                        <Label text="Giant Wolf" id="npc_dota_neutral_giant_wolf"/>
+                                        <Label text="Harpy" id="npc_dota_neutral_harpy_scout"/>
+                                        <Label text="Harpy Stormcrafter" id="npc_dota_neutral_harpy_storm"/>
+                                        <Label text="Hellbear" id="npc_dota_neutral_polar_furbolg_champion"/>
+                                        <Label text="Hellbear Smasher" id="npc_dota_neutral_polar_furbolg_ursa_warrior"/>
+                                        <Label text="Hill Troll" id="npc_dota_neutral_dark_troll"/>
+                                        <Label text="Hill Troll Berserker" id="npc_dota_neutral_forest_troll_berserker"/>
+                                        <Label text="Hill Troll Priest" id="npc_dota_neutral_forest_troll_high_priest"/>
+                                        <Label text="Kobold" id="npc_dota_neutral_kobold"/>
+                                        <Label text="Kobold Soldier" id="npc_dota_neutral_kobold_tunneler"/>
+                                        <Label text="Kobold Foreman" id="npc_dota_neutral_kobold_taskmaster"/>
+                                        <Label text="Mud Golem" id="npc_dota_neutral_mud_golem"/>
+                                        <Label text="Ogre Bruiser" id="npc_dota_neutral_ogre_mauler"/>
+                                        <Label text="Ogre Frostmage" id="npc_dota_neutral_ogre_magi"/>
+                                        <Label text="Satyr Banisher" id="npc_dota_neutral_satyr_trickster"/>
+                                        <Label text="Satyr Mindstealer" id="npc_dota_neutral_satyr_soulstealer"/>
+                                        <Label text="Satyr Tormenter" id="npc_dota_neutral_satyr_hellcaller"/>
+                                        <Label text="Vhoul Assassin" id="npc_dota_neutral_gnoll_assassin"/>
+                                        <Label text="Wildwing" id="npc_dota_neutral_wildkin"/>
+                                        <Label text="Wildwing Ripper" id="npc_dota_neutral_enraged_wildkin"/>
+                                        <Label text="Ancient Black Drake" id="npc_dota_neutral_black_drake"/>
+                                        <Label text="Ancient Black Dragon" id="npc_dota_neutral_black_dragon"/>
+                                        <Label text="Ancient Drakken Armorer" id="npc_dota_neutral_blue_dragonspawn_sorcerer"/>
+                                        <Label text="Ancient Drakken Sentinel" id="npc_dota_neutral_blue_dragonspawn_overseer"/>
+                                        <Label text="Ancient Granite Golem" id="npc_dota_neutral_granite_golem"/>
+                                        <Label text="Ancient Primal Stalker" id="npc_dota_neutral_elder_jungle_stalker"/>
+                                        <Label text="Ancient Rock Golem" id="npc_dota_neutral_rock_golem"/>
+                                        <Label text="Ancient Rumblehide" id="npc_dota_neutral_small_thunder_lizard"/>
+                                        <Label text="Ancient Stalker" id="npc_dota_neutral_jungle_stalker"/>
+                                        <Label text="Thunderhide" id="npc_dota_neutral_big_thunder_lizard"/>
+                                    </DropDown>
+                                </Panel>
+                                <Panel class="Row">
+                                    <Button class="DemoButton HalfButton" onactivate="FireCustomGameEvent( 'SpawnAllyUnitButtonPressed' )">
+                                        <Label text="#Ally_Button" />
+                                    </Button>
+                                    <Button class="DemoButton HalfButton" onactivate="FireCustomGameEvent( 'SpawnEnemyUnitButtonPressed' )">
+                                        <Label text="#Enemy_Button" />
+                                    </Button>
+                                </Panel>
+                                <Panel class="Row">
+                                    <Button class="DemoButton HalfButton" onactivate="FireCustomGameEvent( 'SpawnNeutralUnitButtonPressed' )">
+                                        <Label text="#Neutral_Button" />
+                                    </Button>
                                 </Panel>
                             </Panel>
                         </Panel>

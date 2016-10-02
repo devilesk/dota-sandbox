@@ -858,6 +858,48 @@ function CHeroDemo:OnSpawnEnemyButtonPressedHandler( eventSourceIndex, data )
 end
 
 --------------------------------------------------------------------------------
+-- ButtonEvent: OnSpawnAllyUnitButtonPressed
+--------------------------------------------------------------------------------
+function CHeroDemo:OnSpawnAllyUnitButtonPressed( eventSourceIndex, data )
+    CHeroDemo.OnTargetButtonPress(self, eventSourceIndex, data)
+end
+
+function CHeroDemo:OnSpawnAllyUnitButtonPressedHandler( eventSourceIndex, data )
+    if GameRules:IsCheatMode() then
+        SendToServerConsole("dota_create_unit " .. data.selectedUnit)
+        self:BroadcastMsg( "#SpawnAllyUnit_Msg" )
+    end
+end
+
+--------------------------------------------------------------------------------
+-- ButtonEvent: SpawnEnemyUnitButtonPressed
+--------------------------------------------------------------------------------
+function CHeroDemo:OnSpawnEnemyUnitButtonPressed( eventSourceIndex, data )
+    CHeroDemo.OnTargetButtonPress(self, eventSourceIndex, data)
+end
+
+function CHeroDemo:OnSpawnEnemyUnitButtonPressedHandler( eventSourceIndex, data )
+    if GameRules:IsCheatMode() then
+        SendToServerConsole("dota_create_unit " .. data.selectedUnit .. " enemy")
+        self:BroadcastMsg( "#SpawnEnemyUnit_Msg" )
+	end
+end
+
+--------------------------------------------------------------------------------
+-- ButtonEvent: SpawnNeutralUnitButtonPressed
+--------------------------------------------------------------------------------
+function CHeroDemo:OnSpawnNeutralUnitButtonPressed( eventSourceIndex, data )
+    CHeroDemo.OnTargetButtonPress(self, eventSourceIndex, data)
+end
+
+function CHeroDemo:OnSpawnNeutralUnitButtonPressedHandler( eventSourceIndex, data )
+    if GameRules:IsCheatMode() then
+        SendToServerConsole("dota_create_neutral_hero " .. data.selectedUnit)
+        self:BroadcastMsg( "#SpawnNeutralUnit_Msg" )
+	end
+end
+
+--------------------------------------------------------------------------------
 -- GameEvent: OnClearInventoryButtonPressed
 --------------------------------------------------------------------------------
 function CHeroDemo:OnClearInventoryButtonPressed( eventSourceIndex, data )
@@ -936,6 +978,15 @@ function CHeroDemo:OnMouseClick( eventSourceIndex, data )
         elseif clickEvent == "SpawnEnemyButtonPressed" then
             data.selectedHero = self.m_tCurrentMouseClick[data.PlayerID].data.selectedHero
             CHeroDemo.OnSpawnEnemyButtonPressedHandler(self, eventSourceIndex, data)
+        elseif clickEvent == "SpawnAllyUnitButtonPressed" then
+            data.selectedUnit = self.m_tCurrentMouseClick[data.PlayerID].data.selectedUnit
+            CHeroDemo.OnSpawnAllyUnitButtonPressedHandler(self, eventSourceIndex, data)
+        elseif clickEvent == "SpawnEnemyUnitButtonPressed" then
+            data.selectedUnit = self.m_tCurrentMouseClick[data.PlayerID].data.selectedUnit
+            CHeroDemo.OnSpawnEnemyUnitButtonPressedHandler(self, eventSourceIndex, data)
+        elseif clickEvent == "SpawnNeutralUnitButtonPressed" then
+            data.selectedUnit = self.m_tCurrentMouseClick[data.PlayerID].data.selectedUnit
+            CHeroDemo.OnSpawnNeutralUnitButtonPressedHandler(self, eventSourceIndex, data)
         end
         self.m_tCurrentMouseClick[data.PlayerID] = nil
     end
