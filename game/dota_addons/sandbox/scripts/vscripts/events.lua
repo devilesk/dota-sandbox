@@ -34,11 +34,12 @@ function CHeroDemo:OnGameRulesStateChange()
                 v:AddNewModifier(v, nil, "modifier_fountain_glyph", {duration = -1})
             end
         end
-    if GameRules:IsCheatMode() then
-        SendToServerConsole( "sv_cheats 1" )
-    else
-        CustomUI:DynamicHud_Create(-1, "cheat-popup-prompt", "file://{resources}/layout/custom_game/cheat_popup.xml", nil)
-    end
+        if GameRules:IsCheatMode() then
+            SendToServerConsole( "sv_cheats 1" )
+            SendToServerConsole( "dota_easybuy 1" )
+        else
+            CustomUI:DynamicHud_Create(-1, "cheat-popup-prompt", "file://{resources}/layout/custom_game/cheat_popup.xml", nil)
+        end
 		DebugPrint( "OnGameRulesStateChange: Pre Game Selection" )
 	elseif nNewState == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
 		DebugPrint( "OnGameRulesStateChange: Game In Progress" )
