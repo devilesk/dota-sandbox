@@ -194,6 +194,7 @@ function UpdateTextUI(data) {
 
 (function() {
     $('#BuildingInvulnerability_Button').checked = true;
+    $('#EasyBuyEnabled_Button').checked = true;
     $('#UnitCustomDropDown').SetSelected("npc_dota_creep_badguys_melee");
     $('#NeutralSpawnIntervalDropDown').SetSelected("i_60");
     $('#RoshanUpgradeRate').text = 240;

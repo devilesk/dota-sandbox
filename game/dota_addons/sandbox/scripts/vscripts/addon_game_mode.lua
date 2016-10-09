@@ -219,7 +219,7 @@ function CHeroDemo:InitGameMode()
     -- Events
     ListenToGameEvent( "game_rules_state_change", Dynamic_Wrap( CHeroDemo, 'OnGameRulesStateChange' ), self )
     ListenToGameEvent( "npc_spawned", Dynamic_Wrap( CHeroDemo, "OnNPCSpawned" ), self )
-    ListenToGameEvent( "dota_item_purchased", Dynamic_Wrap( CHeroDemo, "OnItemPurchased" ), self )
+    --ListenToGameEvent( "dota_item_purchased", Dynamic_Wrap( CHeroDemo, "OnItemPurchased" ), self )
     ListenToGameEvent( "npc_replaced", Dynamic_Wrap( CHeroDemo, "OnNPCReplaced" ), self )
     ListenToGameEvent( "player_fullyjoined", Dynamic_Wrap( CHeroDemo, "OnPlayerFullyJoined" ), self )
     ListenToGameEvent( "player_connect", Dynamic_Wrap( CHeroDemo, "OnPlayerConnect" ), self )
@@ -303,7 +303,8 @@ function CHeroDemo:InitGameMode()
     --SendToServerConsole( "dota_ability_debug 0" )
     --SendToServerConsole( "dota_creeps_no_spawning 0" )
     --SendToServerConsole( "dota_bot_mode 1" )
-
+    SendToServerConsole( "dota_easybuy 1" )
+    
     --self.m_sHeroSelection = sHeroSelection -- this seems redundant, but events.lua doesn't seem to know about sHeroSelection
     self.m_nRUNE = 0
     
@@ -343,7 +344,7 @@ function CHeroDemo:InitGameMode()
     self.m_tCurrentMouseClick = {}
     
     self.m_bPauseDayNightCycle = false
-    self.m_bEasyBuyEnabled = false
+    self.m_bEasyBuyEnabled = true
     self.m_bOverrideCreepUpgrades = false
     self.m_bFreeSpellsEnabled = false
     self.m_bInvulnerabilityEnabled = false
