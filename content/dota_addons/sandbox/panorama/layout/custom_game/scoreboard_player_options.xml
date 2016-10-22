@@ -200,6 +200,7 @@
   <DOTAItemImage class="shop-item" id="item_dagon_3" itemname="item_dagon_3" onactivate="ItemClick('item_dagon_3')"/>
   <DOTAItemImage class="shop-item" id="item_dagon_4" itemname="item_dagon_4" onactivate="ItemClick('item_dagon_4')"/>
   <DOTAItemImage class="shop-item" id="item_dagon_5" itemname="item_dagon_5" onactivate="ItemClick('item_dagon_5')"/>
+  <DOTAItemImage class="shop-item" id="item_cheese" itemname="item_cheese" onactivate="ItemClick('item_cheese')"/>
 </Panel>
     </Panel>
     <Panel id="shop-secret" class="shop-tab">
