@@ -446,6 +446,10 @@ var heroAliases = {
     "npc_dota_hero_abyssal_underlord": {
         "name": "Underlord",
         "aliases": ["abyssal", "pitlord"]
+    },
+    "npc_dota_hero_monkey_king": {
+        "name": "Monkey King",
+        "aliases": ["mk", "monkey"]
     }
 }
 
