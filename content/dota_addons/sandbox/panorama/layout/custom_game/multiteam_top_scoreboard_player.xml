@@ -8,7 +8,10 @@
 	</scripts>
     <Panel hittest="false" class="ScoreboardPlayer">
         <Button class="PlayerPortraitWrapper" onmouseactivate="PortraitClicked();" ondblclick="PortraitDoubleClicked();">
+            <Panel id="PlayerColor"></Panel>
+            <Panel id="DisconnectIcon" hittest="false"></Panel>
             <Image hittest="false" id="HeroIcon" />
+            <Panel id="PlayerColorShadow" hittest="false"></Panel>
         </Button>
     </Panel>
 </root>

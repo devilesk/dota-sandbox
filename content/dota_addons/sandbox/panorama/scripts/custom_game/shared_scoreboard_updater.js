@@ -334,7 +334,7 @@ function _ScoreboardUpdater_UpdateAllTeamsAndPlayers( scoreboardConfig, teamsCon
 		{
 			var teamId = teamsList[i].team_id;
 			var teamPanel = panelsByTeam[ teamId ];
-			_ScoreboardUpdater_ReorderTeam( scoreboardConfig, teamsContainer, teamPanel, teamId, i, prevPanel );
+			//_ScoreboardUpdater_ReorderTeam( scoreboardConfig, teamsContainer, teamPanel, teamId, i, prevPanel );
 			prevPanel = teamPanel;
 		}
 //		$.Msg( GameUI.CustomUIConfig().teamsPrevPlace );

@@ -3,9 +3,11 @@
 		<include src="file://{resources}/styles/dotastyles.css" />
 		<include src="file://{resources}/styles/custom_game/multiteam_top_scoreboard.css" />
     </styles>
-	<Panel hittest="false" class="ScoreboardTeamWrapper">
-		<Panel hittest="false" id="ScoreboardTeam">
-			<Panel hittest="false" id="PlayersContainer"/>
+	<Panel hittest="false" class="ScoreboardTeamWrapper TopBarTeam">
+		<Panel hittest="false" id="ScoreboardTeam" class="PlayerContainer">
+            <Panel hittest="false" class="TeamScorePlayers LeftRightFlow">
+                <Panel hittest="false" id="PlayersContainer" class="TopBarPlayersContainer LeftRightFlow" />
+            </Panel>
 		</Panel>
 	</Panel>
 </root>

@@ -1,5 +1,39 @@
 @define ANIM_TIME: 0.75s;
 
+#_dynamic_team_2,
+#_dynamic_team_3
+{
+	width: 380px;
+	height: 100%;
+}
+
+#_dynamic_team_2
+{
+	margin-left: 52px;
+}
+
+#_dynamic_team_3
+{
+    horizontal-align: right;
+	margin-right: 52px;
+}
+
+#_dynamic_team_2 .TeamScorePlayers,
+#_dynamic_team_3 .TeamScorePlayers
+{
+    height: 100%;
+}
+
+#_dynamic_team_3 .TeamScorePlayers
+{
+    horizontal-align: right;
+}
+
+#_dynamic_team_3 .PlayerContainer {
+    horizontal-align: right;
+}
+
+
 .CustomHudRoot
 {
 	width: 100%;
@@ -8,68 +42,109 @@
 
 #MultiteamScoreboard
 {
-    horizontal-align: middle;
-    vertical-align: top;
-    height: 800px;
-    width: 846px;
-    flow-children: right;
+	vertical-align: top;
+	horizontal-align: center;
+	height: 800px;
+	width: 940px;
+
+	transform: translateY(0px);
+	transition-property: transform;
+	transition-duration: 1s;
+	transition-delay: 2s;
+	transition-timing-function: ease-in-out;
 }
 
-.AspectRatio5x4 #MultiteamScoreboard {
-    width: 844px;
-}
-
-.AspectRatio4x3 #MultiteamScoreboard {
-    width: 844px;
-}
-
-.AspectRatio16x10 #MultiteamScoreboard {
-    width: 846px;
-}
-
-
-.ScoreboardTeamWrapper
-{
-    transition-property: position;
-    transition-duration: ANIM_TIME;
-    width: 526px;
-}
-
-.AspectRatio5x4 .ScoreboardTeamWrapper {
-    width: 524px;
-}
-
-.AspectRatio16x10 .ScoreboardTeamWrapper {
-    width: 530px;
+.PlayerContainer {
+    width: 100%;
+    height: 100%;
 }
 
 #PlayersContainer
 {
     flow-children: right;
+	height: 100%;
+	width: 316px;
+	z-index: 2;
 }
 
-.ScoreboardPlayer.active .PlayerPortraitWrapper {
-    box-shadow: inset yellow 0px 0px 5px 0px;
+#_dynamic_team_2 .ScoreboardPlayer {
+    margin-left: -4px;
+    background-color: #FFFFFF00;
+    opacity: 1;
 }
 
-.PlayerPortraitWrapper {
-    //box-shadow: inset lightgrey 0px 0px 5px 0px;
-    border: 1px solid yellow;
-    opacity: .7;
+#_dynamic_team_3 .ScoreboardPlayer {
+    margin-right: -4px;
+    background-color: #FFFFFF00;
+    opacity: 1;
+}
+
+#_dynamic_team_2 .ScoreboardPlayer .PlayerPortraitWrapper {
+    opacity-mask: url("s2r://panorama/images/masks/topbar_heroslant_left_psd.vtex");
+}
+
+#_dynamic_team_3 .ScoreboardPlayer .PlayerPortraitWrapper {
+    opacity-mask: url("s2r://panorama/images/masks/topbar_heroslant_right_psd.vtex");
+}
+
+#_dynamic_team_2 .ScoreboardPlayer .PlayerPortraitWrapper:hover,
+#_dynamic_team_3 .ScoreboardPlayer .PlayerPortraitWrapper:hover {
+    opacity: 0.1;
+    background-color: white;
+}
+
+#_dynamic_team_2 .ScoreboardPlayer.active .PlayerPortraitWrapper,
+#_dynamic_team_3 .ScoreboardPlayer.active .PlayerPortraitWrapper {
+    opacity: 0.1;
+    background-color: yellow;
 }
 
 .PlayerPortraitWrapper:hover
 {
-    box-shadow: inset orange 0px 0px 5px 0px;
+    opacity: 1;
+}
+
+#PlayerColor
+{
+	width: 100%;
+	height: 4px;
+	z-index: 5;
+	background-image: url("s2r://panorama/images/hud/reborn/topbar_playerslot_vignette_psd.vtex");
+	background-size: 92% 100%;
+	background-repeat: no-repeat;
+}
+
+#_dynamic_team_3 #PlayerColor
+{
+	background-size: 93% 100%;
+	background-position: 5px 0px;
+}
+
+#PlayerColorShadow
+{
+	width: 100%;
+	height: 100%;
+	margin-top: 4px;
+	z-index: 4;
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #000 ), color-stop( 0.03, #000a ), color-stop( 0.1, #0000 ), color-stop( 0.91, #0000 ), color-stop( 0.95, #0006 ),  to( #000a ) );
 }
 
 #HeroIcon
 {
-    width: 61px;
+    width: 66px;
     height: 40px;
+    z-index: 3;
 }
 
-.AspectRatio5x4 #HeroIcon
+#DisconnectIcon
 {
-    width: 61px;
+	width: 67px;
+	height: 20px;
+	margin-top: 12px;
+	vertical-align: top;
+	background-image: url("s2r://panorama/images/hud/reborn/icon_disconnect_png.vtex");
+	background-repeat: no-repeat;
+	background-size: 100%;
+	z-index: 20;
+	opacity: 0;
 }

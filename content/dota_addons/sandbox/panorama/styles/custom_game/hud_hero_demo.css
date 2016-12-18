@@ -52,8 +52,7 @@
     width: 96px;
     height: 32px;
     background-color: #181818cc;
-    border-bottom-left-radius: 12px;
-    border-bottom-right-radius: 12px;
+    border-radius: 5px;
     box-shadow: #00000055 -4px -4px 8px 8px;
 }
 
