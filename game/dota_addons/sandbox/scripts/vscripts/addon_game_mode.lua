@@ -65,7 +65,7 @@ function Precache( context )
     PrecacheResource( "particle", RANGE_LINE_PARTICLE, context )
     PrecacheResource( "particle", RANGE_LINE_PARTICLE_RED, context )
     PrecacheResource( "particle", RANGE_TARGET, context )
-    PrecacheUnitByNameSync( "npc_dota_hero_abaddon", context )
+    --[[PrecacheUnitByNameSync( "npc_dota_hero_abaddon", context )
     PrecacheUnitByNameSync( "npc_dota_hero_abyssal_underlord", context )
     PrecacheUnitByNameSync( "npc_dota_hero_alchemist", context )
     PrecacheUnitByNameSync( "npc_dota_hero_ancient_apparition", context )
@@ -177,7 +177,7 @@ function Precache( context )
     PrecacheUnitByNameSync( "npc_dota_hero_winter_wyvern", context )
     PrecacheUnitByNameSync( "npc_dota_hero_witch_doctor", context )
     PrecacheUnitByNameSync( "npc_dota_hero_skeleton_king", context )
-    PrecacheUnitByNameSync( "npc_dota_hero_zuus", context )
+    PrecacheUnitByNameSync( "npc_dota_hero_zuus", context )]]
 end
 
 --------------------------------------------------------------------------------

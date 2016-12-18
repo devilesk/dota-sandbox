@@ -35,9 +35,11 @@ function CHeroDemo:OnGameRulesStateChange()
             end
         end
         if GameRules:IsCheatMode() then
+            print("NO CHEAT POPUP")
             SendToServerConsole( "sv_cheats 1" )
             SendToServerConsole( "dota_easybuy 1" )
         else
+            print("CHEAT POPUP")
             CustomUI:DynamicHud_Create(-1, "cheat-popup-prompt", "file://{resources}/layout/custom_game/cheat_popup.xml", nil)
         end
 		DebugPrint( "OnGameRulesStateChange: Pre Game Selection" )
@@ -740,15 +742,15 @@ end
 -- GameEvent: OnChangeHeroButtonPressed
 --------------------------------------------------------------------------------
 function CHeroDemo:OnChangeHeroButtonPressed( eventSourceIndex, data )
-    -- currently running the command directly in XML, should run it here if possible
-    local nHeroID = PlayerResource:GetSelectedHeroID( data.pID )
-    if nHeroID == -1 then
-        CreateHeroForPlayer(data.selectedHero, PlayerResource:GetPlayer(data.pID))
-    else
-        PlayerResource:ReplaceHeroWith(data.pID, data.selectedHero, PlayerResource:GetGold(data.pID), 0)
-    end
-    CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(data.PlayerID), "select_hero", {entId=PlayerResource:GetSelectedHeroEntity(data.pID):GetEntityIndex()} )
-
+    PrecacheUnitByNameAsync(data.selectedHero, function ()
+        local nHeroID = PlayerResource:GetSelectedHeroID( data.pID )
+        if nHeroID == -1 then
+            CreateHeroForPlayer(data.selectedHero, PlayerResource:GetPlayer(data.pID))
+        else
+            PlayerResource:ReplaceHeroWith(data.pID, data.selectedHero, PlayerResource:GetGold(data.pID), 0)
+        end
+        CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(data.PlayerID), "select_hero", {entId=PlayerResource:GetSelectedHeroEntity(data.pID):GetEntityIndex()} )
+    end, data.pID)
 end
 
 --------------------------------------------------------------------------------
@@ -806,16 +808,18 @@ function CHeroDemo:OnSpawnAllyButtonPressedHandler( eventSourceIndex, data )
             self:BroadcastMsg( "#MaxAllies_Msg" )
         end
     else
-        self.m_sSelectedHero = data.selectedHero
-        
-        local hAbility = self._hNeutralCaster:FindAbilityByName( "la_spawn_ally_at_target" )
-        self._hNeutralCaster:CastAbilityImmediately( hAbility, -1 )
-        self.m_nAlliesCount = self.m_nAlliesCount + 1
-        local hPlayerHero = PlayerResource:GetSelectedHeroEntity( data.PlayerID )
-        local hAbilityTestSearch = hPlayerHero:FindAbilityByName( "la_spawn_ally_at_target" )
-        if hAbilityTestSearch then -- Testing whether AddAbility worked successfully on the lua-based ability
-            DebugPrint( "hPlayerHero:AddAbility( \"la_spawn_ally_at_target\" ) was successful" )
-        end
+        PrecacheUnitByNameAsync(data.selectedHero, function ()
+            self.m_sSelectedHero = data.selectedHero
+            
+            local hAbility = self._hNeutralCaster:FindAbilityByName( "la_spawn_ally_at_target" )
+            self._hNeutralCaster:CastAbilityImmediately( hAbility, -1 )
+            self.m_nAlliesCount = self.m_nAlliesCount + 1
+            local hPlayerHero = PlayerResource:GetSelectedHeroEntity( data.PlayerID )
+            local hAbilityTestSearch = hPlayerHero:FindAbilityByName( "la_spawn_ally_at_target" )
+            if hAbilityTestSearch then -- Testing whether AddAbility worked successfully on the lua-based ability
+                DebugPrint( "hPlayerHero:AddAbility( \"la_spawn_ally_at_target\" ) was successful" )
+            end
+        end, data.PlayerID)
     end
 	self:BroadcastMsg( "#SpawnAlly_Msg" )
 end
@@ -843,16 +847,18 @@ function CHeroDemo:OnSpawnEnemyButtonPressedHandler( eventSourceIndex, data )
             self:BroadcastMsg( "#MaxEnemies_Msg" )
         end
     else
-        self.m_sSelectedHero = data.selectedHero
-        
-        local hAbility = self._hNeutralCaster:FindAbilityByName( "la_spawn_enemy_at_target" )
-        self._hNeutralCaster:CastAbilityImmediately( hAbility, -1 )
-        self.m_nEnemiesCount = self.m_nEnemiesCount + 1
-        local hPlayerHero = PlayerResource:GetSelectedHeroEntity( data.PlayerID )
-        local hAbilityTestSearch = hPlayerHero:FindAbilityByName( "la_spawn_enemy_at_target" )
-        if hAbilityTestSearch then -- Testing whether AddAbility worked successfully on the lua-based ability
-            DebugPrint( "hPlayerHero:AddAbility( \"la_spawn_enemy_at_target\" ) was successful" )
-        end
+        PrecacheUnitByNameAsync(data.selectedHero, function ()
+            self.m_sSelectedHero = data.selectedHero
+            
+            local hAbility = self._hNeutralCaster:FindAbilityByName( "la_spawn_enemy_at_target" )
+            self._hNeutralCaster:CastAbilityImmediately( hAbility, -1 )
+            self.m_nEnemiesCount = self.m_nEnemiesCount + 1
+            local hPlayerHero = PlayerResource:GetSelectedHeroEntity( data.PlayerID )
+            local hAbilityTestSearch = hPlayerHero:FindAbilityByName( "la_spawn_enemy_at_target" )
+            if hAbilityTestSearch then -- Testing whether AddAbility worked successfully on the lua-based ability
+                DebugPrint( "hPlayerHero:AddAbility( \"la_spawn_enemy_at_target\" ) was successful" )
+            end
+        end, data.PlayerID)
 	end
 
 	self:BroadcastMsg( "#SpawnEnemy_Msg" )
