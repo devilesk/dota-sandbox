@@ -371,7 +371,7 @@ function LevelHeroToMax( hPlayerHero )
 		end
 	end
 
-	hPlayerHero:SetAbilityPoints( 0 )
+	hPlayerHero:SetAbilityPoints( 4 )
 	
 end
 
