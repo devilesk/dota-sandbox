@@ -11,20 +11,20 @@
     horizontal-align: middle;
     vertical-align: top;
     height: 800px;
-    width: 868px;
+    width: 846px;
     flow-children: right;
 }
 
 .AspectRatio5x4 #MultiteamScoreboard {
-    width: 814px;
+    width: 844px;
 }
 
 .AspectRatio4x3 #MultiteamScoreboard {
-    width: 868px;
+    width: 844px;
 }
 
 .AspectRatio16x10 #MultiteamScoreboard {
-    width: 868px;
+    width: 846px;
 }
 
 
@@ -32,11 +32,15 @@
 {
     transition-property: position;
     transition-duration: ANIM_TIME;
-    width: 538px;
+    width: 526px;
 }
 
 .AspectRatio5x4 .ScoreboardTeamWrapper {
-    width: 504px;
+    width: 524px;
+}
+
+.AspectRatio16x10 .ScoreboardTeamWrapper {
+    width: 530px;
 }
 
 #PlayersContainer
@@ -49,7 +53,8 @@
 }
 
 .PlayerPortraitWrapper {
-    box-shadow: inset lightgrey 0px 0px 5px 0px;
+    //box-shadow: inset lightgrey 0px 0px 5px 0px;
+    border: 1px solid yellow;
     opacity: .7;
 }
 
@@ -60,11 +65,11 @@
 
 #HeroIcon
 {
-    width: 66px;
+    width: 61px;
     height: 40px;
 }
 
 .AspectRatio5x4 #HeroIcon
 {
-    width: 62px;
+    width: 61px;
 }
