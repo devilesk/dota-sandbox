@@ -13,6 +13,62 @@ function OnPortraitClicked(playerPanel)
     optionsPanel.SetFocus();
     optionsPanel.SetAttributeInt("player_id", playerID);
     optionsPanel.ClearActive = playerPanel.ClearActive;
+    
+    /*for (var i = 0; i < 10; i++) {
+        var playerPanelName = "_dynamic_player_" + i;
+        var playerPanel = $.GetContextPanel().FindChild( playerPanelName );
+        $.Msg("playerPanel i", i, $.GetContextPanel());
+        if ( playerPanel !== null ) {
+            $.Msg("playerPanel", playerPanel);
+            if (i !== playerID) {
+                playerPanel.RemoveClass("active");
+                var optionsPanel = optionsPanels[i];
+                optionsPanel.RemoveClass("active");
+            }
+        }
+    }*/
+    
+    var teamsContainer = $( "#MultiteamScoreboard" );
+	var teamsList = [];
+	for ( var teamId of Game.GetAllTeamIDs() )
+	{
+		teamsList.push( Game.GetTeamDetails( teamId ) );
+	}
+
+	// update/create team panels
+	var teamsInfo = { max_team_players: 0 };
+	var panelsByTeam = [];
+	for ( var i = 0; i < teamsList.length; ++i )
+	{
+        if ( !teamsContainer )
+            return;
+        var teamDetails = teamsList[i];
+        var teamId = teamDetails.team_id;
+        //	$.Msg( "_ScoreboardUpdater_UpdateTeamPanel: ", teamId );
+
+        var teamPanelName = "_dynamic_team_" + teamId;
+        var teamPanel = teamsContainer.FindChild( teamPanelName );
+		if ( teamPanel )
+		{
+            var teamPlayers = Game.GetPlayerIDsOnTeam( teamId )
+            var playersContainer = teamPanel.FindChildInLayoutFile( "PlayersContainer" );
+            if ( playersContainer )
+            {
+                for ( var playerId of teamPlayers )
+                {
+                    var playerPanelName = "_dynamic_player_" + playerId;
+                    var playerPanel = playersContainer.FindChild( playerPanelName );
+                    
+                    if (playerId !== playerID) {
+                        playerPanel.RemoveClass("active");
+                        var optionsPanel = optionsPanels[playerId];
+                        optionsPanel.RemoveClass("active");
+                    }
+                
+                }
+            }
+		}
+	}
 }
 
 function UpdateScoreboard()
