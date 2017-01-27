@@ -9,7 +9,8 @@ function CHeroDemo:OnGameRulesStateChange()
 
 	if nNewState == DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP then
 		DebugPrint( "OnGameRulesStateChange: Custom Game Setup" )
-    GameRules:EnableCustomGameSetupAutoLaunch( false )
+        GameRules:EnableCustomGameSetupAutoLaunch(true)
+        GameRules:SetCustomGameSetupAutoLaunchDelay(0)
     
 	elseif nNewState == DOTA_GAMERULES_STATE_HERO_SELECTION then
 		DebugPrint( "OnGameRulesStateChange: Hero Selection" )
