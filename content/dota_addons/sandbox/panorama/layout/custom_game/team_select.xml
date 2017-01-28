@@ -11,10 +11,131 @@
 		<Panel hittest="false" id="TeamSelectContainer" selectionpos="auto">`
 			<!--Empty space to let the loading screen and chat be visible-->
 			<Panel hittest="false" id="TeamsSelectEmptySpace" />
-
 			<!--Teams List, left hand panel-->
 			<Panel id="TeamsList" >
+
+                <Panel id="HeroListGroup" >
+					
+                </Panel>
 				<Panel id="TeamsListGroup" >
+<Panel id="HeroListHeader">
+						<Label id="TeamListHeaderLabel" text="#custom_game_hero_select" />
+					</Panel>
+                    <DropDown id="HeroDropDown" class="DemoButton" oninputsubmit="OnHeroChanged()">
+<Label text="Abaddon" id="label_npc_dota_hero_abaddon"></Label>
+<Label text="Alchemist" id="label_npc_dota_hero_alchemist"></Label>
+<Label text="Ancient Apparition" id="label_npc_dota_hero_ancient_apparition"></Label>
+<Label text="Anti-Mage" id="label_npc_dota_hero_antimage"></Label>
+<Label text="Arc Warden" id="label_npc_dota_hero_arc_warden"></Label>
+<Label text="Axe" id="label_npc_dota_hero_axe"></Label>
+<Label text="Bane" id="label_npc_dota_hero_bane"></Label>
+<Label text="Batrider" id="label_npc_dota_hero_batrider"></Label>
+<Label text="Beastmaster" id="label_npc_dota_hero_beastmaster"></Label>
+<Label text="Bloodseeker" id="label_npc_dota_hero_bloodseeker"></Label>
+<Label text="Bounty Hunter" id="label_npc_dota_hero_bounty_hunter"></Label>
+<Label text="Brewmaster" id="label_npc_dota_hero_brewmaster"></Label>
+<Label text="Bristleback" id="label_npc_dota_hero_bristleback"></Label>
+<Label text="Broodmother" id="label_npc_dota_hero_broodmother"></Label>
+<Label text="Centaur Warrunner" id="label_npc_dota_hero_centaur"></Label>
+<Label text="Chaos Knight" id="label_npc_dota_hero_chaos_knight"></Label>
+<Label text="Chen" id="label_npc_dota_hero_chen"></Label>
+<Label text="Clinkz" id="label_npc_dota_hero_clinkz"></Label>
+<Label text="Clockwerk" id="label_npc_dota_hero_rattletrap"></Label>
+<Label text="Crystal Maiden" id="label_npc_dota_hero_crystal_maiden"></Label>
+<Label text="Dark Seer" id="label_npc_dota_hero_dark_seer"></Label>
+<Label text="Dazzle" id="label_npc_dota_hero_dazzle"></Label>
+<Label text="Death Prophet" id="label_npc_dota_hero_death_prophet"></Label>
+<Label text="Disruptor" id="label_npc_dota_hero_disruptor"></Label>
+<Label text="Doom" id="label_npc_dota_hero_doom_bringer"></Label>
+<Label text="Dragon Knight" id="label_npc_dota_hero_dragon_knight"></Label>
+<Label text="Drow Ranger" id="label_npc_dota_hero_drow_ranger"></Label>
+<Label text="Earth Spirit" id="label_npc_dota_hero_earth_spirit"></Label>
+<Label text="Earthshaker" id="label_npc_dota_hero_earthshaker"></Label>
+<Label text="Elder Titan" id="label_npc_dota_hero_elder_titan"></Label>
+<Label text="Ember Spirit" id="label_npc_dota_hero_ember_spirit"></Label>
+<Label text="Enchantress" id="label_npc_dota_hero_enchantress"></Label>
+<Label text="Enigma" id="label_npc_dota_hero_enigma"></Label>
+<Label text="Faceless Void" id="label_npc_dota_hero_faceless_void"></Label>
+<Label text="Gyrocopter" id="label_npc_dota_hero_gyrocopter"></Label>
+<Label text="Huskar" id="label_npc_dota_hero_huskar"></Label>
+<Label text="Invoker" id="label_npc_dota_hero_invoker"></Label>
+<Label text="Io" id="label_npc_dota_hero_wisp"></Label>
+<Label text="Jakiro" id="label_npc_dota_hero_jakiro"></Label>
+<Label text="Juggernaut" id="label_npc_dota_hero_juggernaut"></Label>
+<Label text="Keeper of the Light" id="label_npc_dota_hero_keeper_of_the_light"></Label>
+<Label text="Kunkka" id="label_npc_dota_hero_kunkka"></Label>
+<Label text="Legion Commander" id="label_npc_dota_hero_legion_commander"></Label>
+<Label text="Leshrac" id="label_npc_dota_hero_leshrac"></Label>
+<Label text="Lich" id="label_npc_dota_hero_lich"></Label>
+<Label text="Lifestealer" id="label_npc_dota_hero_life_stealer"></Label>
+<Label text="Lina" id="label_npc_dota_hero_lina"></Label>
+<Label text="Lion" id="label_npc_dota_hero_lion"></Label>
+<Label text="Lone Druid" id="label_npc_dota_hero_lone_druid"></Label>
+<Label text="Luna" id="label_npc_dota_hero_luna"></Label>
+<Label text="Lycan" id="label_npc_dota_hero_lycan"></Label>
+<Label text="Magnus" id="label_npc_dota_hero_magnataur"></Label>
+<Label text="Medusa" id="label_npc_dota_hero_medusa"></Label>
+<Label text="Meepo" id="label_npc_dota_hero_meepo"></Label>
+<Label text="Mirana" id="label_npc_dota_hero_mirana"></Label>
+<Label text="Monkey King" id="label_npc_dota_hero_monkey_king"></Label>
+<Label text="Morphling" id="label_npc_dota_hero_morphling"></Label>
+<Label text="Naga Siren" id="label_npc_dota_hero_naga_siren"></Label>
+<Label text="Nature's Prophet" id="label_npc_dota_hero_furion"></Label>
+<Label text="Necrophos" id="label_npc_dota_hero_necrolyte"></Label>
+<Label text="Night Stalker" id="label_npc_dota_hero_night_stalker"></Label>
+<Label text="Nyx Assassin" id="label_npc_dota_hero_nyx_assassin"></Label>
+<Label text="Ogre Magi" id="label_npc_dota_hero_ogre_magi"></Label>
+<Label text="Omniknight" id="label_npc_dota_hero_omniknight"></Label>
+<Label text="Oracle" id="label_npc_dota_hero_oracle"></Label>
+<Label text="Outworld Devourer" id="label_npc_dota_hero_obsidian_destroyer"></Label>
+<Label text="Phantom Assassin" id="label_npc_dota_hero_phantom_assassin"></Label>
+<Label text="Phantom Lancer" id="label_npc_dota_hero_phantom_lancer"></Label>
+<Label text="Phoenix" id="label_npc_dota_hero_phoenix"></Label>
+<Label text="Puck" id="label_npc_dota_hero_puck"></Label>
+<Label text="Pudge" id="label_npc_dota_hero_pudge"></Label>
+<Label text="Pugna" id="label_npc_dota_hero_pugna"></Label>
+<Label text="Queen of Pain" id="label_npc_dota_hero_queenofpain"></Label>
+<Label text="Razor" id="label_npc_dota_hero_razor"></Label>
+<Label text="Riki" id="label_npc_dota_hero_riki"></Label>
+<Label text="Rubick" id="label_npc_dota_hero_rubick"></Label>
+<Label text="Sand King" id="label_npc_dota_hero_sand_king"></Label>
+<Label text="Shadow Demon" id="label_npc_dota_hero_shadow_demon"></Label>
+<Label text="Shadow Fiend" id="label_npc_dota_hero_nevermore"></Label>
+<Label text="Shadow Shaman" id="label_npc_dota_hero_shadow_shaman"></Label>
+<Label text="Silencer" id="label_npc_dota_hero_silencer"></Label>
+<Label text="Skywrath Mage" id="label_npc_dota_hero_skywrath_mage"></Label>
+<Label text="Slardar" id="label_npc_dota_hero_slardar"></Label>
+<Label text="Slark" id="label_npc_dota_hero_slark"></Label>
+<Label text="Sniper" id="label_npc_dota_hero_sniper"></Label>
+<Label text="Spectre" id="label_npc_dota_hero_spectre"></Label>
+<Label text="Spirit Breaker" id="label_npc_dota_hero_spirit_breaker"></Label>
+<Label text="Storm Spirit" id="label_npc_dota_hero_storm_spirit"></Label>
+<Label text="Sven" id="label_npc_dota_hero_sven"></Label>
+<Label text="Techies" id="label_npc_dota_hero_techies"></Label>
+<Label text="Templar Assassin" id="label_npc_dota_hero_templar_assassin"></Label>
+<Label text="Terrorblade" id="label_npc_dota_hero_terrorblade"></Label>
+<Label text="Tidehunter" id="label_npc_dota_hero_tidehunter"></Label>
+<Label text="Timbersaw" id="label_npc_dota_hero_shredder"></Label>
+<Label text="Tinker" id="label_npc_dota_hero_tinker"></Label>
+<Label text="Tiny" id="label_npc_dota_hero_tiny"></Label>
+<Label text="Treant Protector" id="label_npc_dota_hero_treant"></Label>
+<Label text="Troll Warlord" id="label_npc_dota_hero_troll_warlord"></Label>
+<Label text="Tusk" id="label_npc_dota_hero_tusk"></Label>
+<Label text="Underlord" id="label_npc_dota_hero_abyssal_underlord"></Label>
+<Label text="Undying" id="label_npc_dota_hero_undying"></Label>
+<Label text="Ursa" id="label_npc_dota_hero_ursa"></Label>
+<Label text="Vengeful Spirit" id="label_npc_dota_hero_vengefulspirit"></Label>
+<Label text="Venomancer" id="label_npc_dota_hero_venomancer"></Label>
+<Label text="Viper" id="label_npc_dota_hero_viper"></Label>
+<Label text="Visage" id="label_npc_dota_hero_visage"></Label>
+<Label text="Warlock" id="label_npc_dota_hero_warlock"></Label>
+<Label text="Weaver" id="label_npc_dota_hero_weaver"></Label>
+<Label text="Windranger" id="label_npc_dota_hero_windrunner"></Label>
+<Label text="Winter Wyvern" id="label_npc_dota_hero_winter_wyvern"></Label>
+<Label text="Witch Doctor" id="label_npc_dota_hero_witch_doctor"></Label>
+<Label text="Wraith King" id="label_npc_dota_hero_skeleton_king"></Label>
+<Label text="Zeus" id="label_npc_dota_hero_zuus"></Label>
+                    </DropDown>
 					<Panel id="TeamListHeader">
 						<Label id="TeamListHeaderLabel" text="#custom_game_team_select" />
 						<Image id="TeamListLockedIcon" src="file://{images}/control_icons/lock_small.png" />

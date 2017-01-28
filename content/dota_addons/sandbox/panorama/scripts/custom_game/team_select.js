@@ -9,6 +9,13 @@ var g_PlayerPanels = [];
 
 var g_TEAM_SPECATOR = 1;
 
+function OnHeroChanged() {
+    $.Msg($('#HeroDropDown').GetSelected().id.replace('label_', ''));
+    GameEvents.SendCustomGameEventToServer("GameSetupHeroChanged", {
+        hero: $('#HeroDropDown').GetSelected().id.replace('label_', '')
+    });
+}
+
 //--------------------------------------------------------------------------------------------------
 // Handeler for when the unssigned players panel is clicked that causes the player to be reassigned
 // to the unssigned players team

@@ -52,7 +52,7 @@
     flow-children: down;    
 }
 
-#TeamListHeader
+#HeroListHeader, #TeamListHeader
 {
     width: 100%;
     flow-children: right;
@@ -60,7 +60,11 @@
 //	border: 2px solid red;	
 }
 
-#TeamListHeaderLabel
+#HeroDropDown {
+    margin-bottom: 20px;
+}
+
+#HeroListHeaderLabel, #TeamListHeaderLabel
 {
 	text-transform: uppercase;
     font-size: 22px;
