@@ -22,8 +22,6 @@ function CHeroDemo:OnGameRulesStateChange()
 	if nNewState == DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP then
 		DebugPrint( "OnGameRulesStateChange: Custom Game Setup" )
         GameRules:EnableCustomGameSetupAutoLaunch(false)
-        local mode = GameRules:GetGameModeEntity()
-        mode:SetCustomGameForceHero("npc_dota_hero_abaddon")
 	elseif nNewState == DOTA_GAMERULES_STATE_HERO_SELECTION then
 		DebugPrint( "OnGameRulesStateChange: Hero Selection" )
 	elseif nNewState == DOTA_GAMERULES_STATE_PRE_GAME then

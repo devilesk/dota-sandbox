@@ -200,6 +200,7 @@ function CHeroDemo:InitGameMode()
     
     self.spawnBoxController = SPAWNBOXCONTROLLER()
     
+    GameMode:SetCustomGameForceHero("npc_dota_hero_abaddon")
     --GameMode:SetCustomGameForceHero( sHeroSelection ) -- sHeroSelection string gets piped in by dashboard's demo button
     GameMode:SetTowerBackdoorProtectionEnabled(true)
     --GameMode:SetFixedRespawnTime(4)
