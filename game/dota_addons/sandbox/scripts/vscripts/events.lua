@@ -5,16 +5,16 @@
 --------------------------------------------------------------------------------
 function CHeroDemo:OnGameRulesStateChange()
 	local nNewState = GameRules:State_Get()
-	DebugPrint( "OnGameRulesStateChange: " .. nNewState )
+	print( "OnGameRulesStateChange: " .. nNewState )
 
 	if nNewState == DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP then
 		DebugPrint( "OnGameRulesStateChange: Custom Game Setup" )
     --GameRules:EnableCustomGameSetupAutoLaunch( false )
-    
 	elseif nNewState == DOTA_GAMERULES_STATE_HERO_SELECTION then
 		DebugPrint( "OnGameRulesStateChange: Hero Selection" )
         CustomGameEventManager:Send_ServerToAllClients("show_hero_selection", {} )
 	elseif nNewState == DOTA_GAMERULES_STATE_PRE_GAME then
+        CustomGameEventManager:Send_ServerToAllClients("hide_hero_selection", {} )
         self.towers = Entities:FindAllByClassname("npc_dota_tower")
         self.buildings = {}
         for _, v in pairs(self.towers) do

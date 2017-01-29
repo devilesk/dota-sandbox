@@ -290,18 +290,11 @@ function UpdateTimer()
 	$.Schedule( 0.1, UpdateTimer );
 }
 
-function ShowHeroSelection() {
-    $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChild("PreGame").visible = true;
-}
-
 //--------------------------------------------------------------------------------------------------
 // Entry point called when the team select panel is created
 //--------------------------------------------------------------------------------------------------
 (function()
 {
-    
-    $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChild("PreGame").visible = false;
-    GameEvents.Subscribe( "show_hero_selection", ShowHeroSelection );
 
 	var bShowSpectatorTeam = false;
 	var bAutoAssignTeams = true;

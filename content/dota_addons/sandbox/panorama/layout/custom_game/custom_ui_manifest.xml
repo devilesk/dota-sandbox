@@ -1,4 +1,18 @@
 <root>
+    <script>
+function ShowHeroSelection() {
+    $.GetContextPanel().GetParent().GetParent().FindChild("PreGame").visible = true;
+}
+function HideHeroSelection() {
+    $.GetContextPanel().GetParent().GetParent().FindChild("PreGame").visible = false;
+}
+(function()
+{
+    $.GetContextPanel().GetParent().GetParent().FindChild("PreGame").visible = false;
+    GameEvents.Subscribe( "show_hero_selection", ShowHeroSelection );
+    GameEvents.Subscribe( "hide_hero_selection", HideHeroSelection );
+})();
+    </script>
 	<Panel>
             <CustomUIElement type="Hud"					layoutfile="file://{resources}/layout/custom_game/hud_hero_demo.xml" />
             <CustomUIElement type="Hud"                 layoutfile="file://{resources}/layout/custom_game/multiteam_top_scoreboard.xml" />
