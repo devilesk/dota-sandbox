@@ -23,3 +23,8 @@ game/dota_addons/sandbox/resource/overviews/*
 
 #Github dump
 *.stackdump
+
+server_log.txt
+cache_*.soc
+demoheader.tmp
+rich_presence_persistent_data.txt
