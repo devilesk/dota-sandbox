@@ -3,6 +3,10 @@ print( "Hero Demo game mode loaded." )
 _G.NEUTRAL_TEAM = 4 -- global const for neutral team int
 _G.DOTA_MAX_ABILITIES = 16
 _G.HERO_MAX_LEVEL = 25
+_G.XP_RANGE = 1300
+_G.BLINK_RANGE = 1200
+_G.TOWER_TRUE_SIGHT_RANGE = 700
+_G.SENTRY_TRUE_SIGHT_RANGE = 850
 _G.CREEP_HP_PER_UPGRADE = 12
 _G.CREEP_MELEE_DAMAGE_PER_UPGRADE = 1
 _G.CREEP_RANGED_DAMAGE_PER_UPGRADE = 2
@@ -584,33 +588,33 @@ function CreateTowerRangeOverlayForPlayer(player, heroes, towers)
 	if towers ~= nil then
 		for k, tower in pairs(towers) do
 			if tower ~= nil and IsValidEntity(tower) then
-				CreateRangeOverlayForPlayer(player, tower, "TowerDayVisionRangeButtonPressed", "TowerDayVision", 1800, tower._isRed.TowerDayVision)
-				CreateRangeOverlayForPlayer(player, tower, "TowerTrueSightRangeButtonPressed", "TowerTrueSight", 900, tower._isRed.TowerTrueSight)
-				CreateRangeOverlayForPlayer(player, tower, "TowerNightVisionRangeButtonPressed", "TowerNightVision", 800, tower._isRed.TowerNightVision)
-				CreateRangeOverlayForPlayer(player, tower, "TowerAttackRangeButtonPressed", "TowerAttack", 700 + tower:GetHullRadius(), tower._isRed.TowerAttack)
+				CreateRangeOverlayForPlayer(player, tower, "TowerDayVisionRangeButtonPressed", "TowerDayVision", tower:GetDayTimeVisionRange(), tower._isRed.TowerDayVision)
+				CreateRangeOverlayForPlayer(player, tower, "TowerTrueSightRangeButtonPressed", "TowerTrueSight", TOWER_TRUE_SIGHT_RANGE + tower:GetHullRadius(), tower._isRed.TowerTrueSight)
+				CreateRangeOverlayForPlayer(player, tower, "TowerNightVisionRangeButtonPressed", "TowerNightVision", tower:GetNightTimeVisionRange(), tower._isRed.TowerNightVision)
+				CreateRangeOverlayForPlayer(player, tower, "TowerAttackRangeButtonPressed", "TowerAttack", tower:GetAttackRange() + tower:GetHullRadius(), tower._isRed.TowerAttack)
 			end
 		end
 	end
 end
 
 function CreateHeroRangeOverlayForPlayer(player, hero)
-	CreateRangeOverlayForPlayer(player, hero, "HeroXPRangeButtonPressed", "HeroXPRange", 1300, false)
-	CreateRangeOverlayForPlayer(player, hero, "BlinkRangeButtonPressed", "BlinkRange", 1200, false)
+	CreateRangeOverlayForPlayer(player, hero, "HeroXPRangeButtonPressed", "HeroXPRange", XP_RANGE, false)
+	CreateRangeOverlayForPlayer(player, hero, "BlinkRangeButtonPressed", "BlinkRange", BLINK_RANGE, false)
 end
 
 function CreateWardRangeOverlayForPlayer(player, wards, sentries)
 	if wards ~= nil then
 		for k,ent in pairs(wards) do
 			if ent ~= nil and IsValidEntity(ent) then
-				CreateRangeOverlayForPlayer(player, ent, "WardVisionButtonPressed", "WardVision", 1600, false)
+				CreateRangeOverlayForPlayer(player, ent, "WardVisionButtonPressed", "WardVision", ent:GetCurrentVisionRange(), false)
 			end
 		end
 	end
 	if sentries ~= nil then
 		for k,ent in pairs(sentries) do
 			if ent ~= nil and IsValidEntity(ent) then
-				CreateRangeOverlayForPlayer(player, ent, "SentryVisionButtonPressed", "WardVision", 150, false)
-				CreateRangeOverlayForPlayer(player, ent, "SentryVisionButtonPressed", "TrueSightVision", 850, false)
+				CreateRangeOverlayForPlayer(player, ent, "SentryVisionButtonPressed", "WardVision", ent:GetCurrentVisionRange(), false)
+				CreateRangeOverlayForPlayer(player, ent, "SentryVisionButtonPressed", "TrueSightVision", SENTRY_TRUE_SIGHT_RANGE, false)
 			end
 		end
 	end
@@ -704,10 +708,10 @@ function CHeroDemo:SpawnBoxThink()
                         end
                     end
                     ent._isRed = {
-                        TowerDayVision = any(IsInRangeFuncGenerator(ent, 1800), heroes),
-                        TowerTrueSight = any(IsInRangeFuncGenerator(ent, 900), heroes),
-                        TowerNightVision = any(IsInRangeFuncGenerator(ent, 800), heroes),
-                        TowerAttack = any(IsDistBetweenEntOBBFuncGenerator(ent, 700), heroes),
+                        TowerDayVision = any(IsInRangeFuncGenerator(ent, ent:GetDayTimeVisionRange()), heroes),
+                        TowerTrueSight = any(IsDistBetweenEntOBBFuncGenerator(ent, TOWER_TRUE_SIGHT_RANGE), heroes),
+                        TowerNightVision = any(IsInRangeFuncGenerator(ent, ent:GetNightTimeVisionRange()), heroes),
+                        TowerAttack = any(IsDistBetweenEntOBBFuncGenerator(ent, ent:GetAttackRange()), heroes),
                     }
                 end
             end
