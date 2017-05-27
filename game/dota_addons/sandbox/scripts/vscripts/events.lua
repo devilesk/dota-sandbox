@@ -305,7 +305,8 @@ function RefreshUnitCooldowns(hUnit)
     end
     for i = 0, DOTA_MAX_ABILITIES - 1 do
         local hAbility = hUnit:GetAbilityByIndex( i )
-        if hAbility and hAbility:GetLevel() > 0 and not hAbility:IsHidden() then
+        --if hAbility and hAbility:GetLevel() > 0 and not hAbility:IsHidden() then
+        if hAbility and hAbility:GetLevel() > 0 then
             hAbility:EndCooldown()
         end
     end
@@ -1182,6 +1183,10 @@ end
 function CHeroDemo:OnSpawnRunesButtonPressed( eventSourceIndex, data )
 	SendToServerConsole("dota_spawn_rune")
     self.m_nRUNE = (self.m_nRUNE + 1) % 7
+    -- skip bounty rune
+    if self.m_nRUNE == DOTA_RUNE_BOUNTY then
+        self.m_nRUNE = (self.m_nRUNE + 1) % 7
+    end
     self:BroadcastMsg( "#SpawnRunes_Msg" )
 end
 
