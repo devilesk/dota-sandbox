@@ -768,6 +768,36 @@ var itemAliases = {
         "name": "Ring of Protection",
         "aliases": ["rop"],
         "id": "ring_of_protection"
+    },
+    "item_meteor_hammer": {
+        "name": "Meteor Hammer",
+        "aliases": ["mh"],
+        "id": "meteor_hammer"
+    },
+    "item_combo_breaker": {
+        "name": "Aeon Disk",
+        "aliases": ["ad"],
+        "id": "combo_breaker"
+    },
+    "item_spirit_vessel": {
+        "name": "Spirit Vessel",
+        "aliases": ["sv"],
+        "id": "spirit_vessel"
+    },
+    "item_nullifier": {
+        "name": "Nullifier",
+        "aliases": [],
+        "id": "nullifier"
+    },
+    "item_trident": {
+        "name": "Kaya",
+        "aliases": [],
+        "id": "trident"
+    },
+    "item_refresher_shard": {
+        "name": "Refresher Shard",
+        "aliases": [],
+        "id": "refresher_shard"
     }
 }
 
