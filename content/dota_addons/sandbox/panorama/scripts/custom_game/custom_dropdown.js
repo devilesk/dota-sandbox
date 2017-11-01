@@ -450,6 +450,14 @@ var heroAliases = {
     "npc_dota_hero_monkey_king": {
         "name": "Monkey King",
         "aliases": ["mk", "monkey"]
+    },
+    "npc_dota_hero_dark_willow": {
+        "name": "Dark Willow",
+        "aliases": ["dw", "willow"]
+    },
+    "npc_dota_hero_pangolier": {
+        "name": "Pangolier",
+        "aliases": ["panlin", "armadillo"]
     }
 }
 

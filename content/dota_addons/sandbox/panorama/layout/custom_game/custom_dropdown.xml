@@ -30,6 +30,7 @@
             <Button id="npc_dota_hero_rattletrap" onactivate="OnClick('npc_dota_hero_rattletrap')"><Label text="Clockwerk" id="label_npc_dota_hero_rattletrap"></Label></Button>
             <Button id="npc_dota_hero_crystal_maiden" onactivate="OnClick('npc_dota_hero_crystal_maiden')"><Label text="Crystal Maiden" id="label_npc_dota_hero_crystal_maiden"></Label></Button>
             <Button id="npc_dota_hero_dark_seer" onactivate="OnClick('npc_dota_hero_dark_seer')"><Label text="Dark Seer" id="label_npc_dota_hero_dark_seer"></Label></Button>
+            <Button id="npc_dota_hero_dark_willow" onactivate="OnClick('npc_dota_hero_dark_willow')"><Label text="Dark Willow" id="label_npc_dota_hero_dark_willow"></Label></Button>
             <Button id="npc_dota_hero_dazzle" onactivate="OnClick('npc_dota_hero_dazzle')"><Label text="Dazzle" id="label_npc_dota_hero_dazzle"></Label></Button>
             <Button id="npc_dota_hero_death_prophet" onactivate="OnClick('npc_dota_hero_death_prophet')"><Label text="Death Prophet" id="label_npc_dota_hero_death_prophet"></Label></Button>
             <Button id="npc_dota_hero_disruptor" onactivate="OnClick('npc_dota_hero_disruptor')"><Label text="Disruptor" id="label_npc_dota_hero_disruptor"></Label></Button>
@@ -75,6 +76,7 @@
             <Button id="npc_dota_hero_omniknight" onactivate="OnClick('npc_dota_hero_omniknight')"><Label text="Omniknight" id="label_npc_dota_hero_omniknight"></Label></Button>
             <Button id="npc_dota_hero_oracle" onactivate="OnClick('npc_dota_hero_oracle')"><Label text="Oracle" id="label_npc_dota_hero_oracle"></Label></Button>
             <Button id="npc_dota_hero_obsidian_destroyer" onactivate="OnClick('npc_dota_hero_obsidian_destroyer')"><Label text="Outworld Devourer" id="label_npc_dota_hero_obsidian_destroyer"></Label></Button>
+            <Button id="npc_dota_hero_pangolier" onactivate="OnClick('npc_dota_hero_pangolier')"><Label text="Pangolier" id="label_npc_dota_hero_pangolier"></Label></Button>
             <Button id="npc_dota_hero_phantom_assassin" onactivate="OnClick('npc_dota_hero_phantom_assassin')"><Label text="Phantom Assassin" id="label_npc_dota_hero_phantom_assassin"></Label></Button>
             <Button id="npc_dota_hero_phantom_lancer" onactivate="OnClick('npc_dota_hero_phantom_lancer')"><Label text="Phantom Lancer" id="label_npc_dota_hero_phantom_lancer"></Label></Button>
             <Button id="npc_dota_hero_phoenix" onactivate="OnClick('npc_dota_hero_phoenix')"><Label text="Phoenix" id="label_npc_dota_hero_phoenix"></Label></Button>
