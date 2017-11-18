@@ -934,7 +934,7 @@ function CHeroDemo:OnRespawnHeroButtonPressed( eventSourceIndex, data )
         DebugPrint(key,entIndex)
         local ent = EntIndexToHScript(entIndex)
         if ent:IsHero() and PlayerResource:GetRespawnSeconds(ent:GetPlayerOwnerID()) > 0 then
-            ent:RespawnHero(false, false, false)
+            ent:RespawnHero(false, false)
         end
     end
     self:BroadcastMsg( "#RespawnHero_Msg" )
