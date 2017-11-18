@@ -4,7 +4,7 @@ modifier_range_xp = class({}, {}, modifier_range_base)
 
 function modifier_range_xp:OnCreated(params)
     modifier_range_base.OnCreated(self, params)
-    self._range = 1300
+    self._range = 1500
     self._overlayName="HeroXPRangeButtonPressed"
     self._showOwnerOnly = true
 end
