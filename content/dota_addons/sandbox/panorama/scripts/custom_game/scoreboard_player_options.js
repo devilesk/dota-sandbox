@@ -774,10 +774,10 @@ var itemAliases = {
         "aliases": ["mh"],
         "id": "meteor_hammer"
     },
-    "item_combo_breaker": {
+    "item_aeon_disk": {
         "name": "Aeon Disk",
         "aliases": ["ad"],
-        "id": "combo_breaker"
+        "id": "aeon_disk"
     },
     "item_spirit_vessel": {
         "name": "Spirit Vessel",
@@ -789,10 +789,10 @@ var itemAliases = {
         "aliases": [],
         "id": "nullifier"
     },
-    "item_trident": {
+    "item_kaya": {
         "name": "Kaya",
         "aliases": [],
-        "id": "trident"
+        "id": "kaya"
     },
     "item_refresher_shard": {
         "name": "Refresher Shard",

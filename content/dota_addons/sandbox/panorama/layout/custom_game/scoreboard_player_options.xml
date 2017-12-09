@@ -151,7 +151,7 @@
   <DOTAItemImage class="shop-item" id="item_blade_mail" itemname="item_blade_mail" onactivate="ItemClick('item_blade_mail')"/>
   <DOTAItemImage class="shop-item" id="item_soul_booster" itemname="item_soul_booster" onactivate="ItemClick('item_soul_booster')"/>
   <DOTAItemImage class="shop-item" id="item_crimson_guard" itemname="item_crimson_guard" onactivate="ItemClick('item_crimson_guard')"/>
-  <DOTAItemImage class="shop-item" id="item_combo_breaker" itemname="item_combo_breaker" onactivate="ItemClick('item_combo_breaker')"/>
+  <DOTAItemImage class="shop-item" id="item_aeon_disk" itemname="item_aeon_disk" onactivate="ItemClick('item_aeon_disk')"/>
   <DOTAItemImage class="shop-item" id="item_black_king_bar" itemname="item_black_king_bar" onactivate="ItemClick('item_black_king_bar')"/>
   <DOTAItemImage class="shop-item" id="item_lotus_orb" itemname="item_lotus_orb" onactivate="ItemClick('item_lotus_orb')"/>
   <DOTAItemImage class="shop-item" id="item_shivas_guard" itemname="item_shivas_guard" onactivate="ItemClick('item_shivas_guard')"/>
@@ -183,7 +183,7 @@
   <DOTAItemImage class="shop-item" id="item_dragon_lance" itemname="item_dragon_lance" onactivate="ItemClick('item_dragon_lance')"/>
   <DOTAItemImage class="shop-item" id="item_sange" itemname="item_sange" onactivate="ItemClick('item_sange')"/>
   <DOTAItemImage class="shop-item" id="item_yasha" itemname="item_yasha" onactivate="ItemClick('item_yasha')"/>
-  <DOTAItemImage class="shop-item" id="item_trident" itemname="item_trident" onactivate="ItemClick('item_trident')"/>
+  <DOTAItemImage class="shop-item" id="item_kaya" itemname="item_kaya" onactivate="ItemClick('item_kaya')"/>
   <DOTAItemImage class="shop-item" id="item_mask_of_madness" itemname="item_mask_of_madness" onactivate="ItemClick('item_mask_of_madness')"/>
   <DOTAItemImage class="shop-item" id="item_helm_of_the_dominator" itemname="item_helm_of_the_dominator" onactivate="ItemClick('item_helm_of_the_dominator')"/>
   <DOTAItemImage class="shop-item" id="item_echo_sabre" itemname="item_echo_sabre" onactivate="ItemClick('item_echo_sabre')"/>
