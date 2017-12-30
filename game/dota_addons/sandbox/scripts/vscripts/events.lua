@@ -1221,7 +1221,9 @@ function ResetHero( hPlayerHero )
         DebugPrint (i, hAbility, hAbility ~= nil)
         if hAbility ~= nil and hAbility:GetLevel() > 0 and not hAbility:IsHidden() then
             DebugPrint ("setting level", hAbility:GetLevel(), hAbility:IsHidden())
-            hAbility:SetLevel(0)
+            if hAbility:GetName() ~= "wisp_spirits_in" and hAbility:GetName() ~= "wisp_spirits_out" then
+                hAbility:SetLevel(0)
+            end
             if hAbility:GetName() == "earth_spirit_stone_caller" then
                 hAbility:SetLevel(1)
             end
