@@ -47,6 +47,8 @@ local DEBUG = false
 _G.DebugPrint = function(...)
   if DEBUG then
     print(...)
+    --Msg(...)
+    CustomGameEventManager:Send_ServerToAllClients("log", {message=...})
   end
 end
 _G.DeepDebugPrintTable = function(...)
@@ -399,6 +401,10 @@ function CHeroDemo:InitGameMode()
         }
     end
     GameRules:GetGameModeEntity():SetThink("CalculateDPS", self)
+end
+
+function CHeroDemo:SetChat( msg )
+    CustomGameEventManager:Send_ServerToAllClients("set_chat", {message=msg})
 end
 
 function CHeroDemo:UpdateTextUI()

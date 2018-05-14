@@ -85,7 +85,7 @@ end
 --------------------------------------------------------------------------------
 function CHeroDemo:OnPlayerConnect( event )
     DebugPrint("OnPlayerConnect")
-    DebugPrintTable(event, " ")
+    --DebugPrintTable(event, " ")
     --[[if event.bot == 1 then
     end]]
 end
@@ -804,7 +804,9 @@ function CHeroDemo:OnSpawnAllyButtonPressedHandler( eventSourceIndex, data )
 
     if GameRules:IsCheatMode() then
         if PlayerResource:GetPlayerCountForTeam(self.m_nALLIES_TEAM) < 5 then
-            SendToServerConsole("dota_create_unit " .. data.selectedHero)
+            --SendToServerConsole("dota_create_unit " .. data.selectedHero)
+            --CHeroDemo.SetChat(self, "-createhero " .. data.selectedHero)
+            CHeroDemo.SetChat(self, "dota_create_unit " .. data.selectedHero)
         else
             self:BroadcastMsg( "#MaxAllies_Msg" )
         end
@@ -833,17 +835,21 @@ function CHeroDemo:OnSpawnEnemyButtonPressed( eventSourceIndex, data )
 end
 
 function CHeroDemo:OnSpawnEnemyButtonPressedHandler( eventSourceIndex, data )
-    DebugPrint ("GetPlayerCountForTeam", PlayerResource:GetPlayerCountForTeam(DOTA_TEAM_GOODGUYS))
+    DebugPrint ("GetPlayerCountForTeam" .. tostring(PlayerResource:GetPlayerCountForTeam(DOTA_TEAM_GOODGUYS)))
 	if self.m_nEnemiesCount >= 100 then
 		DebugPrint( "#self.m_tEnemiesList == " .. #self.m_tEnemiesList )
 
 		self:BroadcastMsg( "#MaxEnemies_Msg" )
 		return
 	end
-
+    DebugPrint("GameRules:IsCheatMode() " .. tostring(GameRules:IsCheatMode()))
     if GameRules:IsCheatMode() then
+    DebugPrint("PlayerResource:GetPlayerCountForTeam(self.m_nENEMIES_TEAM) < 5 " .. tostring(PlayerResource:GetPlayerCountForTeam(self.m_nENEMIES_TEAM) < 5))
         if PlayerResource:GetPlayerCountForTeam(self.m_nENEMIES_TEAM) < 5 then
-            SendToServerConsole("dota_create_unit " .. data.selectedHero .. " enemy")
+            DebugPrint("dota_create_unit " .. data.selectedHero .. " enemy")
+            --SendToServerConsole("dota_create_unit " .. data.selectedHero .. " enemy")
+            --CHeroDemo.SetChat(self, "-createhero " .. data.selectedHero .. " enemy")
+            CHeroDemo.SetChat(self, "dota_create_unit " .. data.selectedHero .. " enemy")
         else
             self:BroadcastMsg( "#MaxEnemies_Msg" )
         end
@@ -949,11 +955,11 @@ function CHeroDemo:OnTeleportButtonPressed( eventSourceIndex, data )
 end
 
 function CHeroDemo:OnTeleportButtonPressedHandler( eventSourceIndex, data )
-    for key,value in pairs(data.pos) do DebugPrint(key,value) end
+    for key,value in pairs(data.pos) do DebugPrint(tostring(key) .. " " .. tostring(value)) end
     DebugPrint (data.pos.x)
 
     for key,entIndex in pairs(data.selectedUnits) do
-        DebugPrint(key,entIndex)
+        DebugPrint(tostring(key) .. " " .. tostring(entIndex))
         local ent = EntIndexToHScript(entIndex)
         local point = GetGroundPosition(Vector(data.pos.x, data.pos.y, 0), nil)
         FindClearSpaceForUnit(ent, point, false)
@@ -978,6 +984,8 @@ end
 function CHeroDemo:OnMouseClick( eventSourceIndex, data )
     if self.m_tCurrentMouseClick[data.PlayerID] ~= nil then
         local clickEvent = self.m_tCurrentMouseClick[data.PlayerID].data.eventName
+        DebugPrint( "OnMouseClick" )
+        DebugPrint( clickEvent )
         if clickEvent == "TeleportButtonPressed" then
             CHeroDemo.OnTeleportButtonPressedHandler(self, eventSourceIndex, data)
         elseif clickEvent == "SpawnAllyButtonPressed" then
@@ -1203,7 +1211,7 @@ end
 --------------------------------------------------------------------------------
 function CHeroDemo:OnResetHeroButtonPressed( eventSourceIndex, data )
     for key,entIndex in pairs(data.selectedUnits) do
-        DebugPrint(key,entIndex)
+        DebugPrint(tostring(key) .. " " .. tostring(entIndex))
         local ent = EntIndexToHScript(entIndex)
         if ent:IsHero() and not ent:IsClone() then
             ResetHero(ent)
@@ -1218,9 +1226,9 @@ end
 function ResetHero( hPlayerHero )
     for i = 0, DOTA_MAX_ABILITIES - 1 do
         local hAbility = hPlayerHero:GetAbilityByIndex( i )
-        DebugPrint (i, hAbility, hAbility ~= nil)
+        DebugPrint (tostring(i) .. " " ..  tostring(hAbility) .. " " .. tostring(hAbility ~= nil))
         if hAbility ~= nil and hAbility:GetLevel() > 0 and not hAbility:IsHidden() then
-            DebugPrint ("setting level", hAbility:GetLevel(), hAbility:IsHidden())
+            DebugPrint ("setting level" ..  tostring(hAbility:GetLevel()) .. " " .. tostring(hAbility:IsHidden()))
             if hAbility:GetName() ~= "wisp_spirits_in" and hAbility:GetName() ~= "wisp_spirits_out" then
                 hAbility:SetLevel(0)
             end

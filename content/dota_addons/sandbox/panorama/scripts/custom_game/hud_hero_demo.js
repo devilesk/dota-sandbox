@@ -5,6 +5,8 @@ var hostTimeScaleValues = [0.5, 1, 2, 4, 8];
 var indicator;
 var selectedHero = 'npc_dota_hero_abaddon';
 var selectedUnit = 'npc_dota_creep_badguys_melee';
+//var chat;
+//var hudChat;
 
 function SelectedPlayerToKey() {
     return (parseInt($('#PlayerDropDown').GetSelected().id.replace('player', '')) - 1).toString();
@@ -192,6 +194,20 @@ function UpdateTextUI(data) {
     }
 }
 
+function LogHandler(msg) {
+    $.Msg(msg);
+}
+
+function SetChatHandler(msg) {
+    //chat.text = msg.message;
+    //$.Msg(chat);
+    //$.Msg(hudChat);
+    //hudChat.SetHasClass("Active", true);
+    //$.DispatchEvent("SetInputFocus", chat);
+    //$.DispatchEvent("key_enter", chat);
+    Game.ServerCmd(msg.message);
+}
+
 (function() {
     $('#BuildingInvulnerability_Button').checked = true;
     $('#EasyBuyEnabled_Button').checked = true;
@@ -205,6 +221,13 @@ function UpdateTextUI(data) {
     GameEvents.Subscribe( "update_toggle_ui", UpdateToggleUI );
     GameEvents.Subscribe( "update_neutral_spawn_interval_ui", UpdateNeutralSpawnIntervalUI );
     GameEvents.Subscribe( "update_host_time_scale_ui", UpdateHostTimeScaleUI );
+    
+    GameEvents.Subscribe( "log", LogHandler );
+    GameEvents.Subscribe( "set_chat", SetChatHandler );
+    
+    //var top = $.GetContextPanel().GetParent().GetParent().GetParent();
+    //chat = top.FindChildTraverse("ChatInput");
+    //hudChat = top.FindChildTraverse("HudChat");
 })();
 
 function OpenCustomDropDown() {
