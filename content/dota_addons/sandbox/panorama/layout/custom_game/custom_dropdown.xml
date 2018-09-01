@@ -44,6 +44,7 @@
             <Button id="npc_dota_hero_enchantress" onactivate="OnClick('npc_dota_hero_enchantress')"><Label text="Enchantress" id="label_npc_dota_hero_enchantress"></Label></Button>
             <Button id="npc_dota_hero_enigma" onactivate="OnClick('npc_dota_hero_enigma')"><Label text="Enigma" id="label_npc_dota_hero_enigma"></Label></Button>
             <Button id="npc_dota_hero_faceless_void" onactivate="OnClick('npc_dota_hero_faceless_void')"><Label text="Faceless Void" id="label_npc_dota_hero_faceless_void"></Label></Button>
+            <Button id="npc_dota_hero_grimstroke" onactivate="OnClick('npc_dota_hero_grimstroke')"><Label text="Grimstroke" id="label_npc_dota_hero_grimstroke"></Label></Button>
             <Button id="npc_dota_hero_gyrocopter" onactivate="OnClick('npc_dota_hero_gyrocopter')"><Label text="Gyrocopter" id="label_npc_dota_hero_gyrocopter"></Label></Button>
             <Button id="npc_dota_hero_huskar" onactivate="OnClick('npc_dota_hero_huskar')"><Label text="Huskar" id="label_npc_dota_hero_huskar"></Label></Button>
             <Button id="npc_dota_hero_invoker" onactivate="OnClick('npc_dota_hero_invoker')"><Label text="Invoker" id="label_npc_dota_hero_invoker"></Label></Button>

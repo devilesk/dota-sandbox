@@ -458,6 +458,10 @@ var heroAliases = {
     "npc_dota_hero_pangolier": {
         "name": "Pangolier",
         "aliases": ["panlin", "armadillo"]
+    },
+    "npc_dota_hero_grimstroke": {
+        "name": "Grimstroke",
+        "aliases": ["gs", "stroke"]
     }
 }
 
