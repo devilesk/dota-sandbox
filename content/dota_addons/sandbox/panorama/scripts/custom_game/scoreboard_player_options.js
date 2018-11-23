@@ -798,6 +798,31 @@ var itemAliases = {
         "name": "Refresher Shard",
         "aliases": [],
         "id": "refresher_shard"
+    },
+    "item_yasha_and_kaya": {
+        "name": "Yasha and Kaya",
+        "aliases": [],
+        "id": "yasha_and_kaya"
+    },
+    "item_kaya_and_sange": {
+        "name": "Kaya and Sange",
+        "aliases": [],
+        "id": "kaya_and_sange"
+    },
+    "item_ring_of_tarrasque": {
+        "name": "Ring of Tarrasque",
+        "aliases": [],
+        "id": "ring_of_tarrasque"
+    },
+    "item_holy_locket": {
+        "name": "Holy Locket",
+        "aliases": [],
+        "id": "holy_locket"
+    },
+    "item_crown": {
+        "name": "Crown",
+        "aliases": [],
+        "id": "crown"
     }
 }
 

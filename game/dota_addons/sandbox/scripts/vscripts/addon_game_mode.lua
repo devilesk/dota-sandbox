@@ -6,7 +6,7 @@ _G.HERO_MAX_LEVEL = 25
 _G.XP_RANGE = 1500
 _G.BLINK_RANGE = 1200
 _G.TOWER_TRUE_SIGHT_RANGE = 700
-_G.SENTRY_TRUE_SIGHT_RANGE = 850
+_G.SENTRY_TRUE_SIGHT_RANGE = 1000
 _G.CREEP_HP_PER_UPGRADE = 12
 _G.CREEP_MELEE_DAMAGE_PER_UPGRADE = 1
 _G.CREEP_RANGED_DAMAGE_PER_UPGRADE = 2
@@ -597,7 +597,7 @@ function CreateTowerRangeOverlayForPlayer(player, heroes, towers)
 				CreateRangeOverlayForPlayer(player, tower, "TowerDayVisionRangeButtonPressed", "TowerDayVision", tower:GetDayTimeVisionRange(), tower._isRed.TowerDayVision)
 				CreateRangeOverlayForPlayer(player, tower, "TowerTrueSightRangeButtonPressed", "TowerTrueSight", TOWER_TRUE_SIGHT_RANGE + tower:GetHullRadius(), tower._isRed.TowerTrueSight)
 				CreateRangeOverlayForPlayer(player, tower, "TowerNightVisionRangeButtonPressed", "TowerNightVision", tower:GetNightTimeVisionRange(), tower._isRed.TowerNightVision)
-				CreateRangeOverlayForPlayer(player, tower, "TowerAttackRangeButtonPressed", "TowerAttack", tower:GetAttackRange() + tower:GetHullRadius(), tower._isRed.TowerAttack)
+				CreateRangeOverlayForPlayer(player, tower, "TowerAttackRangeButtonPressed", "TowerAttack", tower:Script_GetAttackRange() + tower:GetHullRadius(), tower._isRed.TowerAttack)
 			end
 		end
 	end
@@ -717,7 +717,7 @@ function CHeroDemo:SpawnBoxThink()
                         TowerDayVision = any(IsInRangeFuncGenerator(ent, ent:GetDayTimeVisionRange()), heroes),
                         TowerTrueSight = any(IsDistBetweenEntOBBFuncGenerator(ent, TOWER_TRUE_SIGHT_RANGE), heroes),
                         TowerNightVision = any(IsInRangeFuncGenerator(ent, ent:GetNightTimeVisionRange()), heroes),
-                        TowerAttack = any(IsDistBetweenEntOBBFuncGenerator(ent, ent:GetAttackRange()), heroes),
+                        TowerAttack = any(IsDistBetweenEntOBBFuncGenerator(ent, ent:Script_GetAttackRange()), heroes),
                     }
                 end
             end
