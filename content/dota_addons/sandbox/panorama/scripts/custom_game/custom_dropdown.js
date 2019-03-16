@@ -462,6 +462,10 @@ var heroAliases = {
     "npc_dota_hero_grimstroke": {
         "name": "Grimstroke",
         "aliases": ["gs", "stroke"]
+    },
+    "npc_dota_hero_mars": {
+        "name": "Mars",
+        "aliases": []
     }
 }
 

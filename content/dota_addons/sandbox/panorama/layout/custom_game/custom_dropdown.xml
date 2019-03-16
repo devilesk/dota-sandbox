@@ -63,6 +63,7 @@
             <Button id="npc_dota_hero_luna" onactivate="OnClick('npc_dota_hero_luna')"><Label text="Luna" id="label_npc_dota_hero_luna"></Label></Button>
             <Button id="npc_dota_hero_lycan" onactivate="OnClick('npc_dota_hero_lycan')"><Label text="Lycan" id="label_npc_dota_hero_lycan"></Label></Button>
             <Button id="npc_dota_hero_magnataur" onactivate="OnClick('npc_dota_hero_magnataur')"><Label text="Magnus" id="label_npc_dota_hero_magnataur"></Label></Button>
+            <Button id="npc_dota_hero_mars" onactivate="OnClick('npc_dota_hero_mars')"><Label text="Mars" id="label_npc_dota_hero_mars"></Label></Button>
             <Button id="npc_dota_hero_medusa" onactivate="OnClick('npc_dota_hero_medusa')"><Label text="Medusa" id="label_npc_dota_hero_medusa"></Label></Button>
             <Button id="npc_dota_hero_meepo" onactivate="OnClick('npc_dota_hero_meepo')"><Label text="Meepo" id="label_npc_dota_hero_meepo"></Label></Button>
             <Button id="npc_dota_hero_mirana" onactivate="OnClick('npc_dota_hero_mirana')"><Label text="Mirana" id="label_npc_dota_hero_mirana"></Label></Button>
